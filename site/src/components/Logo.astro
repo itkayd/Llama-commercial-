@@ -1,0 +1,53 @@
+---
+import { site } from '../config';
+import LogoMark from './LogoMark.astro';
+interface Props {
+  id: string;
+  /** Render as a link to the home page. */
+  link?: boolean;
+}
+const { id, link = true } = Astro.props;
+const Tag = link ? 'a' : 'span';
+---
+<Tag class="logo" href={link ? '/' : undefined} aria-label={link ? `${site.name}, home` : undefined}>
+  <LogoMark id={id} />
+  <span class="logo-words" aria-hidden={link ? 'true' : undefined}>
+    <span class="logo-name">Llama</span>
+    <span class="logo-sub">Commercial</span>
+  </span>
+</Tag>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+    /* Clear space: 16% of the 44px tile. */
+    padding: 7px 7px 7px 0;
+    margin-block: -7px;
+    min-height: 44px;
+    border-radius: 8px;
+  }
+  .logo-words {
+    display: grid;
+    gap: 4px;
+  }
+  .logo-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .logo-sub {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 10.5px;
+    line-height: 1;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+</style>

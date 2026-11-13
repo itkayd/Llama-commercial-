@@ -1,0 +1,44 @@
+---
+const facts = [
+  { label: 'Vetted staff', text: 'Right-to-work and reference checks for everyone, and DBS checks to the level your site needs.' },
+  { label: 'Insured', text: "Public liability and employers' liability insurance. Certificates available on request." },
+  { label: 'Trained', text: 'Safe chemical handling (COSHH), colour-coded cleaning and safe use of floor machines.' },
+  { label: 'Products', text: 'Professional equipment, with lower-impact products used wherever they do the job properly.' },
+  { label: 'Hours', text: 'Early mornings, evenings and weekends, so cleaning fits around your building.' },
+];
+---
+<dl class="facts">
+  {
+    facts.map((f) => (
+      <div class="fact">
+        <dt>{f.label}</dt>
+        <dd>{f.text}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .facts {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+  .fact {
+    display: grid;
+    gap: 4px 24px;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 560px) {
+    .fact {
+      grid-template-columns: 150px minmax(0, 1fr);
+    }
+  }
+  dt {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  dd {
+    color: var(--ink-muted);
+  }
+</style>

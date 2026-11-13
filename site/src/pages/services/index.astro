@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { groups, services } from '../../data/services';
+import { site, telHref } from '../../config';
+---
+<Base
+  title="Commercial Cleaning Services · Llama Commercial"
+  description="Contract and deep cleaning, carpets, upholstery and rugs, floor scrubbing, stripping, sealing and polishing, and car park cleaning in London."
+>
+  <section class="page-head band--page">
+    <div class="wrap">
+      <Eyebrow>Services</Eyebrow>
+      <h1>Commercial cleaning services.</h1>
+      <p class="lede">Daily office cleans, carpets, hard floors, deep cleans and car parks. Every job is priced from a site visit.</p>
+    </div>
+  </section>
+
+  {
+    groups.map((g, i) => (
+      <section class:list={['band', i % 2 === 0 ? 'band--card' : 'band--sage', 'group']} id={g.id} aria-labelledby={`${g.id}-title`}>
+        <div class="wrap">
+          <h2 class="eyebrow" id={`${g.id}-title`}>{g.name}</h2>
+          <ul class="service-grid" role="list">
+            {services
+              .filter((s) => s.group === g.id)
+              .map((s) => (
+                <ServiceCard service={s} />
+              ))}
+          </ul>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="band band--page">
+    <div class="wrap">
+      <div class="row">
+        <Button href="/contact/">Arrange a site visit</Button>
+        <p class="muted">Or call <a class="num call" href={telHref}><strong>{site.phoneDisplay}</strong></a></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .group > .wrap {
+    gap: var(--space-4);
+  }
+  .service-grid {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .call {
+    color: var(--ink);
+    display: inline-block;
+    padding-block: 10px;
+  }
+</style>

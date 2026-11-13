@@ -1,0 +1,61 @@
+---
+import { whatWeDo, serviceHref } from '../data/services';
+---
+<div class="service-cols">
+  {
+    whatWeDo.map((col) => (
+      <div class="col">
+        <h3 class="col-title">{col.title}</h3>
+        <ul class="bullets">
+          {col.items.map((item) => (
+            <li>
+              <a href={serviceHref(item.slug)}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .service-cols {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) {
+    .service-cols {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+  }
+  .col {
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+  }
+  .col-title {
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--highland);
+  }
+  @media (prefers-color-scheme: dark) {
+    .col-title {
+      border-bottom-color: var(--on-brand-muted);
+    }
+  }
+  .bullets {
+    gap: 2px;
+  }
+  .bullets a {
+    display: inline-block;
+    padding-block: 9px;
+    text-decoration-color: var(--line);
+  }
+  .bullets a:hover {
+    text-decoration-color: currentColor;
+  }
+  .bullets li::before {
+    top: 1.15em;
+  }
+</style>

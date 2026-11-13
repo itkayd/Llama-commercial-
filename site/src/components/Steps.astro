@@ -1,0 +1,45 @@
+---
+const steps = [
+  { title: 'Site visit.', text: 'We walk the building with you and note every area, floor type and access detail.' },
+  { title: 'Written quote.', text: 'You receive a written specification and a fixed price per visit or per month.' },
+  { title: 'Cleaning starts.', text: 'We clean on the days and at the times set out in your specification.' },
+];
+---
+<ol class="steps" role="list">
+  {
+    steps.map((step, i) => (
+      <li class="step">
+        <p class="mono step-num" aria-hidden="true">Step {i + 1}</p>
+        <h3>
+          <span class="visually-hidden">Step {i + 1}: </span>
+          {step.title}
+        </h3>
+        <p class="muted">{step.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) {
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+  }
+  .step {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    border-top: 2px solid var(--ink);
+    padding-top: var(--space-3);
+  }
+  .step-num {
+    color: var(--ink-muted);
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+/**
+ * Renders nothing until real photos are added to src/content/photos/.
+ * Real team and real sites only: natural light, people working. No stock or AI images.
+ * Name each file descriptively; the file name (without extension, dashes as spaces) becomes the alt text.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../content/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const photos = Object.entries(files).map(([path, mod]) => ({
+  src: mod.default,
+  alt: path
+    .split('/')
+    .pop()!
+    .replace(/\.[a-z]+$/i, '')
+    .replace(/[-_]+/g, ' '),
+}));
+---
+{
+  photos.length > 0 && (
+    <section class="band band--page" aria-label="Our work">
+      <div class="wrap">
+        <ul class="photos" role="list">
+          {photos.map((p) => (
+            <li>
+              <Image src={p.src} alt={p.alt} widths={[360, 720, 1080]} sizes="(min-width: 860px) 33vw, 100vw" loading="lazy" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .photos {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .photos :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+</style>

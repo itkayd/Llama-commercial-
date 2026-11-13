@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { site, mailHref } from '../config';
+---
+<Base title="Privacy Notice · Llama Commercial" description="How Llama Commercial uses the details you send us.">
+  <section class="page-head band--page">
+    <div class="wrap">
+      <Eyebrow>Privacy notice</Eyebrow>
+      <h1>How we use your details.</h1>
+    </div>
+  </section>
+
+  <section class="band band--page privacy-body">
+    <div class="wrap">
+      <div class="privacy body-copy">
+        <section aria-labelledby="who">
+          <h2 id="who">Who we are</h2>
+          <p>{site.legalName}, {site.registeredOffice}. Contact: <a href={mailHref}>{site.email}</a>.</p>
+        </section>
+        <section aria-labelledby="what">
+          <h2 id="what">What we collect</h2>
+          <p>The name and phone number or email you give in the call-back form, and anything you send us by email or phone.</p>
+        </section>
+        <section aria-labelledby="why">
+          <h2 id="why">Why</h2>
+          <p>
+            To reply to you and arrange a site visit or quote. Lawful basis: legitimate interests, or taking steps at your request
+            before a contract.
+          </p>
+        </section>
+        <section aria-labelledby="sees">
+          <h2 id="sees">Who sees it</h2>
+          <p>
+            Our team, and our form provider if we use one to receive call-back requests. We don't sell or share your details for
+            marketing.
+          </p>
+        </section>
+        <section aria-labelledby="long">
+          <h2 id="long">How long</h2>
+          <p>We delete enquiries after 12 months if no contract follows. Client records are kept as long as the law requires.</p>
+        </section>
+        <section aria-labelledby="rights">
+          <h2 id="rights">Your rights</h2>
+          <p>
+            You can ask to see, correct or delete your details, or object to how we use them, by emailing <a href={mailHref}
+              >{site.email}</a
+            >. You can complain to the Information Commissioner's Office at <a href="https://ico.org.uk/">ico.org.uk</a>.
+          </p>
+        </section>
+        <section aria-labelledby="cookies">
+          <h2 id="cookies">Cookies</h2>
+          <p>This website does not use cookies or tracking.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .privacy-body {
+    padding-top: 0;
+  }
+  .privacy {
+    display: grid;
+    gap: var(--space-5);
+  }
+  .privacy section {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .privacy h2 {
+    font-size: clamp(24px, 3vw, 30px);
+  }
+</style>

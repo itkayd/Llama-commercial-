@@ -1,0 +1,26 @@
+---
+import type { PostcodeArea } from '../data/areas';
+interface Props {
+  areas: PostcodeArea[];
+  closest?: boolean;
+}
+const { areas, closest = false } = Astro.props;
+---
+<ul class="chips" role="list">
+  {
+    areas.map((a) => (
+      <li class:list={['chip', { 'chip--closest': closest }]}>
+        <span class="mono">{a.code}</span>
+        <span>{a.name}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Steps from '../../components/Steps.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { services, serviceBySlug, groupName, serviceHref, type Service } from '../../data/services';
+import { site } from '../../config';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const related = service.related.map(serviceBySlug);
+const url = (path: string) => new URL(path, site.domain).href;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: url('/') },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: url('/services/') },
+    { '@type': 'ListItem', position: 3, name: service.h1, item: url(serviceHref(service.slug)) },
+  ],
+};
+---
+<Base title={`${service.h1} in London · Llama Commercial`} description={service.description} schema={[breadcrumbSchema]}>
+  <section class="page-head band--page service-head">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }, { label: service.h1 }]} />
+      <Eyebrow>{groupName(service.group)}</Eyebrow>
+      <h1>{service.h1}</h1>
+      <p class="lede">{service.intro}</p>
+    </div>
+  </section>
+
+  <section class="band band--card" aria-labelledby="included-title">
+    <div class="wrap split">
+      <div class="stack">
+        <h2 id="included-title">What's included</h2>
+        <ul class="bullets included">
+          {service.included.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <aside class="card card--sage" aria-label="At a glance">
+        <dl class="glance">
+          <div>
+            <dt class="label">Good for</dt>
+            <dd>{service.goodFor}</dd>
+          </div>
+          <div>
+            <dt class="label">How often</dt>
+            <dd class="mono freq">{service.howOften.join(' · ')}</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band band--page" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title">How it works.</h2>
+      <Steps />
+    </div>
+  </section>
+
+  <CtaBand />
+
+  <section class="band band--page" aria-labelledby="related-title">
+    <div class="wrap">
+      <h2 id="related-title">Related services</h2>
+      <ul class="related" role="list">
+        {related.map((s) => <ServiceCard service={s} />)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .service-head .wrap {
+    gap: var(--space-3);
+  }
+  .service-head :global(.crumbs) {
+    margin-top: -12px;
+    margin-bottom: var(--space-2);
+  }
+  .included {
+    font-size: 17px;
+    gap: 14px;
+  }
+  .glance {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .glance div {
+    display: grid;
+    gap: 6px;
+  }
+  .glance dd {
+    font-size: 16px;
+  }
+  .freq {
+    color: var(--saffron-ink);
+    font-size: 13px;
+  }
+  .related {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 860px) {
+    .related {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

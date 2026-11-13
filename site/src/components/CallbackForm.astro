@@ -1,0 +1,164 @@
+---
+import { site } from '../config';
+---
+<section class="card callback" aria-labelledby="callback-title">
+  <h2 id="callback-title" class="callback-title">Or we'll call you</h2>
+  <div class="callback-body" data-callback-region>
+    <form
+      class="callback-form"
+      novalidate
+      data-endpoint={site.formEndpoint}
+      data-phone={site.phoneDisplay}
+      data-email={site.email}
+    >
+      <div class="fields">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input class="input" id="name" name="name" type="text" autocomplete="name" aria-describedby="callback-error" />
+        </div>
+        <div class="field">
+          <label for="contact">Phone number or email</label>
+          <input class="input" id="contact" name="contact" type="text" autocomplete="tel" aria-describedby="callback-error" />
+        </div>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="company_website">Company website</label>
+        <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <p class="error-text" id="callback-error" aria-live="polite"></p>
+      <div class="row submit-row">
+        <button class="btn btn--primary" type="submit">Request a call back</button>
+        <p class="fine">We only use your details to get back to you. <a href="/privacy/">Privacy notice</a></p>
+      </div>
+    </form>
+    <p class="callback-done" tabindex="-1" aria-live="polite" hidden></p>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.callback-form');
+  if (form) {
+    const done = form.parentElement!.querySelector<HTMLElement>('.callback-done')!;
+    const nameInput = form.querySelector<HTMLInputElement>('#name')!;
+    const contactInput = form.querySelector<HTMLInputElement>('#contact')!;
+    const honeypot = form.querySelector<HTMLInputElement>('#company_website')!;
+    const error = form.querySelector<HTMLElement>('#callback-error')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const { endpoint = '', phone = '', email = '' } = form.dataset;
+
+    const looksLikeContact = (value: string) => /@.+\./.test(value) || (value.match(/\d/g) ?? []).length >= 10;
+
+    const showError = (message: string, field?: HTMLInputElement) => {
+      error.textContent = message;
+      [nameInput, contactInput].forEach((el) => el.removeAttribute('aria-invalid'));
+      if (field) {
+        field.setAttribute('aria-invalid', 'true');
+        field.focus();
+      }
+    };
+
+    const finish = (message: string) => {
+      form.hidden = true;
+      done.textContent = message;
+      done.hidden = false;
+      done.focus();
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (honeypot.value.trim() !== '') return;
+
+      const name = nameInput.value.trim();
+      const contact = contactInput.value.trim();
+      if (!name) return showError('Please add your name.', nameInput);
+      if (!looksLikeContact(contact)) {
+        return showError('Please add a phone number or an email address so we can reach you.', contactInput);
+      }
+      showError('');
+
+      if (!endpoint) {
+        const body = `Please call me back.\n\nName: ${name}\nPhone or email: ${contact}`;
+        const href = `mailto:${email}?subject=${encodeURIComponent('Call back request')}&body=${encodeURIComponent(body)}`;
+        window.location.href = href;
+        finish(
+          `Your email app should open with your request ready. Press send to get it to us. If nothing opened, call us on ${phone} or email ${email}.`,
+        );
+        return;
+      }
+
+      const label = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ name, contact, source: 'Call back request', page: location.pathname }),
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        const firstName = name.split(/\s+/)[0];
+        finish(`Thanks, ${firstName}. We'll be in touch.`);
+      } catch {
+        button.disabled = false;
+        button.textContent = label;
+        showError(`Sorry, that didn't go through. Please call us on ${phone}.`);
+      }
+    });
+  }
+</script>
+
+<style>
+  .callback {
+    display: grid;
+    gap: var(--space-4);
+    padding: 26px;
+  }
+  .callback-title {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+  .callback-form {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .fields {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 560px) {
+    .fields {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .submit-row {
+    gap: var(--space-3) var(--space-4);
+    margin-top: var(--space-2);
+  }
+  .fine {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    flex: 1 1 240px;
+  }
+  .fine a {
+    color: var(--ink);
+    display: inline-block;
+    padding-block: 12px;
+  }
+  .hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .callback-done {
+    font-size: 19px;
+    line-height: 1.6;
+    max-width: 62ch;
+  }
+  .callback-done:focus {
+    outline: none;
+  }
+</style>
