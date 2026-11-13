@@ -19,7 +19,6 @@ const pages = [
   '/services/car-park-cleaning/',
   '/areas/',
   '/contact/',
-  '/quote/',
   '/privacy/',
   '/404.html',
 ];
@@ -130,30 +129,7 @@ try {
     await bot.close();
   }
 
-  // 4. Price estimate.
-  console.log('\nPrice estimate');
-  {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
-    await page.goto(BASE + '/quote/');
-    const price = page.locator('#result-price');
-    const per = page.locator('#result-per');
-    expect((await price.innerText()) === '£595' && (await per.innerText()).trim() === '/month', `defaults show £595 /month (got ${await price.innerText()}${await per.innerText()})`);
-    await page.check('input[name="kind"][value="deep"]', { force: true });
-    await page.fill('#sqft', '500');
-    await page.fill('#washrooms', '1');
-    await page.fill('#kitchens', '0');
-    expect((await price.innerText()) === '£149', `500 sq ft deep clean shows £149 (got ${await price.innerText()})`);
-    expect(!(await page.locator('#visits-field').isVisible()), 'visits hidden for deep clean');
-    await page.fill('#sqft', '3000');
-    await page.fill('#washrooms', '3');
-    await page.fill('#kitchens', '2');
-    expect((await price.innerText()) === '£455', 'deep(3000, 3, 2) shows £455');
-    await page.fill('#sqft', '-40');
-    expect((await price.innerText()) === '£149', 'negative area counts as 0');
-    await page.close();
-  }
-
-  // 5. Screenshots.
+  // 4. Screenshots.
   if (process.env.SCREENSHOTS) {
     const dir = process.env.SCREENSHOTS;
     mkdirSync(dir, { recursive: true });
@@ -161,7 +137,6 @@ try {
       ['home', '/'],
       ['service', '/services/floor-stripping-and-sealing/'],
       ['contact', '/contact/'],
-      ['quote', '/quote/'],
       ['about', '/about/'],
       ['services', '/services/'],
       ['areas', '/areas/'],

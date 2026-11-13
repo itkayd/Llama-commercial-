@@ -20,8 +20,6 @@ jobs:
         run: npm ci
       - name: Type check
         run: npx astro check
-      - name: Unit tests (pricing)
-        run: npm test
       - name: Build
         run: npm run build
       # Link check, copy scan, contact-details check, and a hard failure if anything

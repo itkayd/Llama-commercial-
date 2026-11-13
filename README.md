@@ -7,7 +7,7 @@ Website, brand kit and business tools for **Llama Commercial**, a commercial cle
 
 | Folder | What it is | Deployed? |
 | --- | --- | --- |
-| `site/` | The public website, built with Astro: Home, About us, Services (13 service pages), Areas covered, Contact us, Price estimate, Privacy notice | Yes, `site/dist` |
+| `site/` | The public website, built with Astro: Home, About us, Services (13 service pages), Areas covered, Contact us, Privacy notice | Yes, `site/dist` |
 | `site/reference/` | The old one-file prototype, kept for reference only (not built) | No |
 | `internal/` | Negotiation desk with your costs, margins and lowest prices | **Never.** Open it on your own device only. CI fails if anything from it reaches the build |
 | `brand/logos/` | Every logo as SVG (print, web) and PNG (Word, Canva, social) | – |
@@ -24,7 +24,6 @@ Website, brand kit and business tools for **Llama Commercial**, a commercial cle
 cd site
 npm install
 npm run dev          # http://localhost:4321
-npm test             # pricing unit tests (Vitest)
 npm run check        # astro check
 npm run build        # static site -> site/dist
 npm run check:dist   # link check, copy scan, internal/ leak check
@@ -71,7 +70,7 @@ Until it is set, the call-back button opens the visitor's email app with the req
 **GitHub Pages**
 Needs a public repo, or a paid GitHub plan for a private one. Go to *Settings → Pages → Source: GitHub Actions* and run *Deploy website to GitHub Pages* from the Actions tab.
 
-Every push to `main` redeploys automatically on Netlify and Vercel. Pull requests run CI (`.github/workflows/ci.yml`): type check, pricing tests, build, link check, copy scan and the `internal/` leak check.
+Every push to `main` redeploys automatically on Netlify and Vercel. Pull requests run CI (`.github/workflows/ci.yml`): type check, build, link check, copy scan and the `internal/` leak check.
 
 ## Rebuild the brand files
 
