@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import ContactWays from '../components/ContactWays.astro';
+import CallbackForm from '../components/CallbackForm.astro';
+import { site } from '../config';
+---
+<Base
+  title="Contact Us · Llama Commercial"
+  description="Call, email or request a call back from Llama Commercial. Site visits and written quotes for commercial buildings in London are free."
+>
+  <section class="page-head band--page">
+    <div class="wrap">
+      <Eyebrow>Contact us</Eyebrow>
+      <h1>Talk to us about your building.</h1>
+      <p class="lede">Call or email us. Or leave your name and number and we'll call you back.</p>
+    </div>
+  </section>
+
+  <section class="band band--page contact-body">
+    <div class="wrap contact-stack">
+      <ContactWays />
+      <CallbackForm />
+      <p class="tagline">{site.tagline}</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-body {
+    padding-top: 0;
+  }
+  .contact-stack {
+    gap: var(--space-3);
+  }
+  .contact-stack .tagline {
+    margin-top: var(--space-3);
+  }
+</style>
