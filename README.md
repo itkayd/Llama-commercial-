@@ -12,11 +12,11 @@ Website, brand kit and business tools for **Llama Commercial**, a commercial cle
 | `internal/` | Negotiation desk with your costs, margins and lowest prices | **Never.** Open it on your own device only |
 | `brand/logos/` | Every logo as SVG (print, web) and PNG (Word, Canva, social) | – |
 | `brand/print/` | Business card and A5 flyer PDFs with 3mm bleed, uniform spec | – |
-| `brand/social/` | Square and story ads, LinkedIn banner, visit report template | – |
-| `brand/templates/` | Letterhead, quote and invoice (A4 PDF), email signature | – |
+| `brand/social/` | Square and story ads, LinkedIn banner | – |
+| `brand/templates/` | Letterhead, quote and invoice (A4 PDF), email signature, site specification template | – |
 | `brand/tokens.json` | Colours, fonts, spacing and radii | – |
 | `brand/source/` | Scripts that rebuild the logos and all exports | – |
-| `docs/` | Brand guidelines and the starter kit (equipment, costs, set-up checklist) | – |
+| `docs/` | Brand guidelines, the starter kit, and `website-build-prompt.md` (the full brief for building the production site with Claude Code) | – |
 
 ## Before going live
 

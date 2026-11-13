@@ -134,13 +134,12 @@ main section{padding-block:clamp(56px,8vw,96px)}
 @media (max-width:860px){.svc-cols{grid-template-columns:1fr}}
 
 /* steps */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:s}
 .step{border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:8px}
 .step .n{font:500 13px var(--mono);color:var(--muted);letter-spacing:.1em}
 .step h3{font-size:20px}
 .step p{font-size:15.5px;color:var(--muted)}
-@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:460px){.steps{grid-template-columns:1fr}}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
 
 /* standards + colour code */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
@@ -282,7 +281,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
       <div>
         <p class="eyebrow">Commercial cleaning · London</p>
         <h1>Commercial cleaning across London.</h1>
-        <p class="lede">Offices, schools, churches, shops, gyms, factories, communal areas and car parks. Cleaned to a written schedule by a regular team, before you open or after you close.</p>
+        <p class="lede">Offices, schools, churches, shops, gyms, factories, communal areas and car parks. Cleaned to a written specification, before you open or after you close.</p>
         <p class="tag">No drama. Just Llama.</p>
         <div class="cta-row">
           <a class="btn" href="#contact">Arrange a site visit</a>
@@ -295,7 +294,6 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
         <dl>
           <dt>Site</dt><dd>Community hall and offices, Hackney E8</dd>
           <dt>Visits</dt><dd>Mon, Wed, Fri at 6:00pm</dd>
-          <dt>Team</dt><dd>The same two cleaners each visit</dd>
           <dt>Areas</dt><dd><span class="dots">
             <span class="dot"><i style="background:var(--blue)"></i>Hall &amp; offices</span>
             <span class="dot"><i style="background:var(--green)"></i>Kitchen</span>
@@ -326,7 +324,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
         </article>
         <article class="sector">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5v4M10 4.5h4"/><path d="M7 21V11.5l5-4.5 5 4.5V21"/><path d="M4 21h16"/><path d="M10.5 21v-3.5a1.5 1.5 0 013 0V21"/></svg>
-          <h3>Churches &amp; places of worship</h3><p>Weekly cleans around services, plus halls turned round after events.</p>
+          <h3>Churches &amp; places of worship</h3><p>Weekly cleans around services, plus halls cleaned after events.</p>
         </article>
         <article class="sector">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l1.8-4h12.4L20 8"/><path d="M4 8h16v1.2a2.7 2.7 0 01-5.3 0 2.7 2.7 0 01-5.4 0A2.7 2.7 0 014 9.2V8z"/><path d="M5.5 12v9h13v-9"/><path d="M10 21v-5h4v5"/></svg>
@@ -378,9 +376,8 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
       </div>
       <ol class="steps" style="list-style:none;padding:0;margin:0">
         <li class="step"><span class="n">STEP 1</span><h3>Site visit</h3><p>We walk the building with you and note every area, floor type and access detail.</p></li>
-        <li class="step"><span class="n">STEP 2</span><h3>Written quote</h3><p>You get a specification and a fixed price per visit or per month, usually within two working days.</p></li>
-        <li class="step"><span class="n">STEP 3</span><h3>A regular team</h3><p>The same cleaners come at the agreed times, with keys and alarm codes kept on record.</p></li>
-        <li class="step"><span class="n">STEP 4</span><h3>Check-ins</h3><p>We walk the site with you every month and adjust the schedule as the building changes.</p></li>
+        <li class="step"><span class="n">STEP 2</span><h3>Written quote</h3><p>You receive a written specification and a fixed price per visit or per month.</p></li>
+        <li class="step"><span class="n">STEP 3</span><h3>Cleaning starts</h3><p>We clean on the days and at the times set out in your specification.</p></li>
       </ol>
     </div>
   </section>
@@ -394,7 +391,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
         </div>
         <div class="facts">
           <div class="fact"><b>Vetted staff</b><p>Right-to-work and reference checks for everyone, and DBS checks to the level your site needs.</p></div>
-          <div class="fact"><b>Insured</b><p>Public liability and employers' liability insurance. Certificates sent on request.</p></div>
+          <div class="fact"><b>Insured</b><p>Public liability and employers' liability insurance. Certificates available on request.</p></div>
           <div class="fact"><b>Trained</b><p>Safe chemical handling (COSHH), colour-coded cleaning and safe use of floor machines.</p></div>
           <div class="fact"><b>Products</b><p>Professional equipment, with lower-impact products used wherever they do the job properly.</p></div>
           <div class="fact"><b>Hours</b><p>Early mornings, evenings and weekends, so cleaning fits around your building.</p></div>
@@ -415,7 +412,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
     <div class="wrap inner">
       <div>
         <h2>Tell us about your building.</h2>
-        <p>Site visits and written quotes are free, with no obligation. We'll come at a time that suits you.</p>
+        <p>Site visits and written quotes are free, with no obligation.</p>
       </div>
       <div class="cta-row" style="margin-top:0"><a class="btn light" href="#contact">Arrange a site visit</a></div>
     </div>
@@ -430,7 +427,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
         <p class="eyebrow">About us</p>
         <h1>A London cleaning company built around the building.</h1>
         <p>Llama Commercial cleans offices, schools, churches, shops, gyms, factories, communal areas and car parks across London. We're based in Hackney and work across Greater London.</p>
-        <p>Every contract starts with a site visit and a written specification. That way you and our team know exactly what gets cleaned, how often and to what standard. We send the same cleaners each visit so they get to know your building.</p>
+        <p>Every contract starts with a site visit and a written specification, so you and our team know exactly what gets cleaned, how often and to what standard.</p>
         <p>Everyone who joins us goes through right-to-work and reference checks, and DBS checks where a site needs them. They're trained in safe chemical handling, colour-coded cleaning and the machines they use.</p>
         <p>We use professional equipment and choose lower-impact products wherever they do the job properly. We work in and outside business hours, including early mornings, evenings and weekends.</p>
         <p>We hold public liability and employers' liability insurance, and we're happy to send certificates before we start.</p>
@@ -458,20 +455,20 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Services</p>
-        <h1>Professional commercial cleaning services.</h1>
-        <p class="lede">We have the people and the equipment for daily office cleans, a pub carpet overnight, or a warehouse floor over a weekend. Every job is priced from a site visit.</p>
+        <h1>Commercial cleaning services.</h1>
+        <p class="lede">Daily office cleans, carpets, hard floors, deep cleans and car parks. Every job is priced from a site visit.</p>
       </div>
 
       <p class="group-title">Everyday cleaning</p>
       <div class="svc-page">
         <article class="svc"><div><h3>Regular office &amp; contract cleaning</h3><p class="for">Offices, business units, studios and clinics.</p><p class="freq">Daily · several times a week · weekly</p></div>
-          <ul><li>Desks, surfaces and touchpoints wiped and sanitised</li><li>Kitchens and breakout areas cleaned, dishwasher loaded</li><li>Washrooms cleaned and consumables refilled</li><li>Bins emptied and recycling separated</li><li>Carpets vacuumed and hard floors mopped</li></ul></article>
+          <ul><li>Desks, surfaces and touchpoints wiped and sanitised</li><li>Kitchens and breakout areas cleaned</li><li>Washrooms cleaned and consumables refilled</li><li>Bins emptied and recycling separated</li><li>Carpets vacuumed and hard floors mopped</li></ul></article>
         <article class="svc"><div><h3>Communal area cleaning</h3><p class="for">Residential blocks, mixed-use buildings and shared office entrances.</p><p class="freq">Weekly · fortnightly</p></div>
-          <ul><li>Entrances, door glass and letterbox areas</li><li>Stairwells, handrails, corridors and lifts</li><li>Bin stores cleaned and kept clear</li><li>Signed log sheet on site after every visit</li></ul></article>
+          <ul><li>Entrances, door glass and letterbox areas</li><li>Stairwells, handrails, corridors and lifts</li><li>Bin stores cleaned and kept clear</li></ul></article>
         <article class="svc"><div><h3>Schools &amp; education centres</h3><p class="for">Primary and secondary schools, nurseries, colleges, tuition and training centres.</p><p class="freq">Term-time daily · holiday deep cleans</p></div>
           <ul><li>Classrooms, halls, corridors and offices</li><li>Toilets and changing rooms cleaned to the colour code</li><li>Deep cleans in the summer, Easter and Christmas holidays</li><li>DBS checks to the level the school requires</li></ul></article>
         <article class="svc"><div><h3>Churches &amp; places of worship</h3><p class="for">Churches, mosques, temples, gurdwaras, synagogues and their halls.</p><p class="freq">Weekly · before and after events</p></div>
-          <ul><li>Worship spaces, halls, kitchens and toilets</li><li>Care around old timber, stone and fittings</li><li>Hall turnarounds after hires and events</li><li>Cleaning timed around services</li></ul></article>
+          <ul><li>Worship spaces, halls, kitchens and toilets</li><li>Care around old timber, stone and fittings</li><li>Halls cleaned after hires and events</li><li>Cleaning timed around services</li></ul></article>
         <article class="svc"><div><h3>Shops, business units &amp; factories</h3><p class="for">High-street shops, trade counters, workshops, factories and warehouses.</p><p class="freq">Daily · weekly · around shifts</p></div>
           <ul><li>Shop floors, glass, fitting rooms and tills</li><li>Welfare areas, canteens and offices</li><li>High-level dusting and floor scrubbing</li><li>Site inductions and permits followed</li></ul></article>
         <article class="svc"><div><h3>Sports facility cleaning</h3><p class="for">Gyms, leisure centres, studios, clubs and sports halls.</p><p class="freq">Daily · between sessions</p></div>
@@ -536,7 +533,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
           </div>
         </div>
       </div>
-      <p class="lede" style="margin-top:32px">Not sure if we cover you? Send us the postcode and we'll tell you the same day.</p>
+      <p class="lede" style="margin-top:32px">Not sure if we cover you? Send us the postcode and we'll let you know.</p>
       <div class="cta-row"><a class="btn" href="#contact">Contact us</a></div>
     </div>
   </section>
@@ -562,7 +559,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
           <span class="way-k">Email us</span>
           <span class="way-v mail js-email">hello@llamacommercial.co.uk</span>
-          <span class="way-n">We reply within one working day</span>
+          <span class="way-n">Tell us about the building and what you need.</span>
         </a>
       </div>
       <form class="callback" id="cb" novalidate>
@@ -645,12 +642,12 @@ cb.addEventListener("submit", e => {
   const first = name.split(/\s+/)[0];
   if (FORM_ENDPOINT) {
     fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ name, contact, page: "Call back request" }) })
-      .then(r => { if (!r.ok) throw 0; finish("Thanks, " + first + ".", "We'll call you back within one working day."); })
+      .then(r => { if (!r.ok) throw 0; finish("Thanks, " + first + ".", "We'll be in touch."); })
       .catch(() => { err.textContent = "Sorry, that didn't go through. Please call us on " + PHONE + "."; err.hidden = false; });
   } else {
     const body = "Please call me back.\n\nName: " + name + "\nPhone or email: " + contact;
     location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Call back request") + "&body=" + encodeURIComponent(body);
-    finish("Nearly done, " + first + ".", "Your email app should open with your request ready. Press send and we'll call you back within one working day. If nothing opened, call us on " + PHONE + " or email " + EMAIL + ".");
+    finish("Nearly done, " + first + ".", "Your email app should open with your request ready. Press send to get it to us. If nothing opened, call us on " + PHONE + " or email " + EMAIL + ".");
   }
 });
 </script>

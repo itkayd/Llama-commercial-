@@ -10,7 +10,8 @@ Llamas are calm, steady and hard-working. That's the feeling a clean should leav
 
 ## Voice
 
-- Short, plain, specific. "The same two cleaners each visit." Never "sparkling", "best in London" or "unbeatable".
+- Short, plain, specific. "Cleaned before you open." Never "sparkling", "best in London" or "unbeatable".
+- No service promises: no guarantees, response times, "same team each visit", check-ins, photos or visit reports.
 - Write what happens: "We walk the building with you", "You get a written specification".
 - No exclamation marks, no all-caps sentences, no countdowns or "limited time".
 - Free site visits and written quotes are stated once, calmly, near the contact details. Never as a headline.
@@ -84,4 +85,4 @@ Use real photos of our own team and sites: people working, finished floors, clea
 
 ## Templates
 
-Business card (front and back), email signature, A5 flyer, A4 letterhead, A4 quote, invoice, social ads (square and story), LinkedIn banner, site report and uniform spec. They live in the Llama Commercial brand kit, with print-ready PDFs in the brand pack.
+Business card (front and back), email signature, A5 flyer, A4 letterhead, A4 quote, invoice, social ads (square and story), LinkedIn banner, site specification template and uniform spec. They live in the Llama Commercial brand kit, with print-ready PDFs in the brand pack.

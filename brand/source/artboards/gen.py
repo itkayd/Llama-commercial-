@@ -99,7 +99,7 @@ F['Main'] = ('Brand sheet', f'''<div style="width: 1280px; height: 800px; displa
     </div>
     <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid {LN}; padding-top: 22px;">
       {img('green', 'Llama Commercial logo', 'height: 56px; width: auto;')}
-      <p style="margin: 0; max-width: 380px; font-size: 14px; line-height: 1.55; color: {MU};">Voice: calm, plain, specific. "The same two cleaners each visit." No offers in headlines, no exclamation marks.</p>
+      <p style="margin: 0; max-width: 380px; font-size: 14px; line-height: 1.55; color: {MU};">Voice: calm, plain, specific. "Cleaned before you open." No promises, no offers in headlines, no exclamation marks.</p>
     </div>
   </div>
 </div>''', 1280, 800)
@@ -152,7 +152,7 @@ F['FlyerA5'] = ('Flyer A5', f'''<div style="width: 592px; height: 840px; box-siz
   <div style="padding: 22px 40px 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; font-size: 13px; line-height: 1.4; color: {MU};">
     <div style="border-top: 2px solid {INK}; padding-top: 10px;"><p style="margin: 0 0 4px; font-family: {MONO}; font-size: 11px; letter-spacing: 0.1em; color: {INK};">1 · SITE VISIT</p>We walk the building with you.</div>
     <div style="border-top: 2px solid {INK}; padding-top: 10px;"><p style="margin: 0 0 4px; font-family: {MONO}; font-size: 11px; letter-spacing: 0.1em; color: {INK};">2 · WRITTEN QUOTE</p>A specification and a fixed price.</div>
-    <div style="border-top: 2px solid {INK}; padding-top: 10px;"><p style="margin: 0 0 4px; font-family: {MONO}; font-size: 11px; letter-spacing: 0.1em; color: {INK};">3 · REGULAR TEAM</p>The same cleaners at set times.</div>
+    <div style="border-top: 2px solid {INK}; padding-top: 10px;"><p style="margin: 0 0 4px; font-family: {MONO}; font-size: 11px; letter-spacing: 0.1em; color: {INK};">3 · CLEANING STARTS</p>On the days and times agreed.</div>
   </div>
   <div style="margin-top: auto; padding: 20px 40px 32px; display: flex; flex-direction: column; gap: 6px;">
     <p style="margin: 0; font-size: 15px; color: {MU};">Arrange a site visit</p>
@@ -176,7 +176,7 @@ F['Letterhead'] = ('Letterhead', f'''<div style="width: 794px; height: 1123px; b
     <p style="margin: 0;">[Name]<br>[Organisation]<br>[Address]</p>
     <p style="margin: 0;">Dear [Name],</p>
     <p style="margin: 0;">I run Llama Commercial, a commercial cleaning company based in Hackney. We clean offices, schools, churches, shops, gyms, factories, communal areas and car parks across London, and we look after carpets and hard floors.</p>
-    <p style="margin: 0;">Every contract starts with a site visit and a written specification, so you know exactly what gets cleaned, how often and by whom. We send the same cleaners each visit, and we walk the site with you every month.</p>
+    <p style="margin: 0;">Every contract starts with a site visit and a written specification, so you know exactly what gets cleaned and how often.</p>
     <p style="margin: 0;">If it would help, I'd be glad to visit [site name] and send you a written quote. You can reach me directly on {PHONE}.</p>
     <p style="margin: 0;">Kind regards,</p>
     <p style="margin: 0;"><b style="font-family: {DISP}; font-weight: 600; font-size: 19px;">Diesel</b><br>Founder, Llama Commercial</p>
@@ -264,7 +264,7 @@ F['SocialStory'] = ('Ad: story', f'''<div style="width: 1080px; height: 1920px; 
   <div style="position: relative; display: grid; gap: 28px; max-width: 700px;">
     {st('1', 'Site visit', 'We walk the building with you.')}
     {st('2', 'Written quote', 'A specification and a fixed monthly price.')}
-    {st('3', 'A regular team', 'The same cleaners at the agreed times.')}
+    {st('3', 'Cleaning starts', 'On the days and times in your specification.')}
   </div>
   <div style="position: relative; margin-top: auto; background: #FFFFFF; color: {INK}; border-radius: 22px; padding: 34px 38px; display: flex; justify-content: space-between; align-items: center; gap: 24px;">
     <span style="font-family: {DISP}; font-weight: 600; font-size: 46px; line-height: 1.05;">Arrange a<br>site visit</span>
@@ -280,34 +280,34 @@ F['LinkedInBanner'] = ('LinkedIn banner', f'''<div style="width: 1584px; height:
   <p style="margin: 0; position: relative; font-family: {DISP}; font-style: italic; font-size: 26px; color: {S};">No drama. Just Llama.</p>
 </div>''', 1584, 396)
 
-# 12 Visit report
-row = lambda area, code, done: f'<div style="display: grid; grid-template-columns: 26px minmax(0, 1fr) 120px; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid {LN}; font-size: 24px;"><i style="width: 22px; height: 22px; border-radius: 5px; background: {code};"></i><span>{area}</span><span style="text-align: right; font-family: {MONO}; font-size: 20px; color: {G};">{done}</span></div>'
-F['PhotoReport'] = ('Visit report', f'''<div style="width: 1080px; height: 1350px; box-sizing: border-box; background: #FFFFFF; display: flex; flex-direction: column;">
+# 12 Site specification template
+srow = lambda area, code, tasks, freq: f'<div style="display: grid; grid-template-columns: 22px 260px minmax(0, 1fr) 150px; gap: 16px; align-items: start; padding: 15px 0; border-bottom: 1px solid {LN}; font-size: 20px; line-height: 1.4;"><i style="width: 20px; height: 20px; border-radius: 5px; background: {code}; margin-top: 4px;"></i><b>{area}</b><span style="color: {MU};">{tasks}</span><span style="text-align: right; font-family: {MONO}; font-size: 16px; letter-spacing: 0.06em; color: {G};">{freq}</span></div>'
+F['PhotoReport'] = ('Site specification', f'''<div style="width: 1080px; height: 1350px; box-sizing: border-box; background: #FFFFFF; display: flex; flex-direction: column;">
   <div style="background: {G}; color: #FFFFFF; padding: 56px 64px; display: flex; justify-content: space-between; align-items: center; gap: 24px;">
     {img('white', 'Llama Commercial', 'width: 320px; height: auto;')}
-    <p style="margin: 0; font-family: {DISP}; font-weight: 600; font-size: 46px;">Visit report</p>
+    <p style="margin: 0; font-family: {DISP}; font-weight: 600; font-size: 44px;">Cleaning specification</p>
   </div>
   <div style="padding: 40px 64px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px;">
     <div>{lab('SITE')}<p style="margin: 0; font-size: 22px;">[Site name]</p></div>
-    <div>{lab('DATE')}<p style="margin: 0; font-size: 22px;">[Date]</p></div>
-    <div>{lab('TEAM')}<p style="margin: 0; font-size: 22px;">[Names]</p></div>
-    <div>{lab('TIME')}<p style="margin: 0; font-size: 22px; font-variant-numeric: tabular-nums;">18:00 to 19:15</p></div>
+    <div>{lab('ADDRESS')}<p style="margin: 0; font-size: 22px;">[Postcode]</p></div>
+    <div>{lab('VISITS')}<p style="margin: 0; font-size: 22px;">Mon, Wed, Fri</p></div>
+    <div>{lab('TIME')}<p style="margin: 0; font-size: 22px; font-variant-numeric: tabular-nums;">From 6:00pm</p></div>
   </div>
-  <div style="padding: 28px 64px 0;">
-    <div style="border-top: 2px solid {G};">
-      {row('Offices and meeting rooms', '#3C6FB6', 'DONE')}
-      {row('Kitchen and breakout area', '#3E8A55', 'DONE')}
-      {row('Toilets: floors and fittings', '#C6463B', 'DONE')}
-      {row('Washroom sinks', '#E0B323', 'DONE')}
-      {row('Bins and recycling', '#3C6FB6', 'DONE')}
-    </div>
+  <div style="padding: 30px 64px 0;">
+    <div style="display: grid; grid-template-columns: 22px 260px minmax(0, 1fr) 150px; gap: 16px; padding-bottom: 10px; border-bottom: 2px solid {G}; font-family: {MONO}; font-size: 13px; letter-spacing: 0.12em; color: {MU};"><span></span><span>AREA</span><span>TASKS</span><span style="text-align: right;">HOW OFTEN</span></div>
+    {srow('Offices and meeting rooms', '#3C6FB6', 'Desks and surfaces wiped, bins emptied, carpets vacuumed', 'EACH VISIT')}
+    {srow('Kitchen', '#3E8A55', 'Worktops, sink and appliance fronts cleaned, floor mopped', 'EACH VISIT')}
+    {srow('Toilets', '#C6463B', 'Toilets, urinals and floors cleaned, consumables refilled', 'EACH VISIT')}
+    {srow('Washroom sinks', '#E0B323', 'Sinks, taps and mirrors cleaned', 'EACH VISIT')}
+    {srow('Hard floors', '#56625D', 'Machine scrub', 'MONTHLY')}
+    {srow('Carpets', '#56625D', 'Hot-water extraction', '6 MONTHLY')}
   </div>
-  <div style="padding: 28px 64px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-    <div style="height: 260px; background: {SG}; border-radius: 14px; display: flex; align-items: flex-end; padding: 18px; font-size: 18px; color: {MU};">[Photo: kitchen]</div>
-    <div style="height: 260px; background: {SG}; border-radius: 14px; display: flex; align-items: flex-end; padding: 18px; font-size: 18px; color: {MU};">[Photo: reception floor]</div>
+  <div style="padding: 26px 64px 0;">{lab('ACCESS AND NOTES')}<p style="margin: 0; font-size: 21px; line-height: 1.5; color: {MU};">[Keys, alarm, parking, areas not to be cleaned]</p></div>
+  <div style="margin: auto 64px 0; display: flex; gap: 40px; font-size: 18px; color: {MU};">
+    <p style="margin: 0; flex: 1; border-top: 1px solid {G}; padding-top: 10px;">Agreed for the client</p>
+    <p style="margin: 0; flex: 1; border-top: 1px solid {G}; padding-top: 10px;">Agreed for Llama Commercial</p>
   </div>
-  <div style="padding: 24px 64px 0;">{lab('NOTES')}<p style="margin: 0; font-size: 22px; line-height: 1.5;">Hand soap running low in the ground floor toilet. New stock brought on Wednesday.</p></div>
-  <p style="margin: auto 64px 40px; padding-top: 16px; border-top: 1px solid {LN}; font-size: 18px; color: {MU};">Llama Commercial · {PHONE} · {EMAIL}</p>
+  <p style="margin: 28px 64px 40px; padding-top: 16px; border-top: 1px solid {LN}; font-size: 18px; color: {MU};">Llama Commercial · {PHONE} · {EMAIL}</p>
 </div>''', 1080, 1350)
 
 # 13 Uniform
