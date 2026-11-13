@@ -1,0 +1,55 @@
+/* Generated from brand/tokens.json by scripts/build-tokens.mjs. Do not edit by hand. */
+
+:root {
+  color-scheme: light dark;
+  --highland: #173D36;
+  --saffron: #E3A13A;
+  --saffron-ink: #8A5A12;
+  --page: #F5F6F2;
+  --card: #FFFFFF;
+  --sage: #E8EDE6;
+  --ink: #152320;
+  --ink-muted: #56625D;
+  --on-brand: #FFFFFF;
+  --on-brand-muted: #B9CCC3;
+  --line: #D5DCD3;
+  --code-red: #C6463B;
+  --code-blue: #3C6FB6;
+  --code-green: #3E8A55;
+  --code-yellow: #E0B323;
+  --icon: var(--highland);
+  --error: #B3261E;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --radius-input: 10px;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --highland: #1E4840;
+    --saffron-ink: #E9B460;
+    --page: #0F1A18;
+    --card: #15231F;
+    --sage: #1A2B26;
+    --ink: #EEF2EE;
+    --ink-muted: #A6B5AE;
+    --on-brand: #F5F6F2;
+    --line: #2A3B36;
+    --icon: var(--on-brand-muted);
+    --error: #F2B8B5;
+  }
+}
