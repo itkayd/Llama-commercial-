@@ -1,0 +1,39 @@
+---
+import type { Service } from '../data/services';
+import { serviceHref } from '../data/services';
+interface Props {
+  service: Service;
+  headingLevel?: 'h3' | 'h2';
+}
+const { service, headingLevel: H = 'h3' } = Astro.props;
+---
+<li class="card service-card">
+  <H class="h3">{service.h1}</H>
+  <p class="muted"><span class="label-inline">Good for:</span> {service.goodFor}</p>
+  <p class="mono freq">{service.howOften.join(' · ')}</p>
+  <a class="text-link" href={serviceHref(service.slug)}>What's included<span class="visually-hidden"> in {service.h1.toLowerCase()}</span></a>
+</li>
+
+<style>
+  .service-card {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    grid-template-rows: auto auto auto 1fr;
+  }
+  .service-card p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .label-inline {
+    font-weight: 700;
+  }
+  .freq {
+    color: var(--saffron-ink);
+  }
+  .service-card .text-link {
+    align-self: end;
+    justify-self: start;
+    margin-bottom: -8px;
+  }
+</style>

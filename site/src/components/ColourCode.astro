@@ -1,0 +1,58 @@
+---
+const codes = [
+  { token: 'red', name: 'Red', area: 'Toilets, urinals and washroom floors' },
+  { token: 'blue', name: 'Blue', area: 'General areas: offices, halls, corridors' },
+  { token: 'green', name: 'Green', area: 'Kitchens, food and bar areas' },
+  { token: 'yellow', name: 'Yellow', area: 'Clinical areas and washroom sinks' },
+];
+---
+<section class="card colour-code" aria-labelledby="colour-code-title">
+  <h3 id="colour-code-title">Colour-coded cleaning</h3>
+  <p class="muted">
+    Cloths, mops and buckets are colour-coded by area so nothing moves from a toilet to a kitchen. We follow the standard UK
+    colour code.
+  </p>
+  <ul class="codes" role="list">
+    {
+      codes.map((c) => (
+        <li class="code">
+          <span class="swatch" style={`background: var(--code-${c.token})`} aria-hidden="true" />
+          <span>
+            <strong>{c.name}</strong>
+            <span class="muted"> · {c.area}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .colour-code {
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+  }
+  .colour-code p {
+    font-size: 16px;
+  }
+  .codes {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+  .code {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  .swatch {
+    flex: none;
+    width: 44px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+  }
+</style>

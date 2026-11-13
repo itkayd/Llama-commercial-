@@ -1,0 +1,50 @@
+---
+import Button from './Button.astro';
+---
+<section class="band band--highland cta on-brand" aria-labelledby="cta-title">
+  <div class="wrap cta-inner">
+    <div class="cta-text">
+      <h2 id="cta-title">Tell us about your building.</h2>
+      <p class="cta-sub">Site visits and written quotes are free, with no obligation.</p>
+      <div>
+        <Button href="/contact/" variant="on-brand">Arrange a site visit</Button>
+      </div>
+    </div>
+    <img class="cta-logo" src="/brand/llama-commercial-logo-white.svg" alt="" width="308" height="100" loading="lazy" decoding="async" />
+  </div>
+</section>
+
+<style>
+  .cta-inner {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .cta-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+  .cta-text {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .cta-text h2 {
+    color: var(--on-brand);
+  }
+  .cta-sub {
+    color: var(--on-brand-muted);
+    font-size: 19px;
+    margin-bottom: var(--space-2);
+  }
+  .cta-logo {
+    width: 240px;
+    height: auto;
+    display: none;
+  }
+  @media (min-width: 860px) {
+    .cta-logo {
+      display: block;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import type { Sector } from '../data/sectors';
+interface Props {
+  sector: Sector;
+}
+const { sector } = Astro.props;
+---
+<li class="card sector">
+  <Icon name={sector.icon} />
+  <h3>{sector.title}</h3>
+  <p class="muted">{sector.line}</p>
+</li>
+
+<style>
+  .sector {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+  }
+  .sector :global(.icon) {
+    margin-bottom: 4px;
+  }
+  .sector p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+</style>

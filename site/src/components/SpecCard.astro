@@ -1,0 +1,126 @@
+---
+const areas = [
+  { label: 'Hall & offices', code: 'blue', name: 'blue' },
+  { label: 'Kitchen', code: 'green', name: 'green' },
+  { label: 'Toilets', code: 'red', name: 'red' },
+];
+---
+<figure class="spec">
+  <div class="spec-head">
+    <p class="spec-title" id="spec-title">Cleaning specification</p>
+    <p class="mono spec-tag">Example</p>
+  </div>
+  <dl class="spec-rows">
+    <div class="spec-row">
+      <dt class="mono">Site</dt>
+      <dd>Community hall and offices, Hackney E8</dd>
+    </div>
+    <div class="spec-row">
+      <dt class="mono">Visits</dt>
+      <dd>Mon, Wed, Fri at 6:00pm</dd>
+    </div>
+    <div class="spec-row">
+      <dt class="mono">Areas</dt>
+      <dd>
+        <ul class="spec-areas" role="list">
+          {
+            areas.map((a) => (
+              <li>
+                <span class="dot" style={`background: var(--code-${a.code})`} aria-hidden="true" />
+                {a.label}
+                <span class="area-code">{a.name}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </dd>
+    </div>
+    <div class="spec-row">
+      <dt class="mono">Floors</dt>
+      <dd>Machine scrub monthly, strip and reseal twice a year</dd>
+    </div>
+  </dl>
+  <figcaption class="spec-foot">Every site gets a written specification like this before we start.</figcaption>
+</figure>
+
+<style>
+  .spec {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 18px 40px -24px rgba(21, 35, 32, 0.35);
+  }
+  .spec-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: 16px 24px;
+    background: var(--highland);
+    color: var(--on-brand);
+  }
+  .spec-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.25;
+  }
+  .spec-tag {
+    color: var(--on-brand-muted);
+  }
+  .spec-rows {
+    padding: 4px 24px;
+  }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 15px;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .spec-row:last-child {
+    border-bottom: 0;
+  }
+  .spec-row dt {
+    color: var(--ink-muted);
+  }
+  .spec-row dd {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .spec-areas {
+    display: grid;
+    gap: 6px;
+  }
+  .spec-areas li {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .area-code {
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .area-code::before {
+    content: '(';
+  }
+  .area-code::after {
+    content: ')';
+  }
+  .spec-foot {
+    padding: 14px 24px;
+    background: var(--sage);
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+</style>
