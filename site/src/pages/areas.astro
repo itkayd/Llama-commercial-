@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import PostcodeChips from '../components/PostcodeChips.astro';
+import { closestAreas, otherAreas, closestBoroughs } from '../data/areas';
+---
+<Base
+  title="Areas We Cover in London · Llama Commercial"
+  description="Commercial cleaning in East London, the City, North London and across Greater London. Based in Hackney."
+>
+  <section class="page-head band--page">
+    <div class="wrap">
+      <Eyebrow>Areas covered</Eyebrow>
+      <h1>Greater London postcodes we cover.</h1>
+      <p class="lede">
+        We're based in Hackney. East London, the City and North London are closest to us, and we cover the rest of Greater London
+        too.
+      </p>
+    </div>
+  </section>
+
+  <section class="band band--card">
+    <div class="wrap areas">
+      <section class="stack" aria-labelledby="closest-title">
+        <h2 class="h3" id="closest-title">Closest to us</h2>
+        <PostcodeChips areas={closestAreas} closest />
+      </section>
+      <section class="stack" aria-labelledby="also-title">
+        <h2 class="h3" id="also-title">Also covered</h2>
+        <PostcodeChips areas={otherAreas} />
+      </section>
+      <section class="stack" aria-labelledby="boroughs-title">
+        <h2 class="h3" id="boroughs-title">Boroughs closest to us</h2>
+        <p class="body-copy">{closestBoroughs.join(', ')}.</p>
+      </section>
+    </div>
+  </section>
+
+  <section class="band band--page">
+    <div class="wrap">
+      <div class="stack not-sure">
+        <p class="lede">Not sure if we cover you? Send us the postcode and we'll let you know.</p>
+        <div><Button href="/contact/">Contact us</Button></div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .areas {
+    gap: var(--space-5);
+  }
+  .not-sure .lede {
+    color: var(--ink);
+  }
+</style>

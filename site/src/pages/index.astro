@@ -1,0 +1,144 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SpecCard from '../components/SpecCard.astro';
+import SectorCard from '../components/SectorCard.astro';
+import ServiceList from '../components/ServiceList.astro';
+import Steps from '../components/Steps.astro';
+import Facts from '../components/Facts.astro';
+import ColourCode from '../components/ColourCode.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PhotoStrip from '../components/PhotoStrip.astro';
+import { site, telHref } from '../config';
+import { sectors } from '../data/sectors';
+---
+<Base
+  title="Commercial Cleaning in London · Llama Commercial"
+  description="Commercial cleaning across London for offices, schools, churches, shops, gyms, factories, communal areas and car parks. Site visits and quotes are free."
+>
+  <section class="band band--page hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <Eyebrow>Commercial cleaning · London</Eyebrow>
+        <h1 id="hero-title">Commercial cleaning across London.</h1>
+        <p class="lede">
+          Offices, schools, churches, shops, gyms, factories, communal areas and car parks. Cleaned to a written specification,
+          before you open or after you close.
+        </p>
+        <p class="tagline">{site.tagline}</p>
+        <div class="row hero-actions">
+          <Button href="/contact/">Arrange a site visit</Button>
+          <Button href="/services/" variant="ghost">See our services</Button>
+        </div>
+        <p class="hero-call">Or call <a class="num" href={telHref}><strong>{site.phoneDisplay}</strong></a></p>
+      </div>
+      <div class="hero-card">
+        <SpecCard />
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--card" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <Eyebrow>Who we clean for</Eyebrow>
+        <h2 id="who-title">Every kind of commercial building.</h2>
+        <p class="lede">We clean during or outside your opening hours, whatever suits the building and the people in it.</p>
+      </div>
+      <ul class="sectors" role="list">
+        {sectors.map((s) => <SectorCard sector={s} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--sage" aria-labelledby="what-title">
+    <div class="wrap">
+      <div class="section-head">
+        <Eyebrow>What we do</Eyebrow>
+        <h2 id="what-title">One team for regular cleaning, floors and specialist work.</h2>
+      </div>
+      <ServiceList />
+      <div>
+        <Button href="/services/" variant="ghost">What each service includes</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--card" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="how-title">How it works.</h2>
+      </div>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="band band--page" aria-labelledby="work-title">
+    <div class="wrap split">
+      <div class="stack-lg">
+        <div class="section-head">
+          <Eyebrow>How we work</Eyebrow>
+          <h2 id="work-title">Staff, insurance and products.</h2>
+        </div>
+        <Facts />
+      </div>
+      <ColourCode />
+    </div>
+  </section>
+
+  <PhotoStrip />
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(40px, 7vw, 88px);
+  }
+  .hero-grid {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+  }
+  .hero-text {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: start;
+  }
+  .hero-text h1 {
+    max-width: 14ch;
+  }
+  .hero-actions {
+    margin-top: var(--space-2);
+  }
+  .hero-call {
+    color: var(--ink-muted);
+  }
+  .hero-call a {
+    color: var(--ink);
+    display: inline-block;
+    padding-block: 10px;
+  }
+  .sectors {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 460px) {
+    .sectors {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 960px) {
+    .sectors {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

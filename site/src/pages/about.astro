@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config';
+
+const cover = [
+  'Offices',
+  'Business units',
+  'Schools & colleges',
+  'Education centres',
+  'Churches & halls',
+  'Shops',
+  'Gyms & leisure',
+  'Hotels & venues',
+  'Factories',
+  'Warehouses',
+  'Communal areas',
+  'Car parks',
+];
+---
+<Base
+  title="About Us · Llama Commercial"
+  description="A Hackney-based commercial cleaning company working across Greater London, with vetted, trained and insured staff."
+>
+  <section class="page-head band--page">
+    <div class="wrap">
+      <Eyebrow>About us</Eyebrow>
+      <h1>A London cleaning company built around the building.</h1>
+    </div>
+  </section>
+
+  <section class="band band--page about-body">
+    <div class="wrap split">
+      <div class="stack body-copy about-copy">
+        <p class="lede">
+          Llama Commercial cleans offices, schools, churches, shops, gyms, factories, communal areas and car parks across London.
+          We're based in Hackney and work across Greater London.
+        </p>
+        <p>
+          Every contract starts with a site visit and a written specification, so you and our team know exactly what gets cleaned,
+          how often and to what standard.
+        </p>
+        <p>
+          Everyone who joins us goes through right-to-work and reference checks, and DBS checks where a site needs them. They're
+          trained in safe chemical handling, colour-coded cleaning and the machines they use.
+        </p>
+        <p>
+          We use professional equipment and choose lower-impact products wherever they do the job properly. We work in and outside
+          business hours, including early mornings, evenings and weekends.
+        </p>
+        <p>
+          We hold public liability and employers' liability insurance, and we're happy to send certificates before we start.
+        </p>
+      </div>
+
+      <aside class="stack" aria-label="At a glance">
+        <section class="card stack" aria-labelledby="cover-title">
+          <h2 class="card-title" id="cover-title">We cover</h2>
+          <ul class="bullets cover-list">
+            {cover.map((c) => <li>{c}</li>)}
+          </ul>
+        </section>
+        <section class="card card--highland stack on-brand" aria-labelledby="name-title">
+          <h2 class="card-title" id="name-title">The name</h2>
+          <p class="muted">
+            Llamas are calm, steady and hard-working. That's how we want a clean to feel for the people who run the building.
+          </p>
+          <p class="tagline">{site.tagline}</p>
+        </section>
+      </aside>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .about-body {
+    padding-top: 0;
+  }
+  .about-copy .lede {
+    color: var(--ink);
+  }
+  .cover-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    font-size: 16px;
+  }
+</style>
