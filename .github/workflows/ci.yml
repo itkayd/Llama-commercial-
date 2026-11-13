@@ -1,0 +1,36 @@
+name: CI
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Type check
+        run: npx astro check
+      - name: Unit tests (pricing)
+        run: npm test
+      - name: Build
+        run: npm run build
+      # Link check, copy scan, contact-details check, and a hard failure if anything
+      # from internal/ or the string "Negotiation Desk" reaches dist/.
+      - name: Check dist
+        run: npm run check:dist
+      - name: Belt and braces: nothing from internal/ in dist
+        run: |
+          if grep -rli "negotiation desk" dist; then echo "Negotiation Desk found in dist/"; exit 1; fi
+          for f in ../internal/*; do
+            if find dist -name "$(basename "$f")" | grep -q .; then echo "$(basename "$f") found in dist/"; exit 1; fi
+          done
