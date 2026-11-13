@@ -1,0 +1,433 @@
+<title>Llama Negotiation Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: internal tool for Llama Commercial — job inputs, 3-number price ladder (quote / walk-away / cost), offer checker, editable cost settings */
+:root{
+  --bg:#F5F6F2; --surface:#FFFFFF; --ink:#152320; --muted:#56625D; --line:#D5DCD3;
+  --accent:#173D36; --accent-ink:#FFFFFF; --soft:#E8EDE6;
+  --good:#1D7A4E; --goodbg:#E3F3EA; --mid:#9A6200; --midbg:#FBF0DA; --bad:#B23A2E; --badbg:#F8E3E0;
+  --display:"Fraunces",Georgia,"Times New Roman",serif; --body:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1A18; --surface:#15231F; --ink:#EEF2EE; --muted:#A6B5AE; --line:#2A3B36; --accent:#9DBCB1; --accent-ink:#0F1A18; --soft:#1A2B26;
+  --good:#5CCB92; --goodbg:#16302A; --mid:#E8B65A; --midbg:#33291A; --bad:#F08A7E; --badbg:#3A1F1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1A18; --surface:#15231F; --ink:#EEF2EE; --muted:#A6B5AE; --line:#2A3B36; --accent:#9DBCB1; --accent-ink:#0F1A18; --soft:#1A2B26;
+  --good:#5CCB92; --goodbg:#16302A; --mid:#E8B65A; --midbg:#33291A; --bad:#F08A7E; --badbg:#3A1F1C; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:760px;margin:0 auto;display:grid;gap:18px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bad);background:var(--badbg);padding:4px 9px;border-radius:999px}
+h1{font-family:var(--display);font-size:clamp(26px,6vw,36px);line-height:1.05;margin:8px 0 0;text-wrap:balance}
+h2{font-family:var(--display);font-size:19px;margin:0}
+.lede{color:var(--muted);margin:6px 0 0}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:5px}
+.tab{font:600 14px var(--body);border:0;background:transparent;color:var(--muted);padding:10px 6px;border-radius:8px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:16px}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.lbl{font-weight:600;font-size:14px}
+.hint{color:var(--muted);font-size:13px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:540px){.row,.row3{grid-template-columns:1fr}}
+input[type=number]{font:500 15px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%;font-variant-numeric:tabular-nums}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:600 14px var(--body);min-width:44px;padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--soft);border-color:var(--accent);color:var(--accent)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:540px){.checks{grid-template-columns:1fr}}
+.check{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:var(--bg);cursor:pointer;font-size:14px}
+.check input{accent-color:var(--accent)}
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:540px){.ladder{grid-template-columns:1fr}}
+.step{border-radius:12px;padding:14px;display:grid;gap:2px;border:1px solid var(--line);background:var(--surface)}
+.step .k{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.step .v{font-family:var(--display);font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums}
+.step .s{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.step.quote{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.step.quote .k,.step.quote .s{color:var(--accent-ink);opacity:.85}
+.step.floor{background:var(--midbg);border-color:var(--mid)}
+.step.floor .k{color:var(--mid)}
+.lines{display:grid;gap:4px;font-size:14px;font-variant-numeric:tabular-nums}
+.lines div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:5px}
+.lines span:first-child{color:var(--muted)}
+.offer{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.offer .field{flex:1 1 180px}
+.verdict{border-radius:12px;padding:14px;display:grid;gap:4px}
+.verdict b{font-family:var(--display);font-size:20px}
+.v-good{background:var(--goodbg);color:var(--good)} .v-mid{background:var(--midbg);color:var(--mid)} .v-bad{background:var(--badbg);color:var(--bad)}
+.verdict p{margin:0;color:var(--ink);font-size:14px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+summary{font-weight:700;cursor:pointer}
+details .row3{margin-top:14px}
+.script{background:var(--soft);border-radius:12px;padding:14px;font-size:14px}
+.script p{margin:0}
+.best{background:var(--goodbg);border:1px solid var(--good);border-radius:12px;padding:16px;display:grid;gap:2px}
+.best .k{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--good)}
+.best .bv{font-family:var(--display);font-size:clamp(30px,8vw,44px);line-height:1.1;font-variant-numeric:tabular-nums}
+.best .s{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.linkbtn{justify-self:start;font:600 13px var(--body);color:var(--accent);background:none;border:0;padding:2px 0;cursor:pointer;text-decoration:underline}
+.lbl{font-weight:600;font-size:14px}
+.team{background:var(--soft);border:1px solid var(--accent);border-radius:14px;padding:16px 18px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;justify-content:space-between}
+.team>div{display:grid;gap:2px}
+.team .k{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.team .tv{font-family:var(--display);font-size:30px;line-height:1.1}
+.team .ts{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums;min-width:0}
+.best.mid{background:var(--midbg);border-color:var(--mid)} .best.mid .k{color:var(--mid)}
+.best.bad{background:var(--badbg);border-color:var(--bad)} .best.bad .k{color:var(--bad)}
+.pitch ul{margin:8px 0;padding-left:20px;display:grid;gap:4px}
+.btn-copy{justify-self:start;font:700 14px var(--body);border-radius:9px;padding:9px 14px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.lines .tot{border-top:2px solid var(--ink);font-weight:700}
+.lines .tot span:first-child{color:var(--ink)}
+.vatnote{margin:0;font-size:14px;font-weight:600;color:var(--mid);background:var(--midbg);border-radius:10px;padding:10px 14px}
+.set{display:grid;gap:14px;margin-top:14px}
+.set .row3{margin-top:0}
+.foot{margin:0;font-size:12px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><svg viewBox="0 0 100 100" width="36" height="36" aria-hidden="true"><clipPath id="c"><rect width="100" height="100" rx="22"/></clipPath><rect width="100" height="100" rx="22" fill="#173D36"/><g clip-path="url(#c)" transform="translate(9 0)"><path d="M37.2 30.5C35 23 35.6 15.5 38.6 10.5C41.2 15 42.4 22.5 41.8 30Z" fill="#fff"/><path d="M43.6 29.2C42.4 21.5 44 14 47.6 9.6C49.8 14.4 50.2 22 48.4 29.2Z" fill="#fff"/><path d="M32 100L32 44C32 33.5 37 28 45.5 28L61 28C67.5 28 71.5 32 71.5 37.5C71.5 43 67.5 46 62 46L52 46C49.6 46 48 47.8 48 50.2L48 100Z" fill="#fff"/><circle cx="55.5" cy="35.5" r="2.4" fill="#173D36"/><rect x="32" y="66" width="16" height="9" fill="#E3A13A"/></g></svg><b style="font-family:var(--display);font-weight:600;font-size:20px">Llama Commercial</b></div>
+    <span class="tag">Internal only · don't share with customers</span>
+    <h1>Negotiation Desk</h1>
+    <p class="lede">For any regular commercial clean: offices, schools, churches, shops, gyms, factories and communal areas. Enter the job. You get your price, your lowest price, your real costs after tax and wages, the team you need, and what to say to win the client.</p>
+  </header>
+
+
+  <section class="card" id="p-office">
+    <div class="row">
+      <div class="field"><label for="o-sqft">Office size (sq ft)</label><input type="number" id="o-sqft" min="200" step="50" value="1500"></div>
+      <div class="field"><span class="lbl" id="ot">Type</span>
+        <div class="seg" id="o-type" aria-labelledby="ot"><button aria-pressed="true" data-v="regular">Regular contract</button><button aria-pressed="false" data-v="deep">One-off deep</button></div></div>
+    </div>
+    <div class="row3">
+      <div class="field" id="o-visits-f"><label for="o-visits">Visits / week</label><input type="number" id="o-visits" min="1" max="14" value="5"></div>
+      <div class="field"><label for="o-wc">Toilets</label><input type="number" id="o-wc" min="0" value="2"></div>
+      <div class="field"><label for="o-kit">Kitchens</label><input type="number" id="o-kit" min="0" value="1"></div>
+    </div>
+    <div class="field"><label for="o-win">Time window per visit (hrs)</label><input type="number" id="o-win" min="0.5" step="0.5" value="2"><span class="hint">How long you have on site, e.g. 6–8pm after staff leave = 2.</span></div>
+  </section>
+
+  <section class="card" id="p-eot" hidden>
+    <div class="row">
+      <div class="field"><span class="lbl" id="eb">Bedrooms</span>
+        <div class="seg" id="e-bed" aria-labelledby="eb"><button aria-pressed="false" data-v="0">Studio</button><button aria-pressed="false" data-v="1">1</button><button aria-pressed="true" data-v="2">2</button><button aria-pressed="false" data-v="3">3</button><button aria-pressed="false" data-v="4">4+</button></div></div>
+      <div class="field"><span class="lbl" id="eba">Bathrooms</span>
+        <div class="seg" id="e-bath" aria-labelledby="eba"><button aria-pressed="true" data-v="1">1</button><button aria-pressed="false" data-v="2">2</button><button aria-pressed="false" data-v="3">3</button></div></div>
+    </div>
+    <div class="checks">
+      <label class="check"><input type="checkbox" id="x-oven">Oven (+£39)</label>
+      <label class="check"><input type="checkbox" id="x-fridge">Fridge / freezer (+£20)</label>
+      <label class="check"><input type="checkbox" id="x-win">Inside windows (+£30)</label>
+      <label class="check"><input type="checkbox" id="x-balc">Balcony (+£20)</label>
+      <label class="check"><input type="checkbox" id="x-dirty">Heavily soiled (+25%)</label>
+    </div>
+    <div class="row">
+      <div class="field"><label for="x-carpet">Carpeted rooms (£25 each)</label><input type="number" id="x-carpet" min="0" value="0"></div>
+      <div class="field"><label for="e-win">Time window on site (hrs)</label><input type="number" id="e-win" min="1" step="0.5" value="4"><span class="hint">Under 4 hours may need extra cleaners: +£15 each.</span></div>
+    </div>
+  </section>
+
+  <section class="card" id="p-bnb" hidden>
+    <div class="row">
+      <div class="field"><span class="lbl" id="bb">Bedrooms</span>
+        <div class="seg" id="b-bed" aria-labelledby="bb"><button aria-pressed="false" data-v="0">Studio</button><button aria-pressed="true" data-v="1">1</button><button aria-pressed="false" data-v="2">2</button><button aria-pressed="false" data-v="3">3</button><button aria-pressed="false" data-v="4">4+</button></div></div>
+      <div class="field"><span class="lbl" id="bba">Bathrooms</span>
+        <div class="seg" id="b-bath" aria-labelledby="bba"><button aria-pressed="true" data-v="1">1</button><button aria-pressed="false" data-v="2">2</button><button aria-pressed="false" data-v="3">3</button></div></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="b-beds">Beds with linen (£15 each)</label><input type="number" id="b-beds" min="0" value="0"></div>
+      <div class="field"><label for="b-month">Cleans per month</label><input type="number" id="b-month" min="1" value="6"></div>
+    </div>
+    <div class="field"><label for="b-win">Gap between check-out and check-in (hrs)</label><input type="number" id="b-win" min="0.5" step="0.5" value="3"><span class="hint">e.g. check-out 11am, check-in 2pm = 3. Under 3 hours may need extra cleaners: +£15 each.</span></div>
+  </section>
+
+  <section class="card">
+    <div class="field"><span class="lbl" id="srcl">Where did this client come from?</span>
+      <div class="seg" id="src" aria-labelledby="srcl"><button aria-pressed="false" data-v="0">Repeat / referral</button><button aria-pressed="false" data-v="15">Letting agent</button><button aria-pressed="true" data-v="20">Google / flyer</button><button aria-pressed="false" data-v="48">Bark / Checkatrade</button></div>
+      <span class="hint">Paid leads cost money to win. Bark averages about £48 per customer won, so your lowest price rises for those jobs.</span></div>
+  </section>
+
+  <p class="vatnote" id="vatnote" hidden>VAT registered: every price on this page includes 20% VAT. Costs and profit are shown without VAT.</p>
+
+  <section class="ladder" aria-live="polite">
+    <div class="step quote"><span class="k">Quote this</span><span class="v" id="v-quote">£0</span><span class="s" id="s-quote"></span></div>
+    <div class="step floor"><span class="k">Lowest you accept</span><span class="v" id="v-floor">£0</span><span class="s" id="s-floor"></span></div>
+    <div class="step"><span class="k">Your cost</span><span class="v" id="v-cost">£0</span><span class="s" id="s-cost"></span></div>
+  </section>
+
+  <section class="team" aria-live="polite">
+    <div><span class="k">Cleaners needed</span><span class="tv" id="t-n">1 cleaner</span></div>
+    <div class="ts" id="t-s"></div>
+  </section>
+
+  <section class="card">
+    <h2>Beat their current cleaner</h2>
+    <div class="row">
+      <div class="field"><label for="cur" id="cur-l">They pay now (£)</label><input type="number" id="cur" min="0" placeholder="Their current price"></div>
+      <div class="field"><label for="beat">Beat it by (%)</label><input type="number" id="beat" min="0" max="50" value="10"><span class="hint">The offer never goes below your lowest price.</span></div>
+    </div>
+    <div class="field"><span class="lbl" id="probl">What's going wrong with their current cleaner?</span>
+      <div class="seg chips" id="probs" aria-labelledby="probl">
+        <button aria-pressed="false" data-v="late">Late or no-shows</button>
+        <button aria-pressed="false" data-v="quality">Rushed or poor cleaning</button>
+        <button aria-pressed="false" data-v="changing">Different cleaner each time</button>
+        <button aria-pressed="false" data-v="refuse">Won't come back to fix things</button>
+        <button aria-pressed="false" data-v="extras">Surprise extra charges</button>
+        <button aria-pressed="false" data-v="contact">Hard to get hold of</button>
+        <button aria-pressed="false" data-v="lockin">Locked into a long contract</button>
+      </div></div>
+    <div class="best" id="beat-box"><span class="k" id="beat-k">Offer them</span><span class="bv" id="beat-v">Enter their price</span><span class="s" id="beat-s"></span></div>
+    <div class="script pitch" id="pitch"><p>Enter what they pay now and tap what's going wrong. You'll get a price that beats it and the pitch to say.</p></div>
+    <button type="button" class="btn-copy" id="copy-pitch">Copy pitch</button>
+  </section>
+
+  <section class="card">
+    <h2>Job breakdown</h2>
+    <div class="lines" id="lines"></div>
+  </section>
+
+  <section class="card">
+    <h2>Cost per cleaner hour</h2>
+    <div class="lines" id="build"></div>
+    <span class="hint" id="build-h"></span>
+  </section>
+
+  <section class="card">
+    <h2>Ask and bid</h2>
+    <div class="row">
+      <div class="field"><label for="ask" id="ask-l">Our ask (£)</label><input type="number" id="ask" min="0"><button type="button" id="ask-reset" class="linkbtn">Reset to our quote</button></div>
+      <div class="field"><label for="offer" id="offer-l">Client's bid (£)</label><input type="number" id="offer" min="0" placeholder="What they offered"></div>
+    </div>
+    <div class="best"><span class="k">Best price to take</span><span class="bv" id="best">Enter their bid</span><span class="s" id="best-s"></span></div>
+    <div>
+      <span class="lbl">Concession plan</span>
+      <div class="lines" id="ladder2"></div>
+      <span class="hint">Move down one step at a time, and only when they push back. Never go below the final step.</span>
+    </div>
+    <div class="verdict v-mid" id="verdict"><b>Waiting for their bid</b><p>Put in what the client offered to get your best price.</p></div>
+    <div class="script" id="script"><p>Always open at your ask. Only come down if they push, and trade something for every discount.</p></div>
+  </section>
+
+  <details>
+    <summary>Cost and tax settings</summary>
+    <div class="set">
+      <div class="row3">
+        <div class="field"><label for="c-pay">Cleaner pay (£/hr)</label><input type="number" id="c-pay" step="0.05" value="14.50"><span class="hint">Legal minimum (age 21+): £12.71.</span></div>
+        <div class="field"><label for="c-eotpay">End-of-tenancy pay (£/hr)</label><input type="number" id="c-eotpay" step="0.05" value="15"></div>
+        <div class="field"><label for="c-hours">Hours a week per cleaner</label><input type="number" id="c-hours" min="1" value="20"><span class="hint">Sets employer NI and pension per hour.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="eal">Employment Allowance</span>
+        <div class="seg" id="c-ea" aria-labelledby="eal"><button aria-pressed="true" data-v="1">Covers our employer NI</button><button aria-pressed="false" data-v="0">Used up or not eligible</button></div>
+        <span class="hint">£10,500 a year off employer NI, one claim per group of connected companies. It covers about 5–6 cleaners on 20 hours a week.</span></div>
+      <div class="field"><span class="lbl" id="vatl">VAT</span>
+        <div class="seg" id="c-vat" aria-labelledby="vatl"><button aria-pressed="true" data-v="0">Not registered</button><button aria-pressed="false" data-v="1">Registered (+20%)</button></div>
+        <span class="hint">You must register once turnover in any rolling 12 months goes over £90,000.</span></div>
+      <div class="row3">
+        <div class="field"><label for="c-sick">Sick pay allowance (%)</label><input type="number" id="c-sick" step="0.5" value="1"><span class="hint">SSP is paid from day one.</span></div>
+        <div class="field"><label for="c-tmin">Paid travel between jobs (mins per cleaner)</label><input type="number" id="c-tmin" min="0" step="5" value="20"><span class="hint">Paid at £12.71/hr. Keeps you legal on minimum wage.</span></div>
+        <div class="field"><label for="c-travel">Fares per cleaner per visit (£)</label><input type="number" id="c-travel" step="0.5" value="3"></div>
+        <div class="field"><label for="c-ovh">Overhead per one-off job (£)</label><input type="number" id="c-ovh" step="1" value="8"><span class="hint">Insurance, phone, software.</span></div>
+        <div class="field"><label for="c-card">Card fee (%)</label><input type="number" id="c-card" step="0.1" value="2"></div>
+        <div class="field"><label for="c-rate">Office quote rate (£/hr)</label><input type="number" id="c-rate" step="0.5" value="22"></div>
+        <div class="field"><label for="c-min">Minimum profit (%)</label><input type="number" id="c-min" value="15"><span class="hint">Sets the lowest price.</span></div>
+      </div>
+    </div>
+  </details>
+  <p class="foot">Tax year 2026/27 rates: National Living Wage £12.71 · employer NI 15% above £96 a week · Employment Allowance £10,500 · holiday pay 12.07% · pension 3% on earnings between £6,240 and £50,270 a year · SSP from day one · VAT threshold £90,000. Check again every April.</p>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const gbp=n=>"£"+(Math.round(n)).toLocaleString("en-GB");
+const gbp2=n=>"£"+(+n).toFixed(2);
+const pct=x=>Math.round(x*100)+"%";
+let svc="office", askTouched=false;
+const EOT={0:[135,3],1:[169,4.5],2:[199,6],3:[259,8],4:[329,10.5]}; // price, team labour hours
+const BNB={0:[59,1.75],1:[69,2.25],2:[85,2.75],3:[115,3.5],4:[145,4.5]};
+// Verified 2026/27 rates (GOV.UK)
+const NLW=12.71, ER_NI=0.15, ST_WK=96, QE_LO=6240/52, QE_HI=50270/52, HOL=0.1207, PEN=0.03;
+const n=id=>+$(id).value||0;
+const segV=id=>document.querySelector(`#${id} [aria-pressed="true"]`).dataset.v;
+const row=(a,b)=>`<div><span>${a}</span><span>${b}</span></div>`;
+
+document.querySelectorAll(".seg:not(.chips)").forEach(s=>s.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;s.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));if(s.id==="c-vat")askTouched=false;calc()}));
+document.querySelectorAll(".chips").forEach(s=>s.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");calc()}));
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{svc=t.dataset.svc;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));["office","eot","bnb"].forEach(k=>$("p-"+k).hidden=k!==svc);$("offer").value="";$("cur").value="";askTouched=false;calc()}));
+document.querySelectorAll("input").forEach(i=>i.addEventListener("input",e=>{if(e.target.id==="ask")askTouched=true;calc()}));
+$("ask-reset").addEventListener("click",()=>{askTouched=false;calc()});
+
+// Employer cost of one paid hour, from verified rates
+function loaded(wage){
+  const H=Math.max(1,n("c-hours")), ea=segV("c-ea")==="1", sick=Math.max(0,n("c-sick"))/100;
+  const basic=wage*H, hol=basic*HOL, gross=basic+hol;
+  const ni=ea?0:Math.max(0,gross-ST_WK)*ER_NI;
+  const pen=gross>QE_LO?(Math.min(gross,QE_HI)-QE_LO)*PEN:0;
+  const sk=basic*sick;
+  return {pay:wage,hol:hol/H,pen:pen/H,ni:ni/H,sick:sk/H,hr:(gross+ni+pen+sk)/H,ea,H};
+}
+
+function calc(){
+  const cl=(x,a,b)=>Math.min(b,Math.max(a,x));
+  const minM=cl(n("c-min"),0,60)/100, fare=Math.max(0,n("c-travel")), ovh=Math.max(0,n("c-ovh")), cf=cl(n("c-card"),0,10)/100, tmin=Math.max(0,n("c-tmin"))/60;
+  const vat=segV("c-vat")==="1", V=vat?1.2:1, src=+segV("src");
+  const Ls=loaded(n("c-pay")), Le=loaded(n("c-eotpay")), Lt=loaded(NLW);
+  const need=(h,w,min)=>Math.max(min||1,Math.ceil(h/Math.max(0.5,w)-1e-9));
+  let q,base,hrs,cac,L=Ls,unit="",lines="",kind,ex={},team=1,win=1,tt=0,rush=0;
+  if(svc==="office"){
+    const sq=Math.max(0,n("o-sqft")),wc=Math.max(0,n("o-wc")),kit=Math.max(0,n("o-kit")),type=segV("o-type");
+    $("o-visits-f").hidden=type==="deep";
+    if(type==="regular"){
+      const v=Math.min(14,Math.max(1,Math.round(n("o-visits")))), vm=v*4.33;
+      hrs=Math.max(1,sq/2000+wc*0.15+kit*0.2); win=Math.max(0.5,n("o-win")||2); team=need(hrs,win);
+      q=hrs*n("c-rate")*vm;
+      base=(hrs*Ls.hr+1)*vm; // regular single site: no paid travel time, £1 consumables per visit
+      cac=src/12; unit=" /month"; kind="oreg"; ex={sq,vm,v};
+    }else{
+      hrs=Math.max(1,sq/600+wc*0.4+kit*0.5); win=Math.max(n("o-win")||2,4); team=need(hrs,win);
+      q=Math.max(149,sq*0.12+wc*15+kit*25); tt=tmin*team*Lt.hr;
+      base=hrs*Ls.hr+15+fare*team+tt+ovh; cac=src; kind="odeep"; ex={sq};
+    }
+  }else if(svc==="eot"){
+    const b=+segV("e-bed"),ba=+segV("e-bath"); L=Le;
+    q=EOT[b][0]+(ba-1)*25; hrs=EOT[b][1]+(ba-1);
+    [["x-oven",39,1.25],["x-fridge",20,.5],["x-win",30,.75],["x-balc",20,.5]].forEach(([id,p,h])=>{if($(id).checked){q+=p;hrs+=h}});
+    const cr=Math.max(0,Math.round(n("x-carpet"))); q+=cr*25; hrs+=cr*.75;
+    if($("x-dirty").checked){q*=1.25;hrs*=1.25}
+    win=Math.max(1,n("e-win")||4); team=need(hrs,win,hrs>3.5?2:1); tt=tmin*team*Lt.hr;
+    rush=Math.max(0,team-need(hrs,4,hrs>3.5?2:1))*15; q+=rush;
+    const direct=10+6+cr*4+fare*team; // supplies, kit transport, carpet solution, fares
+    base=hrs*Le.hr+direct+tt+ovh; cac=src; kind="eot"; ex={direct};
+  }else{
+    const b=+segV("b-bed"),ba=+segV("b-bath"),beds=Math.max(0,Math.round(n("b-beds"))),m=Math.max(1,Math.round(n("b-month")));
+    q=BNB[b][0]+(ba-1)*15+beds*15; hrs=BNB[b][1]+(ba-1)*.5+beds*.15;
+    if(m>=8) q*=0.95;
+    win=Math.max(0.5,n("b-win")||3); team=need(hrs,win); tt=tmin*team*Lt.hr;
+    rush=Math.max(0,team-need(hrs,3))*15; q+=rush;
+    base=hrs*Ls.hr+3+beds*6+fare*team+tt+3; // supplies, laundry, fares, travel time, overhead
+    cac=src/24; unit=" /clean"; kind="bnb"; ex={beds,m};
+  }
+  // Prices are net of VAT internally; P() converts to what the customer pays
+  const P=x=>x*V, N=x=>x/V;
+  const card=p=>p*V*cf, profit=p=>p-base-cac-card(p);
+  const floor=(base+cac)/(1-minM-V*cf);
+  const cost=base+cac+card(q);
+  $("vatnote").hidden=!vat;
+  $("v-quote").textContent=gbp(P(q)); $("s-quote").textContent="Profit "+gbp(profit(q))+unit+" · "+pct(profit(q)/q);
+  $("v-floor").textContent=gbp(P(floor)); $("s-floor").textContent="Profit "+gbp(profit(floor))+unit+" · "+pct(minM);
+  $("v-cost").textContent=gbp(cost); $("s-cost").textContent="Wages and on-costs, supplies, travel, lead, card fee";
+
+  // Breakdown
+  const lead=row("Cost of winning this client","£"+cac.toFixed(2)+(kind==="oreg"?" (spread over 12 months)":kind==="bnb"?" (spread over 24 cleans)":""));
+  const lab=(h,l)=>row("Wages and on-costs",gbp(h*l.hr)+` (${h.toFixed(1)} hrs × ${gbp2(l.hr)})`);
+  if(kind==="oreg") lines=row("Hours per visit",hrs.toFixed(1))+row("Visits per month",ex.vm.toFixed(1))+row("Cleaner hours per month",(hrs*ex.vm).toFixed(1))
+      +lab(hrs*ex.vm,Ls)+row("Consumables",gbp(ex.vm))+lead+row("Card fee",gbp(card(q)))
+      +(ex.sq>0?row("Quote per sq ft / month","£"+(P(q)/ex.sq).toFixed(2))+row("Lowest per sq ft / month","£"+(P(floor)/ex.sq).toFixed(2)):"")+row("Lowest hourly rate","£"+(P(floor)/(hrs*ex.vm)).toFixed(2));
+  else if(kind==="odeep") lines=lab(hrs,Ls)+row("Supplies and fares",gbp(15+fare*team))+row("Paid travel time",gbp(tt))+row("Overhead share",gbp(ovh))+lead+row("Card fee",gbp(card(q)))
+      +(ex.sq>0?row("Quote per sq ft","£"+(P(q)/ex.sq).toFixed(2))+row("Lowest per sq ft","£"+(P(floor)/ex.sq).toFixed(2)):"");
+  else if(kind==="eot") lines=row("Team",team+(team>1?" cleaners":" cleaner")+" × "+(hrs/team).toFixed(1)+" hrs")+lab(hrs,Le)
+      +row("Supplies, kit transport, fares",gbp(ex.direct))+row("Paid travel time",gbp(tt))+row("Overhead share",gbp(ovh))+lead+row("Card fee",gbp(card(q)));
+  else lines=lab(hrs,Ls)+row("Laundry, supplies, fares",gbp(6+ex.beds*6+fare*team))+row("Paid travel time",gbp(tt))+lead+row("Card fee",gbp(card(q)))
+      +(ex.m>=8?row("Regular host discount (8+ cleans a month)","5% already applied"):"")+row(`Monthly at quote (${ex.m} cleans)`,gbp(P(q)*ex.m))+row("Monthly profit at quote",gbp(profit(q)*ex.m));
+  if(rush>0) lines=row("Rush turnaround (+£15 per extra cleaner)",gbp(P(rush)))+lines;
+  $("lines").innerHTML=lines;
+
+  // Team
+  $("t-n").textContent=team+(team>1?" cleaners":" cleaner");
+  $("t-s").innerHTML=`<b>${(hrs/team).toFixed(1)} hrs each</b> on site (window ${win} hrs) · ${hrs.toFixed(1)} cleaner-hours`+
+    (kind==="oreg"?` per visit<br>${(hrs*ex.v).toFixed(1)} cleaner-hours a week across ${ex.v} visits`:"")+
+    (kind==="eot"&&team===2&&hrs<=6?"<br>Two cleaners is standard for end of tenancy.":"");
+
+  // Cost per cleaner hour
+  $("build").innerHTML=row("Hourly pay",gbp2(L.pay))+row("Holiday pay (12.07%)",gbp2(L.hol))+row("Workplace pension (3%)",gbp2(L.pen))
+    +row("Employer NI (15%)",L.ea?"£0.00 · covered by Employment Allowance":gbp2(L.ni))+row("Sick pay allowance",gbp2(L.sick))
+    +`<div class="tot"><span>Real cost per hour</span><span>${gbp2(L.hr)}</span></div>`;
+  $("build-h").textContent=`Based on ${L.H} hours a week per cleaner. Cleaners' own income tax and NI come out of their pay, so they don't add to your cost.`+(L.ea?` Without the Employment Allowance this would be ${gbp2(loadedNoEA(L.pay))}.`:"");
+
+  // Ask and bid (customer-facing amounts)
+  if(!askTouched) $("ask").value=Math.round(P(q));
+  const perL=unit?" "+unit.trim().replace("/","per "):"";
+  $("ask-l").textContent="Our ask (£"+perL+")"; $("offer-l").textContent="Client's bid (£"+perL+")"; $("cur-l").textContent="They pay now (£"+perL+")";
+  const ask=n("ask")||Math.round(P(q)), bid=parseFloat($("offer").value), askN=N(ask);
+  const pp=p=>`${gbp(P(p))}${unit} · profit ${gbp(profit(p))} (${pct(profit(p)/p)})`;
+  const gap=Math.max(0,askN-floor);
+  $("ladder2").innerHTML=[["Open",askN],["1st move",askN-gap*0.35],["2nd move",askN-gap*0.7],["Final offer",floor]].map(([k,p])=>row(k,pp(p))).join("");
+  const v=$("verdict"), sc=$("script");
+  const warn=askN<floor?`<p>Your ask is below your lowest price of ${gbp(P(floor))}. Raise it.</p>`:"";
+  const give=kind==="oreg"?" if we agree a 6-month contract":kind==="bnb"?" if you book us for every turnover":" if we book it in this week";
+  if(!(bid>0)){$("best").textContent="Enter their bid";$("best-s").textContent="";
+    v.className="verdict v-mid";v.innerHTML="<b>Waiting for their bid</b><p>Put in what the client offered to get your best price.</p>"+warn;
+    sc.innerHTML="<p>Always open at your ask. Only come down if they push, and trade something for every discount: a longer contract, more cleans, or payment upfront.</p>";
+  }else{
+    const bidN=N(bid); let bestP;
+    if(bidN>=askN){bestP=bid;v.className="verdict v-good";v.innerHTML=`<b>Accept</b><p>Their bid is at or above your ask. Profit ${gbp(profit(bidN))}${unit}.</p>`+warn;sc.innerHTML=`<p>"That works for us. Let's get you booked in."</p>`}
+    else if(bidN>=floor){bestP=Math.round(Math.max(P(floor),(ask+bid)/2));v.className="verdict v-mid";v.innerHTML=`<b>Counter at ${gbp(bestP)}</b><p>Meet in the middle. If they won't move, their bid of ${gbp(bid)} is still safe to accept (profit ${gbp(profit(bidN))}${unit}).</p>`+warn;sc.innerHTML=`<p>"I can do ${gbp(bestP)}${unit}${give}. That's already below our standard price."</p>`}
+    else{bestP=Math.ceil(P(floor));v.className="verdict v-bad";v.innerHTML=`<b>Walk away below ${gbp(P(floor))}</b><p>At their bid you ${profit(bidN)>0?`only make ${gbp(profit(bidN))}${unit}`:`lose ${gbp(-profit(bidN))}${unit}`}. Counter with your final offer.</p>`+warn;
+      sc.innerHTML=`<p>"The lowest I can go is ${gbp(P(floor))}${unit} and still send properly paid, insured cleaners. ${kind==="oreg"?"We could cut the visits per week to bring it down.":kind==="eot"?"We could drop some extras to bring it down.":"We could leave out linen to bring it down."}"</p>`}
+    $("best").textContent=gbp(bestP)+unit; $("best-s").textContent=`Profit ${gbp(profit(N(bestP)))}${unit} · ${pct(profit(N(bestP))/N(bestP))} margin`;
+  }
+
+  // Beat their current cleaner
+  beatPanel({P,N,profit,q,floor,unit,kind,ex});
+}
+
+function loadedNoEA(w){const H=Math.max(1,n("c-hours")),basic=w*H,gross=basic*(1+HOL);return (gross+Math.max(0,gross-ST_WK)*ER_NI+(gross>QE_LO?(Math.min(gross,QE_HI)-QE_LO)*PEN:0)+basic*n("c-sick")/100)/H}
+
+function beatPanel({P,N,profit,q,floor,unit,kind,ex}){
+  const cur=parseFloat($("cur").value), beat=Math.min(50,Math.max(0,n("beat")))/100;
+  const box=$("beat-box"), pitch=$("pitch");
+  const probs=[...document.querySelectorAll("#probs [aria-pressed='true']")].map(b=>b.dataset.v);
+  if(!(cur>0)){box.className="best";$("beat-k").textContent="Offer them";$("beat-v").textContent="Enter their price";$("beat-s").textContent="";
+    pitch.innerHTML="<p>Enter what they pay now and tap what's going wrong. You'll get a price that beats it and the pitch to say.</p>";return}
+  const Pq=P(q), Pf=P(floor), target=cur*(1-beat);
+  const nice=x=>kind==="oreg"?Math.floor(x/5)*5:x>=100?Math.floor((x+1)/10)*10-1:Math.floor(x);
+  let offer,mode;
+  if(target>=Pq){offer=Math.round(Pq);mode="std"}
+  else if(target>=Pf){offer=Math.max(nice(target),Math.ceil(Pf));mode="beat"}
+  else if(cur>Math.ceil(Pf)){offer=Math.ceil(Pf);mode="small"}
+  else{offer=Math.ceil(Pf);mode="value"}
+  const save=cur-offer, pr=profit(N(offer));
+  let saveTxt="";
+  if(save>0){
+    if(kind==="oreg") saveTxt=`${gbp(save)} a month (${gbp(save*12)} a year)`;
+    else if(kind==="bnb") saveTxt=`${gbp(save)} a clean (${gbp(save*ex.m)} a month, ${gbp(save*ex.m*12)} a year)`;
+    else saveTxt=gbp(save);
+  }
+  box.className="best"+(mode==="small"?" mid":mode==="value"?" bad":"");
+  $("beat-k").textContent=mode==="value"?"Can't beat on price · sell on value":mode==="small"?"Small beat · lead with quality":"Offer them";
+  $("beat-v").textContent=gbp(offer)+unit;
+  $("beat-s").textContent=(save>0?`They save ${saveTxt} · `:"")+`your profit ${gbp(pr)}${unit} (${pct(pr/N(offer))})`;
+  const eot=kind==="eot", reg=kind==="oreg";
+  const items={
+    late:"On-time guarantee: if we're more than 30 minutes late you get 20% off, and if we miss a booking the next clean is free.",
+    quality:eot?"We clean to your letting agent's own checkout checklist and send before-and-after photos of every room.":"We clean to a written checklist for your space and send before-and-after photos after every clean.",
+    changing:eot?"A team leader checks every room against the checklist before we hand back the keys.":"The same cleaner every time, so they learn your space and how you like it.",
+    refuse:eot?"Deposit-back guarantee: if your agent flags anything we cleaned, we come back and re-clean it free.":`Re-clean guarantee: tell us within ${reg||kind==="bnb"?"24":"48"} hours and we come back and fix it free.`,
+    extras:"Fixed price: what we quote is what you pay, with no extra charges on the day.",
+    contact:"A direct number for the owner, plus WhatsApp updates when we arrive and when we finish.",
+    lockin:reg?"A 30-day rolling contract: you stay because we're good, not because you're tied in.":"No contract and no minimum term."
+  };
+  const order=[...probs,...["quality","refuse","late","extras","changing","contact","lockin"].filter(k=>!probs.includes(k))];
+  const picked=[...new Set(order)].slice(0,Math.max(4,probs.length));
+  const bullets=[...picked.map(k=>items[k]),"Vetted cleaners (ID, right-to-work and DBS checked), trained, fully insured, and paid well above minimum wage, so they stay and take care."];
+  const issue={late:"cleaners turn up late",quality:"corners get cut",changing:"you get a different cleaner every time",refuse:"problems don't get fixed",extras:"extra charges appear",contact:"nobody answers the phone"};
+  const issues=probs.filter(k=>issue[k]).map(k=>issue[k]);
+  const issueTxt=issues.length>1?issues.slice(0,-1).join(", ")+" and "+issues.at(-1):issues[0]||"standards slip";
+  let open;
+  if(mode==="value") open=`At ${gbp(cur)}${unit} it's very hard to pay trained, insured cleaners properly, and that's usually when ${issueTxt}. Our price is ${gbp(offer)}${unit}, and for that you get:`;
+  else open=`You're paying ${gbp(cur)}${unit} at the moment. We'll do it for ${gbp(offer)}${unit}${save>0?`, which saves you ${saveTxt}`:""}. And you get more for less:`;
+  const close=eot?"Shall I book your date in now?":reg?"Can we start with a free trial clean this week?":"Shall I take your next turnover so you can see the difference?";
+  pitch.innerHTML=`<p>"${open}</p><ul>${bullets.map(b=>`<li>${b}</li>`).join("")}</ul><p>${close}"</p>`;
+}
+
+$("copy-pitch").addEventListener("click",()=>{
+  const el=$("pitch"), t=el.innerText;
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)};
+  try{navigator.clipboard.writeText(t).then(()=>{$("copy-pitch").textContent="Copied";setTimeout(()=>$("copy-pitch").textContent="Copy pitch",1500)},sel)}catch(e){sel()}
+});
+calc();
+</script>

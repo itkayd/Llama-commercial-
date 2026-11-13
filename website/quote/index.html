@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Llama Commercial Quote</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: single centred tool column: brand row, inputs card, estimate panel, call band. Llama Commercial palette. */
+:root{
+  --bg:#F5F6F2; --surface:#FFFFFF; --ink:#152320; --muted:#56625D; --line:#D5DCD3;
+  --accent:#173D36; --accent-ink:#FFFFFF; --soft:#E8EDE6; --warn:#8A5A12; --saffron:#E3A13A;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Manrope", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1A18; --surface:#15231F; --ink:#EEF2EE; --muted:#A6B5AE; --line:#2A3B36;
+  --accent:#9DBCB1; --accent-ink:#0F1A18; --soft:#1A2B26; --warn:#E9B460; --saffron:#E3A13A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1A18; --surface:#15231F; --ink:#EEF2EE; --muted:#A6B5AE; --line:#2A3B36;
+  --accent:#9DBCB1; --accent-ink:#0F1A18; --soft:#1A2B26; --warn:#E9B460; --saffron:#E3A13A; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:720px;margin:0 auto;display:grid;gap:20px}
+h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--muted);margin:6px 0 0;max-width:60ch}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:5px}
+.tab{font:600 14px var(--body);border:0;background:transparent;color:var(--muted);padding:10px 6px;border-radius:8px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:18px}
+.field{display:grid;gap:6px}
+.field label,.lbl{font-weight:600;font-size:14px}
+.hint{color:var(--muted);font-size:13px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+input[type=number],select{font:500 15px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px 12px;width:100%}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sqft{display:flex;gap:10px;align-items:center}
+.sqft input[type=number]{max-width:130px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:600 14px var(--body);min-width:44px;padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--soft);border-color:var(--accent);color:var(--accent)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:520px){.checks{grid-template-columns:1fr}}
+.check{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--bg);cursor:pointer}
+.check span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px}
+.check input{accent-color:var(--accent);margin-right:8px}
+.quote{background:var(--accent);color:var(--accent-ink);border-radius:14px;padding:20px;display:grid;gap:10px}
+.quote .k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;font-weight:700}
+.price{font-family:var(--display);font-size:clamp(38px,9vw,54px);line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-size:.38em;font-family:var(--body);font-weight:600;opacity:.9}
+.lines{display:grid;gap:4px;font-size:14px;font-variant-numeric:tabular-nums}
+.lines div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid color-mix(in srgb,var(--accent-ink) 22%,transparent);padding-top:5px}
+.note{font-size:13px;opacity:.9}
+.call{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:12px}
+.call h2{font-family:var(--display);font-size:22px;margin:0}
+.call p{margin:0;color:var(--muted)}
+.phone{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.num{font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:.01em;user-select:all}
+.btn{font:700 14px var(--body);border-radius:9px;padding:10px 14px;border:1px solid var(--accent);cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.trust{display:flex;flex-wrap:wrap;gap:8px}
+.trust span{font-size:13px;font-weight:600;background:var(--soft);color:var(--accent);padding:5px 10px;border-radius:999px}
+@media (prefers-reduced-motion:no-preference){.price{transition:opacity .15s}}
+.guar{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px}
+.guar h2{font-family:var(--display);font-size:22px;margin:0}
+.glist{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.glist{grid-template-columns:1fr}}
+.glist div{display:grid;gap:3px;padding:12px;border-radius:10px;background:var(--soft);min-width:0}
+.glist b{color:var(--accent);font-size:15px}
+.glist span{font-size:14px;color:var(--ink)}
+.beatline{margin:0;font-size:15px}
+.small{margin:0;font-size:12px;color:var(--muted)}
+
+.brandrow{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.brandrow svg{width:38px;height:38px}
+.brandrow b{font-family:var(--display);font-weight:600;font-size:22px;line-height:1}
+.brandrow span{display:block;font-size:10px;font-weight:700;letter-spacing:.3em;color:var(--muted);margin-top:3px}
+h1{font-weight:600}
+select{appearance:auto}
+.later{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;gap:6px}
+.later h2{font-family:var(--display);font-size:20px;margin:0;font-weight:600}
+.later p{margin:0;color:var(--muted);font-size:14px}
+.tag{font-family:var(--display);font-style:italic;color:var(--warn);font-size:17px}
+</style></head><body>
+<div class="wrap">
+  <header>
+    <div class="brandrow">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><clipPath id="c"><rect width="100" height="100" rx="22"/></clipPath><rect width="100" height="100" rx="22" fill="#173D36"/><g clip-path="url(#c)" transform="translate(9 0)"><path d="M37.2 30.5C35 23 35.6 15.5 38.6 10.5C41.2 15 42.4 22.5 41.8 30Z" fill="#fff"/><path d="M43.6 29.2C42.4 21.5 44 14 47.6 9.6C49.8 14.4 50.2 22 48.4 29.2Z" fill="#fff"/><path d="M32 100L32 44C32 33.5 37 28 45.5 28L61 28C67.5 28 71.5 32 71.5 37.5C71.5 43 67.5 46 62 46L52 46C49.6 46 48 47.8 48 50.2L48 100Z" fill="#fff"/><circle cx="55.5" cy="35.5" r="2.4" fill="#173D36"/><rect x="32" y="66" width="16" height="9" fill="#E3A13A"/></g></svg>
+      <div><b>Llama</b><span>COMMERCIAL</span></div>
+    </div>
+    <h1>Estimate your cleaning cost</h1>
+    <p class="lede">For offices, schools, churches, shops, gyms, factories and communal areas across London. Enter the building and see a guide price.</p>
+  </header>
+
+  <section class="card" id="p-office">
+    <div class="field">
+      <label for="o-bld">Type of building</label>
+      <select id="o-bld">
+        <option>Office or business unit</option><option>School or education centre</option><option>Church or place of worship</option><option>Shop</option><option>Gym or sports facility</option><option>Factory or warehouse (welfare and office areas)</option><option>Communal areas</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="o-sqft">Floor area to clean (sq ft)</label>
+      <div class="sqft">
+        <input type="number" id="o-sqft" min="200" max="20000" step="50" value="1500">
+        <input type="range" id="o-range" min="200" max="10000" step="50" value="1500" aria-label="Floor area slider">
+      </div>
+      <span class="hint">Not sure? A 10-desk office is roughly 1,000 to 1,500 sq ft.</span>
+    </div>
+    <div class="row">
+      <div class="field">
+        <span class="lbl" id="o-type-l">Type of clean</span>
+        <div class="seg" id="o-type" aria-labelledby="o-type-l">
+          <button aria-pressed="true" data-v="regular">Regular contract</button>
+          <button aria-pressed="false" data-v="deep">One-off deep clean</button>
+        </div>
+      </div>
+      <div class="field" id="o-visits-f">
+        <span class="lbl" id="o-visits-l">Visits per week</span>
+        <div class="seg" id="o-visits" aria-labelledby="o-visits-l">
+          <button aria-pressed="false" data-v="1">1</button><button aria-pressed="false" data-v="2">2</button>
+          <button aria-pressed="false" data-v="3">3</button><button aria-pressed="true" data-v="5">5</button>
+          <button aria-pressed="false" data-v="7">7</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="o-wc">Toilets and washrooms</label>
+        <input type="number" id="o-wc" min="0" max="20" value="2">
+      </div>
+      <div class="field">
+        <label for="o-kit">Kitchens and break areas</label>
+        <input type="number" id="o-kit" min="0" max="10" value="1">
+      </div>
+    </div>
+  </section>
+
+  <section class="quote" aria-live="polite">
+    <span class="k" id="q-label">Estimated monthly price</span>
+    <div class="price" id="q-price">£0</div>
+    <div class="lines" id="q-lines"></div>
+    <p class="note" id="q-note">A guide price. We confirm the final price in writing after a site visit.</p>
+  </section>
+
+  <section class="later">
+    <h2>Floors, carpets and car parks</h2>
+    <p>Carpet and upholstery cleaning, floor scrubbing, stripping, sealing and polishing, and car park cleaning depend on the floor and its condition, so we price them after a site visit.</p>
+  </section>
+
+  <section class="call">
+    <h2>Talk to us about your building</h2>
+    <p>Site visits and written quotes are free. We'll walk the building with you and send a specification and a fixed price.</p>
+    <div class="phone">
+      <span class="num" id="phone">07000 000000</span>
+      <button class="btn primary" id="copy">Copy number</button>
+      <a class="btn ghost" id="tel" href="tel:+447000000000">Call</a>
+    </div>
+    <div class="trust"><span>Insured</span><span>Vetted staff</span><span>Written specification</span><span>Same team each visit</span></div>
+    <p class="tag">No drama. Just Llama.</p>
+  </section>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const gbp=n=>"£"+Math.round(n).toLocaleString("en-GB");
+
+// Pricing model (unchanged from the verified office model): £22 per cleaner hour, 2,000 sq ft cleaned per hour,
+// +0.15 hr per washroom, +0.2 hr per kitchen, 4.33 weeks a month. Deep clean: £0.12 per sq ft + £15 per washroom + £25 per kitchen, £149 minimum.
+const RATE=22, SQFT_PER_HR=2000, WEEKS=4.33;
+
+function segVal(id){return +document.querySelector(`#${id} [aria-pressed="true"]`).dataset.v}
+function segStr(id){return document.querySelector(`#${id} [aria-pressed="true"]`).dataset.v}
+document.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  s.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  calc();
+}));
+$("o-range").addEventListener("input",e=>{$("o-sqft").value=e.target.value;calc()});
+$("o-sqft").addEventListener("input",e=>{$("o-range").value=Math.min(10000,+e.target.value||0);calc()});
+document.querySelectorAll("input,select").forEach(i=>i.addEventListener("input",calc));
+
+function row(a,b){return `<div><span>${a}</span><span>${b}</span></div>`}
+function n(id,max){const v=+$(id).value; return Number.isFinite(v)?Math.min(max,Math.max(0,v)):0}
+
+function calc(){
+  const sq=n("o-sqft",50000), wc=Math.round(n("o-wc",50)), kit=Math.round(n("o-kit",20));
+  const type=segStr("o-type");
+  $("o-visits-f").hidden= type==="deep";
+  let label,price,lines;
+  if(type==="regular"){
+    const hrs=Math.max(1, sq/SQFT_PER_HR + wc*0.15 + kit*0.2);
+    const v=segVal("o-visits");
+    const perVisit=hrs*RATE, month=perVisit*v*WEEKS;
+    label="Estimated monthly price"; price=gbp(month)+"<small> /month</small>";
+    lines=row("Time per visit",hrs.toFixed(1)+" hrs")+row("Price per visit",gbp(perVisit))+row("Visits",v+" a week")+(sq>0?row("Works out at","£"+(month/sq).toFixed(2)+" per sq ft a month"):"");
+  }else{
+    const p=Math.max(149, sq*0.12 + wc*15 + kit*25);
+    label="One-off deep clean"; price=gbp(p);
+    lines=row("Floor area",sq.toLocaleString("en-GB")+" sq ft")+row("Washrooms",wc)+row("Kitchens",kit);
+  }
+  $("q-label").textContent=label; $("q-price").innerHTML=price; $("q-lines").innerHTML=lines;
+}
+
+$("copy").addEventListener("click",()=>{
+  const t=$("phone").textContent;
+  const done=()=>{$("copy").textContent="Copied";setTimeout(()=>$("copy").textContent="Copy number",1500)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel())}catch(e){sel()}
+  function sel(){const r=document.createRange();r.selectNodeContents($("phone"));const s=getSelection();s.removeAllRanges();s.addRange(r)}
+});
+calc();
+</script>
+</body></html>

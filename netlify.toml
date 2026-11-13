@@ -1,0 +1,3 @@
+# Netlify: publish only the public website. internal/ is never deployed.
+[build]
+  publish = "website"

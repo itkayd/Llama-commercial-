@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quote and invoice</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Manrope:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0;font-family:Manrope,Arial,sans-serif;color:#152320}
+a{color:#152320}a:hover{color:#56625D}
+td,th{padding:12px 10px;text-align:left;vertical-align:top}
+</style>
+</helmet>
+<div style="width: 794px; height: 1123px; box-sizing: border-box; background: #FFFFFF; padding: 56px 64px 44px; display: flex; flex-direction: column; gap: 28px;">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;">
+    <img src="/_blob/45747eb1bfad2fb31f5d91890ad86247" alt="Llama Commercial" style="width: 250px; height: auto;">
+    <div style="text-align: right; display: flex; flex-direction: column; gap: 6px;">
+      <p style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 36px; line-height: 1;">{{docType}}</p>
+      <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #56625D;">NO. LC-0001 · [DATE]</p>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; background: #E8EDE6; border-radius: 14px; padding: 20px 22px; font-size: 14px; line-height: 1.6;">
+    <div><p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #56625D;">FOR</p>[Client organisation]<br>[Contact name]<br>[Billing address]</div>
+    <div><p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #56625D;">SITE</p>[Site address]<br>Offices, kitchen, 2 toilets · vinyl and carpet<br>Monday to Friday, from 6:00pm</div>
+  </div>
+  <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+    <thead>
+      <tr style="border-bottom: 2px solid #173D36; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em;">
+        <th>SERVICE</th><th style="text-align: right;">FREQUENCY</th><th style="text-align: right;">HOURS</th><th style="text-align: right;">PER MONTH</th>
+      </tr>
+    </thead>
+    <tbody style="font-variant-numeric: tabular-nums;">
+      <tr style="border-bottom: 1px solid #D5DCD3;"><td>Contract clean to the attached specification</td><td style="text-align: right;">5 a week</td><td style="text-align: right;">1.25 a visit</td><td style="text-align: right;">£595.38</td></tr>
+      <tr style="border-bottom: 1px solid #D5DCD3;"><td>Machine scrub of hard floors, machine included</td><td style="text-align: right;">Monthly</td><td style="text-align: right;">2.0</td><td style="text-align: right;">£75.00</td></tr>
+      <tr style="border-bottom: 1px solid #D5DCD3;"><td>Toilet roll, hand soap and bin liners, at cost plus 10%</td><td style="text-align: right;">As used</td><td style="text-align: right;">–</td><td style="text-align: right;">As used</td></tr>
+    </tbody>
+  </table>
+  <div style="align-self: flex-end; width: 310px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-variant-numeric: tabular-nums;">
+    <div style="display: flex; justify-content: space-between;"><span>Subtotal</span><span>£670.38</span></div>
+    <div style="display: flex; justify-content: space-between; color: #56625D;"><span>VAT</span><span>Not charged</span></div>
+    <div style="display: flex; justify-content: space-between; background: #173D36; color: #FFFFFF; border-radius: 8px; padding: 12px 14px; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 20px;"><span>Total per month</span><span style="color: #E3A13A;">£670.38</span></div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; font-size: 13px; line-height: 1.6;">
+    <div><p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #56625D;">TERMS</p>Rolling monthly agreement, 30 days' notice either way. Invoiced monthly in advance, payment within 14 days. This quote is valid for 30 days.</div>
+    <div><p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #56625D;">PAY BY BANK TRANSFER</p>Llama Commercial Ltd<br>Sort code [00-00-00] · Account [00000000]<br>Reference: LC-0001</div>
+  </div>
+  <div style="display: flex; gap: 32px; font-size: 13px; color: #56625D;">
+    <p style="margin: 0; flex: 1; border-top: 1px solid #173D36; padding-top: 8px;">Accepted by (name and signature)</p>
+    <p style="margin: 0; width: 160px; border-top: 1px solid #173D36; padding-top: 8px;">Date</p>
+  </div>
+  <p style="margin: auto 0 0; font-size: 11px; line-height: 1.6; color: #56625D; border-top: 1px solid #D5DCD3; padding-top: 14px;">Llama Commercial Ltd · Company number [COMPANY NUMBER] · [REGISTERED ADDRESS] · 07000 000000 · hello@llamacommercial.co.uk · Not VAT registered</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"docType": {"editor": "enum", "options": ["Quote", "Invoice"], "default": "Quote"}, "$preview": {"width": 794, "height": 1123}}'>
+class Component extends DCLogic {
+  renderVals() { return { docType: this.props.docType ?? 'Quote' }; }
+}
+</script>
+</body>
+</html>

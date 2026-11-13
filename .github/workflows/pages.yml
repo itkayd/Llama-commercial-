@@ -1,0 +1,27 @@
+# Publishes the website/ folder to GitHub Pages.
+# Run it from the Actions tab ("Run workflow"). GitHub Pages needs a public repo,
+# or a paid GitHub plan for a private one. Netlify and Vercel work with private repos.
+name: Deploy website to GitHub Pages
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website
+      - id: deployment
+        uses: actions/deploy-pages@v4
