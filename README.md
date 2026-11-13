@@ -7,43 +7,71 @@ Website, brand kit and business tools for **Llama Commercial**, a commercial cle
 
 | Folder | What it is | Deployed? |
 | --- | --- | --- |
-| `website/` | The public website: Home, About us, Services, Areas covered, Contact us (one `index.html`) | Yes |
-| `website/quote/` | Price estimate tool for clients (regular and deep cleans) | Yes, at `/quote` |
-| `internal/` | Negotiation desk with your costs, margins and lowest prices | **Never.** Open it on your own device only |
+| `site/` | The public website, built with Astro: Home, About us, Services (13 service pages), Areas covered, Contact us, Price estimate, Privacy notice | Yes, `site/dist` |
+| `site/reference/` | The old one-file prototype, kept for reference only (not built) | No |
+| `internal/` | Negotiation desk with your costs, margins and lowest prices | **Never.** Open it on your own device only. CI fails if anything from it reaches the build |
 | `brand/logos/` | Every logo as SVG (print, web) and PNG (Word, Canva, social) | – |
 | `brand/print/` | Business card and A5 flyer PDFs with 3mm bleed, uniform spec | – |
 | `brand/social/` | Square and story ads, LinkedIn banner | – |
 | `brand/templates/` | Letterhead, quote and invoice (A4 PDF), email signature, site specification template | – |
-| `brand/tokens.json` | Colours, fonts, spacing and radii | – |
+| `brand/tokens.json` | Colours, fonts, spacing and radii (the site's `tokens.css` is generated from it) | – |
 | `brand/source/` | Scripts that rebuild the logos and all exports | – |
-| `docs/` | Brand guidelines, the starter kit, and `website-build-prompt.md` (the full brief for building the production site with Claude Code) | – |
+| `docs/` | Brand guidelines, the starter kit, and `website-build-prompt.md` (the brief the site was built from) | – |
 
-## Before going live
+## Work on the website
 
-Open `website/index.html` and `website/quote/index.html` and change:
+```bash
+cd site
+npm install
+npm run dev          # http://localhost:4321
+npm test             # pricing unit tests (Vitest)
+npm run check        # astro check
+npm run build        # static site -> site/dist
+npm run check:dist   # link check, copy scan, internal/ leak check
+npm run test:e2e     # browser checks at desktop and mobile widths (needs Playwright installed)
+npm run tokens       # regenerate src/styles/tokens.css after changing brand/tokens.json
+npm run images       # regenerate favicons and og.png (needs Playwright installed)
+```
 
-- `PHONE` and `EMAIL` near the bottom of `website/index.html` (they fill in every page)
-- the phone number in `website/quote/index.html` (search for `07000 000000`)
-- `[COMPANY NUMBER]` and `[REGISTERED ADDRESS]` in the footer
-- `FORM_ENDPOINT`: make a free form at [formspree.io](https://formspree.io) and paste its address here, so call-back requests arrive in your inbox. Left empty, the button opens the visitor's email app instead.
+Every phone number, email address and company detail lives in **`site/src/config.ts`**. Change it there and every page updates.
+
+## Going live
+
+Open `site/src/config.ts` and replace each `TODO`:
+
+| Setting | Now | Change to |
+| --- | --- | --- |
+| `domain` | `https://llamacommercial.co.uk` | Confirm the domain is registered. If it changes, also update `site` in `site/astro.config.mjs` and the sitemap line in `site/public/robots.txt` |
+| `phoneDisplay` | placeholder number | Your business number, written like `07123 456789` |
+| `phoneE164` | placeholder number | The same number in international form, like `+447123456789` |
+| `email` | `hello@llamacommercial.co.uk` | Your real inbox |
+| `hours` | `Monday to Saturday, 8am to 7pm` | Your real hours. If they change, also update `openingHoursSchema` (`Mo-Sa 08:00-19:00`) beside it |
+| `companyNumber` | `[COMPANY NUMBER]` | From Companies House |
+| `registeredOffice` | `[REGISTERED ADDRESS]` | Your registered office. Once it is real, the address is added to the search-engine data automatically |
+
+**Call-back form (`PUBLIC_FORM_ENDPOINT`).** Make a free form at [formspree.io](https://formspree.io) (or similar) and copy its endpoint URL, then set it as an environment variable called `PUBLIC_FORM_ENDPOINT` on your host and redeploy:
+
+- **Netlify:** Site configuration → Environment variables → Add a variable.
+- **Vercel:** Project → Settings → Environment Variables.
+- **GitHub Pages:** Settings → Secrets and variables → Actions → Variables.
+
+Until it is set, the call-back button opens the visitor's email app with the request filled in, and the page tells them to press send.
 
 ## Deploy the website
 
-The site is plain HTML: no build step, nothing to install. Each option below publishes only the `website/` folder.
-
 **Netlify (easiest)**
 1. Sign in at netlify.com with GitHub and choose *Add new site → Import an existing project*.
-2. Pick this repo. Netlify reads `netlify.toml` and publishes `website/`.
+2. Pick this repo. Netlify reads `netlify.toml`: it builds `site/` and publishes `site/dist`.
 3. Add your domain under *Domain management*.
 
 **Vercel**
 1. Sign in at vercel.com with GitHub, *Add New → Project*, pick this repo.
-2. Framework preset: *Other*. `vercel.json` sets the output folder to `website/`.
+2. `vercel.json` builds `site/` and publishes `site/dist`. (Alternatively set *Root Directory* to `site` in the project settings; Vercel then detects Astro by itself.)
 
 **GitHub Pages**
-Needs a public repo, or a paid GitHub plan for a private one. Then go to *Settings → Pages → Source: GitHub Actions* and run *Deploy website to GitHub Pages* from the Actions tab.
+Needs a public repo, or a paid GitHub plan for a private one. Go to *Settings → Pages → Source: GitHub Actions* and run *Deploy website to GitHub Pages* from the Actions tab.
 
-Every push to `main` redeploys automatically on Netlify and Vercel.
+Every push to `main` redeploys automatically on Netlify and Vercel. Pull requests run CI (`.github/workflows/ci.yml`): type check, pricing tests, build, link check, copy scan and the `internal/` leak check.
 
 ## Rebuild the brand files
 
