@@ -65,7 +65,7 @@ Until it is set, the call-back button opens the visitor's email app with the req
 
 **Vercel**
 1. Sign in at vercel.com with GitHub, *Add New → Project*, pick this repo.
-2. `vercel.json` builds `site/` and publishes `site/dist`. (Alternatively set *Root Directory* to `site` in the project settings; Vercel then detects Astro by itself.)
+2. Set *Root Directory* to `site`. Vercel detects Astro and reads `site/vercel.json` for the security and cache headers.
 
 **GitHub Pages**
 Needs a public repo, or a paid GitHub plan for a private one. Go to *Settings → Pages → Source: GitHub Actions* and run *Deploy website to GitHub Pages* from the Actions tab.
