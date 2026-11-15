@@ -1,6 +1,6 @@
 const fs=require('fs'),path=require('path');const {chromium}=require('playwright');
 const S=__dirname, KIT=path.join(S,'artboards'), OUT=path.join(S,'..','out'), LOGO=path.join(S,'..','logos'), FS=path.join(S,'node_modules','@fontsource'); fs.mkdirSync(OUT,{recursive:true});
-const blobs={'45747eb1bfad2fb31f5d91890ad86247':'llama-commercial-logo-green.svg','4daefa90de90aaf6cbfb5b378997ee69':'llama-commercial-logo-white.svg',eb600a582d39b3385988a690e2831197:'llama-commercial-logo-green-descriptor.svg',dabd937533f0acb453058b548c9ac787:'llama-commercial-logo-white-descriptor.svg',ad611d59d5820cd9c3dac1da2c6247c1:'llama-commercial-stacked-green.svg','0dcc9dd6cce55c0e71b7c98afa7943a1':'llama-commercial-stacked-white.svg','6d24f1759fb724ffe604f8d902942d82':'llama-commercial-icon.svg'};
+const blobs={'45747eb1bfad2fb31f5d91890ad86247':'llama-commercial-logo-navy.svg','4daefa90de90aaf6cbfb5b378997ee69':'llama-commercial-logo-white.svg',eb600a582d39b3385988a690e2831197:'llama-commercial-logo-navy-descriptor.svg',dabd937533f0acb453058b548c9ac787:'llama-commercial-logo-white-descriptor.svg',ad611d59d5820cd9c3dac1da2c6247c1:'llama-commercial-stacked-navy.svg','0dcc9dd6cce55c0e71b7c98afa7943a1':'llama-commercial-stacked-white.svg','6d24f1759fb724ffe604f8d902942d82':'llama-commercial-icon.svg'};
 const fonts=`@font-face{font-family:Fraunces;font-weight:500;src:url(file://${FS}/fraunces/files/fraunces-latin-500-normal.woff2)}
 @font-face{font-family:Fraunces;font-weight:600;src:url(file://${FS}/fraunces/files/fraunces-latin-600-normal.woff2)}
 @font-face{font-family:Fraunces;font-weight:500;font-style:italic;src:url(file://${FS}/fraunces/files/fraunces-latin-500-italic.woff2)}
@@ -50,7 +50,7 @@ w.write(sys.argv[1])`,OUT+'/'+file,...outs]); outs.forEach(f=>fs.unlinkSync(f));
   }
   // Business card: 85x55mm at 8px/mm, 3mm bleed = 24px
   const cs=mm(91)/(680+48);
-  const cf=page(load('BusinessCardFront'),{w:680,h:440,bleed:24,bleedBg:'#173D36',scale:cs,pageW:'91mm',pageH:'61mm'});
+  const cf=page(load('BusinessCardFront'),{w:680,h:440,bleed:24,bleedBg:'#1F395E',scale:cs,pageW:'91mm',pageH:'61mm'});
   const cb=page(load('BusinessCardBack'),{w:680,h:440,bleed:24,bleedBg:'#FFFFFF',scale:cs,pageW:'91mm',pageH:'61mm'});
   await pdf([cf,cb],'llama-commercial-business-card-print-91x61mm-bleed.pdf','91mm','61mm');
   // Flyer A5: 4px/mm, bleed 12px

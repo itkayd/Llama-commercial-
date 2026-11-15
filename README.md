@@ -84,9 +84,9 @@ node export.js              # print PDFs and social PNGs -> brand/out/  (needs P
 
 ## Brand at a glance
 
-- **Highland** `#173D36`, the main colour (close to Pantone 3435 C)
+- **Navy** `#1F395E`, the main colour (close to Pantone 534 C)
 - **Saffron** `#E3A13A`, the llama's neck band and small accents only (close to Pantone 7409 C)
-- **Page** `#F5F6F2` · **Sage** `#E8EDE6` · **Ink** `#152320` · **Slate** `#56625D`
+- **Page** `#F5F7FA` · **Frost** `#E8EDF4` · **Ink** `#131B27` · **Slate** `#556070`
 - Fonts: Fraunces (headlines), Manrope (text), IBM Plex Mono (labels), all free on Google Fonts
 - Voice: calm, plain, specific. No offers in headlines, no exclamation marks.
 

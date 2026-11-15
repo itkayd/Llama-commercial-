@@ -40,7 +40,7 @@ await page.setContent(`<!doctype html><html><head><style>
 @font-face{font-family:Fraunces;font-weight:600;src:url(${font('fraunces', 'fraunces-latin-600-normal.woff2')})}
 @font-face{font-family:Fraunces;font-weight:500;font-style:italic;src:url(${font('fraunces', 'fraunces-latin-500-italic.woff2')})}
 html,body{margin:0}
-body{width:1200px;height:630px;background:#173D36;color:#fff;box-sizing:border-box;padding:72px 84px;display:flex;flex-direction:column;justify-content:space-between;font-family:Fraunces,Georgia,serif}
+body{width:1200px;height:630px;background:#1F395E;color:#fff;box-sizing:border-box;padding:72px 84px;display:flex;flex-direction:column;justify-content:space-between;font-family:Fraunces,Georgia,serif}
 .logo svg{width:340px;height:auto;display:block}
 h1{font-weight:600;font-size:76px;line-height:1.08;margin:0;max-width:900px;letter-spacing:-0.005em}
 p{font-style:italic;font-weight:500;font-size:40px;color:#E3A13A;margin:28px 0 0}
@@ -63,8 +63,8 @@ writeFileSync(
         { src: '/brand/llama-commercial-icon-192.png', sizes: '192x192', type: 'image/png' },
         { src: '/brand/llama-commercial-icon-512.png', sizes: '512x512', type: 'image/png' },
       ],
-      theme_color: '#173D36',
-      background_color: '#F5F6F2',
+      theme_color: '#1F395E',
+      background_color: '#F5F7FA',
       display: 'browser',
     },
     null,

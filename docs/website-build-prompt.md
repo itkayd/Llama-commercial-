@@ -112,7 +112,7 @@ Claims you **may** make (they are true and required for how the business runs):
 
 ### 3.2 Logo
 
-**The mark** is an original llama in profile facing right, with two banana-shaped ears, a small eye, and a woven saffron band around its neck. It sits inside a highland-green tile with 22% rounded corners. The neck runs off the bottom of the tile.
+**The mark** is an original llama in profile facing right, with two banana-shaped ears, a small eye, and a woven saffron band around its neck. It sits inside a navy tile with 22% rounded corners. The neck runs off the bottom of the tile.
 
 **The wordmark** is "Llama" in Fraunces 600 above "COMMERCIAL" in Manrope 700, uppercase, letter-spaced 0.3em, in slate.
 
@@ -120,11 +120,11 @@ Claims you **may** make (they are true and required for how the business runs):
 
 | File in `brand/logos/` | Use |
 | --- | --- |
-| `llama-commercial-logo-green.svg` | Default. Light backgrounds |
-| `llama-commercial-logo-green-descriptor.svg` | With "COMMERCIAL CLEANING · LONDON" |
-| `llama-commercial-logo-white.svg` | On highland or dark backgrounds (no tile; band stays saffron) |
+| `llama-commercial-logo-navy.svg` | Default. Light backgrounds |
+| `llama-commercial-logo-navy-descriptor.svg` | With "COMMERCIAL CLEANING · LONDON" |
+| `llama-commercial-logo-white.svg` | On navy or dark backgrounds (no tile; band stays saffron) |
 | `llama-commercial-logo-white-descriptor.svg` | Same, with descriptor |
-| `llama-commercial-stacked-green.svg` / `-white.svg` | Square spaces |
+| `llama-commercial-stacked-navy.svg` / `-white.svg` | Square spaces |
 | `llama-commercial-icon.svg` | The tile alone: favicon, header, app icon |
 | `llama-commercial-social-avatar.svg` | Social and OG use, crops to a circle |
 
@@ -133,13 +133,13 @@ Claims you **may** make (they are true and required for how the business runs):
 ```html
 <svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true">
   <clipPath id="llama-tile"><rect width="100" height="100" rx="22"/></clipPath>
-  <rect width="100" height="100" rx="22" fill="#173D36"/>
+  <rect width="100" height="100" rx="22" fill="#1F395E"/>
   <g clip-path="url(#llama-tile)" transform="translate(9 0)">
     <path d="M37.2 30.5C35 23 35.6 15.5 38.6 10.5C41.2 15 42.4 22.5 41.8 30Z" fill="#fff"/>
     <path d="M43.6 29.2C42.4 21.5 44 14 47.6 9.6C49.8 14.4 50.2 22 48.4 29.2Z" fill="#fff"/>
     <path d="M32 100L32 44C32 33.5 37 28 45.5 28L61 28C67.5 28 71.5 32 71.5 37.5C71.5 43 67.5 46 62 46L52 46C49.6 46 48 47.8 48 50.2L48 100Z" fill="#fff"/>
-    <circle cx="55.5" cy="35.5" r="2.4" fill="#173D36"/>
-    <path d="M62 41.5L66.5 41.5" stroke="#173D36" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="55.5" cy="35.5" r="2.4" fill="#1F395E"/>
+    <path d="M62 41.5L66.5 41.5" stroke="#1F395E" stroke-width="1.6" stroke-linecap="round"/>
     <rect x="32" y="66" width="16" height="9" fill="#E3A13A"/>
     <path d="M32.8 70.5L34.9 68.2L37.4 72.8L40 68.2L42.6 72.8L45.1 68.2L47.2 70.5" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/>
   </g>
@@ -149,50 +149,50 @@ Claims you **may** make (they are true and required for how the business runs):
 **Rules**
 - Clear space on every side: at least the width of the llama's neck (16% of the tile width).
 - Minimum size: tile 24px on screen; full lockup 120px wide.
-- Green logo on light backgrounds, white logo on highland or dark. Never the green logo on a busy background.
-- Never recolour the saffron band, stretch, rotate, outline, add shadows or effects, place the llama outside its tile in the green version, or redraw it.
+- Navy logo on light backgrounds, white logo on navy or dark. Never the navy logo on a busy background.
+- Never recolour the saffron band, stretch, rotate, outline, add shadows or effects, place the llama outside its tile in the navy version, or redraw it.
 
-**Favicons:** generate `favicon.svg` plus 16, 32, 180 (apple-touch-icon) and 512px PNGs from `llama-commercial-icon.svg`. Theme colour `#173D36`.
+**Favicons:** generate `favicon.svg` plus 16, 32, 180 (apple-touch-icon) and 512px PNGs from `llama-commercial-icon.svg`. Theme colour `#1F395E`.
 
-**Open Graph image** (1200 × 630, `public/brand/og.png`): highland background, white logo top-left, "Commercial cleaning across London." in Fraunces 600 white, tagline in Fraunces 500 italic saffron.
+**Open Graph image** (1200 × 630, `public/brand/og.png`): navy background, white logo top-left, "Commercial cleaning across London." in Fraunces 600 white, tagline in Fraunces 500 italic saffron.
 
 ### 3.3 Colour
 
-**Ratio:** roughly 60% page/card neutrals, 30% highland, 10% saffron and everything else. Saffron is a spice, not a sauce.
+**Ratio:** roughly 60% page/card neutrals, 30% navy, 10% saffron and everything else. Saffron is a spice, not a sauce.
 
 | Token | Name | Hex | RGB | Print ref | Role |
 | --- | --- | --- | --- | --- | --- |
-| `--highland` | Highland | `#173D36` | 23, 61, 54 | ≈ Pantone 3435 C | The brand colour. Logo tile, primary buttons, dark bands, result panels, footer accents |
-| `--saffron` | Saffron | `#E3A13A` | 227, 161, 58 | ≈ Pantone 7409 C | The llama's band. Bullets, small marks, the tagline on highland, focus rings. **Never text or thin lines on light backgrounds** (2.1:1) |
+| `--navy` | Navy | `#1F395E` | 31, 57, 94 | ≈ Pantone 534 C | The brand colour. Logo tile, primary buttons, dark bands, result panels, footer accents |
+| `--saffron` | Saffron | `#E3A13A` | 227, 161, 58 | ≈ Pantone 7409 C | The llama's band. Bullets, small marks, the tagline on navy, focus rings. **Never text or thin lines on light backgrounds** (2.1:1) |
 | `--saffron-ink` | Saffron ink | `#8A5A12` | 138, 90, 18 | – | Saffron for text on light: the tagline, small accent labels |
-| `--page` | Page | `#F5F6F2` | 245, 246, 242 | – | Page background. Cool off-white with a green lean, never cream |
+| `--page` | Page | `#F5F7FA` | 245, 247, 250 | – | Page background. Cool off-white with a blue lean, never cream |
 | `--card` | Card | `#FFFFFF` | 255, 255, 255 | – | Cards, header, forms, white bands |
-| `--sage` | Sage | `#E8EDE6` | 232, 237, 230 | – | Quiet bands, panels, active nav pill |
-| `--ink` | Ink | `#152320` | 21, 35, 32 | – | All headings and body text |
-| `--ink-muted` | Slate | `#56625D` | 86, 98, 93 | – | Secondary text, eyebrows, captions |
-| `--on-brand` | White | `#FFFFFF` | 255, 255, 255 | – | Text and the llama on highland |
-| `--on-brand-muted` | Mist | `#B9CCC3` | 185, 204, 195 | – | Secondary text on highland |
-| `--line` | Line | `#D5DCD3` | 213, 220, 211 | – | Hairlines, card borders, input borders |
+| `--frost` | Frost | `#E8EDF4` | 232, 237, 244 | – | Quiet bands, panels, active nav pill |
+| `--ink` | Ink | `#131B27` | 19, 27, 39 | – | All headings and body text |
+| `--ink-muted` | Slate | `#556070` | 85, 96, 112 | – | Secondary text, eyebrows, captions |
+| `--on-brand` | White | `#FFFFFF` | 255, 255, 255 | – | Text and the llama on navy |
+| `--on-brand-muted` | Mist | `#B8C6D9` | 184, 198, 217 | – | Secondary text on navy |
+| `--line` | Line | `#D3DAE4` | 211, 218, 228 | – | Hairlines, card borders, input borders |
 
 **Dark mode** (`@media (prefers-color-scheme: dark)`, no toggle):
 
 | Token | Dark value |
 | --- | --- |
-| `--highland` | `#1E4840` |
+| `--navy` | `#25436A` |
 | `--saffron` | `#E3A13A` |
 | `--saffron-ink` | `#E9B460` |
-| `--page` | `#0F1A18` |
-| `--card` | `#15231F` |
-| `--sage` | `#1A2B26` |
-| `--ink` | `#EEF2EE` |
-| `--ink-muted` | `#A6B5AE` |
-| `--on-brand` | `#F5F6F2` |
-| `--on-brand-muted` | `#B9CCC3` |
-| `--line` | `#2A3B36` |
+| `--page` | `#0E1520` |
+| `--card` | `#151E2B` |
+| `--frost` | `#1A2535` |
+| `--ink` | `#EEF1F6` |
+| `--ink-muted` | `#A5B1C2` |
+| `--on-brand` | `#F5F7FA` |
+| `--on-brand-muted` | `#B8C6D9` |
+| `--line` | `#2A3647` |
 
-In dark mode, line icons use `--on-brand-muted` instead of `--highland`. Always set `body { background: var(--page); color: var(--ink); }`.
+In dark mode, line icons use `--on-brand-muted` instead of `--navy`. Always set `body { background: var(--page); color: var(--ink); }`.
 
-**Checked contrast:** ink on page 15:1 · slate on page 5.6:1 · slate on sage 5.3:1 · white on highland 11:1 · mist on highland 6:1 · saffron on highland 5.4:1 · saffron-ink on page 5.4:1. Keep these pairs; don't introduce others without checking 4.5:1 (3:1 for 24px+ text and icons).
+**Checked contrast:** ink on page 16.1:1 · slate on page 5.9:1 · slate on frost 5.4:1 · white on navy 11.6:1 · mist on navy 6.7:1 · saffron on navy 5.2:1 · saffron-ink on page 5.5:1. Keep these pairs; don't introduce others without checking 4.5:1 (3:1 for 24px+ text and icons).
 
 **Cleaning colour code** (only in the colour-code panel, always with the colour's name beside the swatch):
 
@@ -214,7 +214,7 @@ Self-host with `@fontsource/fraunces`, `@fontsource/manrope`, `@fontsource/ibm-p
 | H1 | Fraunces 600 | clamp(38px, 6vw, 64px) / 1.1 | `text-wrap: balance`, letter-spacing −0.005em |
 | H2 | Fraunces 600 | clamp(28px, 3.6vw, 40px) / 1.15 | |
 | H3 | Fraunces 600 | 21px / 1.25 | Card and step titles |
-| Tagline | Fraunces 500 italic | 22px / 1.3 | `--saffron-ink` on light, `--saffron` on highland |
+| Tagline | Fraunces 500 italic | 22px / 1.3 | `--saffron-ink` on light, `--saffron` on navy |
 | Lede | Manrope 400 | 19px / 1.6 | `--ink-muted`, max 62ch |
 | Body | Manrope 400 | 17px / 1.6 | max 65ch |
 | Small | Manrope 400 | 14–15px / 1.5 | |
@@ -229,7 +229,7 @@ Rules: sentence case for every heading and button. One H1 per page. Never set bo
 
 ### 3.5 Icons
 
-Simple line icons on a 24 × 24 grid, 1.6px stroke, round caps and joins, no fill, colour `--highland` (dark mode `--on-brand-muted`), shown at 30px. All `aria-hidden="true"`. Use these paths:
+Simple line icons on a 24 × 24 grid, 1.6px stroke, round caps and joins, no fill, colour `--navy` (dark mode `--on-brand-muted`), shown at 30px. All `aria-hidden="true"`. Use these paths:
 
 | Icon | SVG content |
 | --- | --- |
@@ -251,7 +251,7 @@ No emoji anywhere. Bullets are 7 × 7px saffron squares with 2px radius.
 There are no photos yet. **Do not use stock photos or AI-generated images.** Visual interest comes from:
 - the example cleaning specification card on the home page,
 - the building-type icons,
-- highland bands with the white logo,
+- navy bands with the white logo,
 - generous white space.
 
 Build a `PhotoStrip` component that renders nothing until real photos are added to `src/content/photos/`. When photos arrive later: real team and real sites only, natural light, people working, no posed smiles, no rubber-glove clichés, no sparkles or lens flares.
@@ -261,23 +261,23 @@ Build a `PhotoStrip` component that renders nothing until real photos are added 
 - Max content width 1120px, centred. Side gutter `max(20px, env(safe-area-inset-left/right))`.
 - Spacing scale: 4, 8, 16, 24, 40, 64px. Section vertical padding `clamp(56px, 8vw, 96px)`.
 - Use grid/flex with `gap`, not margins between siblings. Left-align text. Don't centre whole sections.
-- Alternate section backgrounds to separate content: `--page`, `--card`, `--sage`, and one `--highland` CTA band per page at most.
+- Alternate section backgrounds to separate content: `--page`, `--card`, `--frost`, and one `--navy` CTA band per page at most.
 - Radius: 6px inputs and chips · 14px cards and panels · 22px large tiles · 999px buttons.
 
 **Buttons (pills)**
-- Primary: `--highland` background, white text, 12px × 20px padding. Hover: brightness(1.12). Active: brightness(0.95).
+- Primary: `--navy` background, white text, 12px × 20px padding. Hover: brightness(1.12). Active: brightness(0.95).
 - Ghost: transparent, `--ink` text, 1.5px inset `--line` border. Hover: border `--ink`.
-- On highland: white background, `--highland` text.
+- On navy: white background, `--navy` text.
 - Focus (every interactive element): 3px solid `--saffron` outline, 3px offset.
 - Minimum touch target 44 × 44px.
 
-**Cards:** `--card` background, 1px `--line` border, 14px radius, 22–26px padding, no shadows. Only the example specification card has a soft shadow (`0 18px 40px -24px rgba(21,35,32,.35)`).
+**Cards:** `--card` background, 1px `--line` border, 14px radius, 22–26px padding, no shadows. Only the example specification card has a soft shadow (`0 18px 40px -24px rgba(20,28,40,.35)`).
 
-**Inputs:** 17px Manrope, `--page` background, 1.5px `--line` border, 10px radius, 13px × 14px padding. Focus: border `--highland` plus 3px highland ring at 22% opacity. Labels above inputs in Manrope 700 14.5px.
+**Inputs:** 17px Manrope, `--page` background, 1.5px `--line` border, 10px radius, 13px × 14px padding. Focus: border `--navy` plus 3px navy ring at 22% opacity. Labels above inputs in Manrope 700 14.5px.
 
 **Lists of facts:** hairline rules (`--line`) between rows instead of boxes.
 
-**Chips** (postcodes): `--card`, 1px `--line` border, 10px radius, mono postcode then the area name. "Closest" chips get a highland border.
+**Chips** (postcodes): `--card`, 1px `--line` border, 10px radius, mono postcode then the area name. "Closest" chips get a navy border.
 
 ---
 
@@ -416,7 +416,7 @@ Phone numbers always appear as visible text **and** a `tel:` link. The email alw
 
 **Header** (sticky at `top: env(safe-area-inset-top)`, `--card` background, 1px `--line` bottom border, 14px vertical padding)
 - Left: logo → `/`
-- Nav: Home · About us · Services · Areas covered · Contact us (15.5px Manrope 500, pill hover in `--sage`, current page `aria-current="page"` with `--sage` pill and 700 weight)
+- Nav: Home · About us · Services · Areas covered · Contact us (15.5px Manrope 500, pill hover in `--frost`, current page `aria-current="page"` with `--frost` pill and 700 weight)
 - Right: phone number (Manrope 700, tabular numbers, `tel:` link) and primary pill **Request a quote** → `/contact/`
 - Under 960px: nav collapses behind a **Menu** button (`aria-expanded`, `aria-controls`), opening a full-width panel under the header. Header CTA hides. Under 520px the header phone hides (it appears in the menu panel).
 
@@ -463,13 +463,13 @@ Use this copy exactly. `{phone}`, `{email}`, `{hours}` come from config.
 - Buttons: **Arrange a site visit** (primary → `/contact/`) · **See our services** (ghost → `/services/`)
 - Line below: Or call **{phone}**
 - Right column, the **example specification card**:
-  - Highland header bar: "Cleaning specification" (Fraunces 600 19px, white) and mono label "EXAMPLE" (mist)
+  - Navy header bar: "Cleaning specification" (Fraunces 600 19px, white) and mono label "EXAMPLE" (mist)
   - Definition rows (mono label left, Manrope value right, hairlines):
     - SITE: Community hall and offices, Hackney E8
     - VISITS: Mon, Wed, Fri at 6:00pm
     - AREAS: ● Hall & offices (blue) · ● Kitchen (green) · ● Toilets (red)
     - FLOORS: Machine scrub monthly, strip and reseal twice a year
-  - Sage footer: Every site gets a written specification like this before we start.
+  - Frost footer: Every site gets a written specification like this before we start.
 
 **Who we clean for** (`--card` band)
 - Eyebrow: WHO WE CLEAN FOR
@@ -488,10 +488,10 @@ Use this copy exactly. `{phone}`, `{email}`, `{hours}` come from config.
 | Communal areas | Communal areas | Entrances, stairwells, lifts, corridors and bin stores in residential and mixed-use blocks. |
 | Car park | Car parks | Litter picking, sweeping, pressure washing, stairwells and lift lobbies. |
 
-**What we do** (`--sage` band)
+**What we do** (`--frost` band)
 - Eyebrow: WHAT WE DO
 - H2: One team for regular cleaning, floors and specialist work.
-- Three columns, H3 with a 2px highland underline, saffron-square bullets, each item links to its service page:
+- Three columns, H3 with a 2px navy underline, saffron-square bullets, each item links to its service page:
   - **Everyday cleaning:** Regular office and contract cleaning · Communal area cleaning · School and education centre cleaning · Shop, business unit and factory cleaning · Sports facility cleaning
   - **Floors & carpets:** Carpet and upholstery cleaning · Rug cleaning · Floor scrubbing · Floor stripping and sealing · Floor polishing
   - **Deep & outdoor:** Deep cleaning · Car park cleaning · Washroom and kitchen deep cleans · Holiday and shutdown cleans · One-off cleans after works or events (the last three link to deep cleaning)
@@ -513,7 +513,7 @@ Use this copy exactly. `{phone}`, `{email}`, `{hours}` come from config.
   - **Hours:** Early mornings, evenings and weekends, so cleaning fits around your building.
 - Side panel (card) **Colour-coded cleaning**: "Cloths, mops and buckets are colour-coded by area so nothing moves from a toilet to a kitchen. We follow the standard UK colour code." Then four rows (44 × 30px swatch + bold colour + area): Red · Toilets, urinals and washroom floors / Blue · General areas: offices, halls, corridors / Green · Kitchens, food and bar areas / Yellow · Clinical areas and washroom sinks.
 
-**CTA band** (`--highland`)
+**CTA band** (`--navy`)
 - H2 (white): Tell us about your building.
 - Text (mist): Site visits and written quotes are free, with no obligation.
 - White pill: **Arrange a site visit** → `/contact/`
@@ -529,7 +529,7 @@ Use this copy exactly. `{phone}`, `{email}`, `{hours}` come from config.
   4. We use professional equipment and choose lower-impact products wherever they do the job properly. We work in and outside business hours, including early mornings, evenings and weekends.
   5. We hold public liability and employers' liability insurance, and we're happy to send certificates before we start.
 - Side card **We cover** (two columns): Offices · Business units · Schools & colleges · Education centres · Churches & halls · Shops · Gyms & leisure · Hotels & venues · Factories · Warehouses · Communal areas · Car parks
-- Highland card **The name**: Llamas are calm, steady and hard-working. That's how we want a clean to feel for the people who run the building. Then the tagline in saffron italic.
+- Navy card **The name**: Llamas are calm, steady and hard-working. That's how we want a clean to feel for the people who run the building. Then the tagline in saffron italic.
 - CTA band as on the home page.
 
 ### 9.3 Services `/services/`
@@ -569,7 +569,7 @@ Keep it as simple as possible: **call, email, or leave two details.** Nothing el
 - Eyebrow: CONTACT US
 - H1: Talk to us about your building.
 - Lede: Call or email us. Or leave your name and number and we'll call you back.
-- **Two large cards** side by side (stacked under 640px). Each whole card is a link with a hover border in `--highland`:
+- **Two large cards** side by side (stacked under 640px). Each whole card is a link with a hover border in `--navy`:
   - Phone icon · label "Call us" (Manrope 700, slate) · `{phone}` (Fraunces 600, clamp(22px, 3vw, 28px)) · `{hours}` (slate, 14.5px) → `tel:`
   - Email icon · label "Email us" · `{email}` (Manrope 700, clamp(17px, 2vw, 20px), wraps cleanly on small screens) · "Tell us about the building and what you need." → `mailto:`
 - **Call-back card** titled "Or we'll call you" (H2 24px) with exactly **two fields** side by side (stacked under 560px):
@@ -638,7 +638,7 @@ export function deep(sqft: number, washrooms: number, kitchens: number) {
 **Inputs:** Type of building (select, informational only: Office or business unit / School or education centre / Church or place of worship / Shop / Gym or sports facility / Factory or warehouse (welfare and office areas) / Communal areas) · Floor area to clean (sq ft) as a number field plus a 200–10,000 slider, default 1,500, hint "Not sure? A 10-desk office is roughly 1,000 to 1,500 sq ft." · Type of clean (segmented: Regular contract / One-off deep clean) · Visits per week (segmented: 1, 2, 3, 5, 7; default 5; hidden for deep clean) · Toilets and washrooms (default 2) · Kitchens and break areas (default 1).
 Clamp: floor area 0–50,000, washrooms 0–50, kitchens 0–20; empty, negative or non-numeric input counts as 0.
 
-**Result panel** (`--highland`, white text, `aria-live="polite"`):
+**Result panel** (`--navy`, white text, `aria-live="polite"`):
 - Regular: label "ESTIMATED MONTHLY PRICE", price in Fraunces (rounded to £) with "/month", rows: Time per visit (1 decimal) · Price per visit · Visits ({n} a week) · Works out at (£{x.xx} per sq ft a month)
 - Deep: label "ONE-OFF DEEP CLEAN", price, rows: Floor area · Washrooms · Kitchens
 - Note: A guide price. We confirm the final price in writing after a site visit.

@@ -1,9 +1,9 @@
 import os, json
 D = os.path.dirname(os.path.abspath(__file__))
-G = '#173D36'; S = '#E3A13A'; SI = '#8A5A12'; PG = '#F5F6F2'; SG = '#E8EDE6'; INK = '#152320'; MU = '#56625D'; LN = '#D5DCD3'; OBM = '#B9CCC3'
-B = {'green': '45747eb1bfad2fb31f5d91890ad86247', 'white': '4daefa90de90aaf6cbfb5b378997ee69',
-     'green_d': 'eb600a582d39b3385988a690e2831197', 'white_d': 'dabd937533f0acb453058b548c9ac787',
-     'stack_g': 'ad611d59d5820cd9c3dac1da2c6247c1', 'stack_w': '0dcc9dd6cce55c0e71b7c98afa7943a1', 'icon': '6d24f1759fb724ffe604f8d902942d82'}
+G = '#1F395E'; S = '#E3A13A'; SI = '#8A5A12'; PG = '#F5F7FA'; SG = '#E8EDF4'; INK = '#131B27'; MU = '#556070'; LN = '#D3DAE4'; OBM = '#B8C6D9'
+B = {'navy': '45747eb1bfad2fb31f5d91890ad86247', 'white': '4daefa90de90aaf6cbfb5b378997ee69',
+     'navy_d': 'eb600a582d39b3385988a690e2831197', 'white_d': 'dabd937533f0acb453058b548c9ac787',
+     'stack_n': 'ad611d59d5820cd9c3dac1da2c6247c1', 'stack_w': '0dcc9dd6cce55c0e71b7c98afa7943a1', 'icon': '6d24f1759fb724ffe604f8d902942d82'}
 PHONE = '07000 000000'; EMAIL = 'hello@llamacommercial.co.uk'; WEB = 'llamacommercial.co.uk'
 DISP = "Fraunces, Georgia, serif"; MONO = "'IBM Plex Mono', monospace"
 SECT = 'OFFICES · SCHOOLS · CHURCHES · SHOPS · GYMS · FACTORIES · COMMUNAL AREAS · CAR PARKS'
@@ -64,18 +64,18 @@ F['Main'] = ('Brand sheet', f'''<div style="width: 1280px; height: 800px; displa
     <div style="position: relative; margin-top: auto; display: flex; flex-direction: column; gap: 18px; max-width: 300px;">
       <p style="margin: 0; font-family: {MONO}; font-size: 13px; letter-spacing: 0.14em; color: {S};">BRAND SHEET · V1 · NOV 2026</p>
       <h1 style="margin: 0; font-family: {DISP}; font-weight: 600; font-size: 58px; line-height: 1.02;">No drama. <span style="color: {S};">Just Llama.</span></h1>
-      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: {OBM};">An original llama with a woven band: calm, steady and hard-working. Highland green carries the brand. Saffron is the band and nothing more.</p>
+      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: {OBM};">An original llama with a woven band: calm, steady and hard-working. Navy carries the brand. Saffron is the band and nothing more.</p>
     </div>
   </div>
   <div style="padding: 52px 56px; display: flex; flex-direction: column; gap: 32px;">
     <div style="display: flex; flex-direction: column; gap: 12px;">
       <p style="margin: 0; font-family: {MONO}; font-size: 12px; letter-spacing: 0.14em; color: {MU};">COLOUR · 60 / 30 / 10</p>
       <div style="display: flex; gap: 10px;">
-        {sw('Highland', '#173D36', ' · Pantone 3435 C', G, '#FFFFFF', 1.6)}
+        {sw('Navy', '#1F395E', ' · Pantone 534 C', G, '#FFFFFF', 1.6)}
         {sw('Saffron', '#E3A13A', ' · 7409 C', S, INK, 1)}
-        {sw('Page', '#F5F6F2', '', PG, INK, 1)}
-        {sw('Sage', '#E8EDE6', '', SG, INK, 1)}
-        {sw('Slate', '#56625D', '', MU, '#FFFFFF', 1)}
+        {sw('Page', '#F5F7FA', '', PG, INK, 1)}
+        {sw('Frost', '#E8EDF4', '', SG, INK, 1)}
+        {sw('Slate', '#556070', '', MU, '#FFFFFF', 1)}
       </div>
     </div>
     <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px;">
@@ -98,7 +98,7 @@ F['Main'] = ('Brand sheet', f'''<div style="width: 1280px; height: 800px; displa
       </div>
     </div>
     <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid {LN}; padding-top: 22px;">
-      {img('green', 'Llama Commercial logo', 'height: 56px; width: auto;')}
+      {img('navy', 'Llama Commercial logo', 'height: 56px; width: auto;')}
       <p style="margin: 0; max-width: 380px; font-size: 14px; line-height: 1.55; color: {MU};">Voice: calm, plain, specific. "Cleaned before you open." No promises, no offers in headlines, no exclamation marks.</p>
     </div>
   </div>
@@ -168,7 +168,7 @@ F['FlyerA5'] = ('Flyer A5', f'''<div style="width: 592px; height: 840px; box-siz
 # 6 Letterhead
 F['Letterhead'] = ('Letterhead', f'''<div style="width: 794px; height: 1123px; box-sizing: border-box; background: #FFFFFF; padding: 64px 72px 48px; display: flex; flex-direction: column;">
   <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-bottom: 28px; border-bottom: 2px solid {G};">
-    {img('green_d', 'Llama Commercial, commercial cleaning, London', 'width: 330px; height: auto;')}
+    {img('navy_d', 'Llama Commercial, commercial cleaning, London', 'width: 330px; height: auto;')}
     <p style="margin: 0; text-align: right; font-size: 13px; line-height: 1.7; color: {MU};">{PHONE}<br>{EMAIL}<br>{WEB}</p>
   </div>
   <div style="padding-top: 44px; display: flex; flex-direction: column; gap: 18px; font-size: 15px; line-height: 1.65; max-width: 600px;">
@@ -191,7 +191,7 @@ F['Letterhead'] = ('Letterhead', f'''<div style="width: 794px; height: 1123px; b
 lab = lambda t: f'<p style="margin: 0 0 4px; font-family: {MONO}; font-size: 11px; letter-spacing: 0.14em; color: {MU};">{t}</p>'
 F['Quote'] = ('Quote and invoice', f'''<div style="width: 794px; height: 1123px; box-sizing: border-box; background: #FFFFFF; padding: 56px 64px 44px; display: flex; flex-direction: column; gap: 28px;">
   <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;">
-    {img('green', 'Llama Commercial', 'width: 250px; height: auto;')}
+    {img('navy', 'Llama Commercial', 'width: 250px; height: auto;')}
     <div style="text-align: right; display: flex; flex-direction: column; gap: 6px;">
       <p style="margin: 0; font-family: {DISP}; font-weight: 600; font-size: 36px; line-height: 1;">{{{{docType}}}}</p>
       <p style="margin: 0; font-family: {MONO}; font-size: 12px; letter-spacing: 0.12em; color: {MU};">NO. LC-0001 · [DATE]</p>
@@ -249,7 +249,7 @@ F['SocialGuarantee'] = ('Ad: what we clean', f'''<div style="width: 1080px; heig
     {sec('Offices')}{sec('Schools')}{sec('Churches')}{sec('Shops')}{sec('Gyms')}{sec('Factories')}{sec('Communal areas')}{sec('Car parks')}
   </div>
   <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;">
-    {img('green', 'Llama Commercial', 'width: 380px; height: auto;')}
+    {img('navy', 'Llama Commercial', 'width: 380px; height: auto;')}
     <p style="margin: 0; text-align: right; font-size: 28px; line-height: 1.4;"><i style="font-family: {DISP}; color: {SI};">No drama. Just Llama.</i><br><b style="font-variant-numeric: tabular-nums;">{PHONE}</b></p>
   </div>
 </div>''', 1080, 1080)
@@ -299,8 +299,8 @@ F['PhotoReport'] = ('Site specification', f'''<div style="width: 1080px; height:
     {srow('Kitchen', '#3E8A55', 'Worktops, sink and appliance fronts cleaned, floor mopped', 'EACH VISIT')}
     {srow('Toilets', '#C6463B', 'Toilets, urinals and floors cleaned, consumables refilled', 'EACH VISIT')}
     {srow('Washroom sinks', '#E0B323', 'Sinks, taps and mirrors cleaned', 'EACH VISIT')}
-    {srow('Hard floors', '#56625D', 'Machine scrub', 'MONTHLY')}
-    {srow('Carpets', '#56625D', 'Hot-water extraction', '6 MONTHLY')}
+    {srow('Hard floors', '#556070', 'Machine scrub', 'MONTHLY')}
+    {srow('Carpets', '#556070', 'Hot-water extraction', '6 MONTHLY')}
   </div>
   <div style="padding: 26px 64px 0;">{lab('ACCESS AND NOTES')}<p style="margin: 0; font-size: 21px; line-height: 1.5; color: {MU};">[Keys, alarm, parking, areas not to be cleaned]</p></div>
   <div style="margin: auto 64px 0; display: flex; gap: 40px; font-size: 18px; color: {MU};">
@@ -317,8 +317,8 @@ F['Uniform'] = ('Uniform', f'''<div style="width: 1000px; height: 620px; box-siz
       <div style="position: relative; width: 400px; height: 440px;">
         <svg width="400" height="440" viewBox="0 0 400 440" aria-hidden="true" style="position: absolute; left: 0; top: 0;">
           <path d="M140 20L100 34L10 90L48 170L92 146V440H308V146L352 170L390 90L300 34L260 20C246 44 224 56 200 56C176 56 154 44 140 20Z" fill="{G}"/>
-          <path d="M140 20C154 44 176 56 200 56C224 56 246 44 260 20L246 16C236 34 220 42 200 42C180 42 164 34 154 16Z" fill="#2A5A50"/>
-          <path d="M200 56V120" stroke="#2A5A50" stroke-width="3"/>
+          <path d="M140 20C154 44 176 56 200 56C224 56 246 44 260 20L246 16C236 34 220 42 200 42C180 42 164 34 154 16Z" fill="#34557F"/>
+          <path d="M200 56V120" stroke="#34557F" stroke-width="3"/>
         </svg>
         {img('white', 'Logo on left chest', 'position: absolute; left: 222px; top: 100px; width: 124px; height: auto;')}
       </div>
@@ -328,7 +328,7 @@ F['Uniform'] = ('Uniform', f'''<div style="width: 1000px; height: 620px; box-siz
       <div style="position: relative; width: 400px; height: 440px;">
         <svg width="400" height="440" viewBox="0 0 400 440" aria-hidden="true" style="position: absolute; left: 0; top: 0;">
           <path d="M140 20L100 34L10 90L48 170L92 146V440H308V146L352 170L390 90L300 34L260 20C246 30 224 34 200 34C176 34 154 30 140 20Z" fill="{G}"/>
-          <path d="M140 20C154 30 176 34 200 34C224 34 246 30 260 20L250 12C236 20 220 24 200 24C180 24 164 20 150 12Z" fill="#2A5A50"/>
+          <path d="M140 20C154 30 176 34 200 34C224 34 246 30 260 20L250 12C236 20 220 24 200 24C180 24 164 20 150 12Z" fill="#34557F"/>
         </svg>
         {img('stack_w', 'Stacked logo across shoulders', 'position: absolute; left: 120px; top: 80px; width: 160px; height: auto;')}
         <p style="position: absolute; left: 92px; top: 300px; width: 216px; margin: 0; text-align: center; font-family: {DISP}; font-style: italic; font-size: 19px; color: {S};">No drama. Just Llama.</p>
@@ -336,7 +336,7 @@ F['Uniform'] = ('Uniform', f'''<div style="width: 1000px; height: 620px; box-siz
       <p style="margin: 0; font-family: {MONO}; font-size: 13px; letter-spacing: 0.14em; color: {MU};">BACK · STACKED LOGO, 220MM WIDE</p>
     </div>
   </div>
-  <p style="margin: 0; font-size: 14px; line-height: 1.5; color: {MU}; border-top: 1px solid {LN}; padding-top: 12px;">Bottle-green polo, the closest stock colour to highland #173D36. Embroider the front logo; print the back in white and saffron. Same layout on tabards. Add a hi-vis vest with the white logo for car park work.</p>
+  <p style="margin: 0; font-size: 14px; line-height: 1.5; color: {MU}; border-top: 1px solid {LN}; padding-top: 12px;">Navy polo, the closest stock colour to navy #1F395E. Embroider the front logo; print the back in white and saffron. Same layout on tabards. Add a hi-vis vest with the white logo for car park work.</p>
 </div>''', 1000, 620)
 
 for name, (title, body, w, h, *rest) in F.items():
