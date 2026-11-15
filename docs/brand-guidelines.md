@@ -34,14 +34,14 @@ Services: regular office and contract cleaning; communal area cleaning; school a
 
 ## Colour
 
-Use roughly 60% surface-page or surface-card, 30% highland, 10% saffron and the rest.
+Use roughly 60% surface-page or surface-card, 30% navy, 10% saffron and the rest.
 
-- **Highland** (`highland`, #173d36) carries the brand: the logo tile, header bars, buttons, uniforms and the van.
+- **Navy** (`navy`, #1f395e) carries the brand: the logo tile, header bars, buttons, uniforms and the van.
 - **Saffron** (`saffron`, #e3a13a) is the woven band on the llama's neck. Use it for small marks and one highlight per layout. On light backgrounds it is never text; use `saffron-ink` for the tagline.
-- Neutrals lean slightly green (`surface-page` #f5f6f2, `surface-sage` #e8ede6). Never cream, never pure grey.
+- Neutrals lean slightly blue (`surface-page` #f5f7fa, `surface-frost` #e8edf4). Never cream, never pure grey.
 - `ink` for all text, `ink-muted` for secondary text.
 
-**Print:** ask the printer to match the hex values and send a proof. Closest Pantone references for checking: highland ≈ 3435 C, saffron ≈ 7409 C.
+**Print:** ask the printer to match the hex values and send a proof. Closest Pantone references for checking: navy ≈ 534 C, saffron ≈ 7409 C.
 
 ### Colour-coded cleaning
 
@@ -64,12 +64,12 @@ All three are free Google Fonts. In Word or Canva, use Georgia for Fraunces and 
 
 ## Logo
 
-The mark is an original llama in profile with a woven saffron neck band, inside a highland tile with 22% rounded corners. The wordmark is "Llama" in Fraunces above "COMMERCIAL" in tracked Manrope.
+The mark is an original llama in profile with a woven saffron neck band, inside a navy tile with 22% rounded corners. The wordmark is "Llama" in Fraunces above "COMMERCIAL" in tracked Manrope.
 
 - Clear space on every side: at least the width of the llama's neck (16% of the tile).
 - Minimum size: tile 24px on screen or 8mm in print; full lockup 120px or 30mm wide.
-- On highland or dark photos, use the white logo (no tile). On light backgrounds, use the green logo (with tile).
-- Don't recolour the band, stretch the mark, put the green logo on a busy photo, add shadows or outlines, or redraw the llama.
+- On navy or dark photos, use the white logo (no tile). On light backgrounds, use the navy logo (with tile).
+- Don't recolour the band, stretch the mark, put the navy logo on a busy photo, add shadows or outlines, or redraw the llama.
 - Every logo is outlined artwork in `assets/Logos/`: SVG for print and web, 2,000px PNG for Word, Canva and social.
 
 ## Layout
@@ -81,7 +81,7 @@ The mark is an original llama in profile with a woven saffron neck band, inside 
 
 ## Photography
 
-Use real photos of our own team and sites: people working, finished floors, clean washrooms. No stock photos of smiling models, no rubber gloves, no sparkles. If there's no real photo yet, use a plain highland panel with the mark.
+Use real photos of our own team and sites: people working, finished floors, clean washrooms. No stock photos of smiling models, no rubber gloves, no sparkles. If there's no real photo yet, use a plain navy panel with the mark.
 
 ## Templates
 

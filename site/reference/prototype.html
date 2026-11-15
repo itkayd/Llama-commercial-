@@ -9,13 +9,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23173D36'/%3E%3Cg transform='translate(9 0)'%3E%3Cpath d='M37.2 30.5C35 23 35.6 15.5 38.6 10.5C41.2 15 42.4 22.5 41.8 30Z' fill='%23fff'/%3E%3Cpath d='M43.6 29.2C42.4 21.5 44 14 47.6 9.6C49.8 14.4 50.2 22 48.4 29.2Z' fill='%23fff'/%3E%3Cpath d='M32 100L32 44C32 33.5 37 28 45.5 28L61 28C67.5 28 71.5 32 71.5 37.5C71.5 43 67.5 46 62 46L52 46C49.6 46 48 47.8 48 50.2L48 100Z' fill='%23fff'/%3E%3Crect x='32' y='66' width='16' height='9' fill='%23E3A13A'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231F395E'/%3E%3Cg transform='translate(9 0)'%3E%3Cpath d='M37.2 30.5C35 23 35.6 15.5 38.6 10.5C41.2 15 42.4 22.5 41.8 30Z' fill='%23fff'/%3E%3Cpath d='M43.6 29.2C42.4 21.5 44 14 47.6 9.6C49.8 14.4 50.2 22 48.4 29.2Z' fill='%23fff'/%3E%3Cpath d='M32 100L32 44C32 33.5 37 28 45.5 28L61 28C67.5 28 71.5 32 71.5 37.5C71.5 43 67.5 46 62 46L52 46C49.6 46 48 47.8 48 50.2L48 100Z' fill='%23fff'/%3E%3Crect x='32' y='66' width='16' height='9' fill='%23E3A13A'/%3E%3C/g%3E%3C/svg%3E">
 <style>
-/* Plan: a calm contractor's site. Highland green carries the brand, saffron is used only for small marks, cool off-white pages.
+/* Plan: a calm contractor's site. Navy carries the brand, saffron is used only for small marks, cool off-white pages.
    Layout: header + hash-routed pages (home, services, about, areas, contact) mirroring a classic cleaning-company site. */
 :root{
-  --bg:#F5F6F2; --surface:#FFFFFF; --surface-2:#E8EDE6; --ink:#152320; --muted:#56625D; --line:#D5DCD3;
-  --brand:#173D36; --brand-ink:#FFFFFF; --brand-muted:#B9CCC3; --accent:#E3A13A; --accent-ink:#8A5A12;
+  --bg:#F5F7FA; --surface:#FFFFFF; --surface-2:#E8EDF4; --ink:#131B27; --muted:#556070; --line:#D3DAE4;
+  --brand:#1F395E; --brand-ink:#FFFFFF; --brand-muted:#B8C6D9; --accent:#E3A13A; --accent-ink:#8A5A12;
   --red:#C6463B; --blue:#3C6FB6; --green:#3E8A55; --yellow:#E0B323;
   --display:"Fraunces", Georgia, "Times New Roman", serif;
   --body:"Manrope", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
@@ -25,14 +25,14 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0F1A18; --surface:#15231F; --surface-2:#1A2B26; --ink:#EEF2EE; --muted:#A6B5AE; --line:#2A3B36;
-    --brand:#1E4840; --brand-ink:#F5F6F2; --brand-muted:#B9CCC3; --accent:#E3A13A; --accent-ink:#E9B460;
+    --bg:#0E1520; --surface:#151E2B; --surface-2:#1A2535; --ink:#EEF1F6; --muted:#A5B1C2; --line:#2A3647;
+    --brand:#25436A; --brand-ink:#F5F7FA; --brand-muted:#B8C6D9; --accent:#E3A13A; --accent-ink:#E9B460;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0F1A18; --surface:#15231F; --surface-2:#1A2B26; --ink:#EEF2EE; --muted:#A6B5AE; --line:#2A3B36;
-  --brand:#1E4840; --brand-ink:#F5F6F2; --brand-muted:#B9CCC3; --accent:#E3A13A; --accent-ink:#E9B460;
+  --bg:#0E1520; --surface:#151E2B; --surface-2:#1A2535; --ink:#EEF1F6; --muted:#A5B1C2; --line:#2A3647;
+  --brand:#25436A; --brand-ink:#F5F7FA; --brand-muted:#B8C6D9; --accent:#E3A13A; --accent-ink:#E9B460;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -98,7 +98,7 @@ main section{padding-block:clamp(56px,8vw,96px)}
 @media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
 
 /* example spec card */
-.spec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 40px -24px rgba(21,35,32,.35);overflow:hidden}
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 40px -24px rgba(20,28,40,.35);overflow:hidden}
 .spec-top{background:var(--brand);color:var(--brand-ink);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .spec-top b{font-family:var(--display);font-weight:600;font-size:19px}
 .spec-top span{font:500 11.5px var(--mono);letter-spacing:.12em;color:var(--brand-muted);text-transform:uppercase}
@@ -238,13 +238,13 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding-block:
   <defs>
     <symbol id="llama" viewBox="0 0 100 100">
       <clipPath id="tileclip"><rect width="100" height="100" rx="22"/></clipPath>
-      <rect width="100" height="100" rx="22" fill="#173D36"/>
+      <rect width="100" height="100" rx="22" fill="#1F395E"/>
       <g clip-path="url(#tileclip)" transform="translate(9 0)">
         <path d="M37.2 30.5C35 23 35.6 15.5 38.6 10.5C41.2 15 42.4 22.5 41.8 30Z" fill="#fff"/>
         <path d="M43.6 29.2C42.4 21.5 44 14 47.6 9.6C49.8 14.4 50.2 22 48.4 29.2Z" fill="#fff"/>
         <path d="M32 100L32 44C32 33.5 37 28 45.5 28L61 28C67.5 28 71.5 32 71.5 37.5C71.5 43 67.5 46 62 46L52 46C49.6 46 48 47.8 48 50.2L48 100Z" fill="#fff"/>
-        <circle cx="55.5" cy="35.5" r="2.4" fill="#173D36"/>
-        <path d="M62 41.5L66.5 41.5" stroke="#173D36" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="55.5" cy="35.5" r="2.4" fill="#1F395E"/>
+        <path d="M62 41.5L66.5 41.5" stroke="#1F395E" stroke-width="1.6" stroke-linecap="round"/>
         <rect x="32" y="66" width="16" height="9" fill="#E3A13A"/>
         <path d="M32.8 70.5L34.9 68.2L37.4 72.8L40 68.2L42.6 72.8L45.1 68.2L47.2 70.5" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/>
       </g>

@@ -7,7 +7,7 @@ const root = new URL('..', import.meta.url);
 const tokens = JSON.parse(readFileSync(new URL('../brand/tokens.json', root), 'utf8'));
 
 // tokens.json names -> CSS custom property names used by the site (section 3.3).
-const rename = { 'surface-page': 'page', 'surface-card': 'card', 'surface-sage': 'sage' };
+const rename = { 'surface-page': 'page', 'surface-card': 'card', 'surface-frost': 'frost' };
 const colours = tokens.color.tokens.map((t) => ({ name: rename[t.name] ?? t.name, ...t.value }));
 const line = (name, value) => `  --${name}: ${value.toUpperCase()};`;
 
@@ -22,7 +22,7 @@ const css = `/* Generated from brand/tokens.json by scripts/build-tokens.mjs. Do
 :root {
   color-scheme: light dark;
 ${light.join('\n')}
-  --icon: var(--highland);
+  --icon: var(--navy);
   --error: #B3261E;
 
 ${space.join('\n')}

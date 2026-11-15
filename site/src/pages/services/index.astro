@@ -20,7 +20,7 @@ import { site, telHref } from '../../config';
 
   {
     groups.map((g, i) => (
-      <section class:list={['band', i % 2 === 0 ? 'band--card' : 'band--sage', 'group']} id={g.id} aria-labelledby={`${g.id}-title`}>
+      <section class:list={['band', i % 2 === 0 ? 'band--card' : 'band--frost', 'group']} id={g.id} aria-labelledby={`${g.id}-title`}>
         <div class="wrap">
           <h2 class="eyebrow" id={`${g.id}-title`}>{g.name}</h2>
           <ul class="service-grid" role="list">

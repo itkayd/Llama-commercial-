@@ -2,22 +2,22 @@
 
 :root {
   color-scheme: light dark;
-  --highland: #173D36;
+  --navy: #1F395E;
   --saffron: #E3A13A;
   --saffron-ink: #8A5A12;
-  --page: #F5F6F2;
+  --page: #F5F7FA;
   --card: #FFFFFF;
-  --sage: #E8EDE6;
-  --ink: #152320;
-  --ink-muted: #56625D;
+  --frost: #E8EDF4;
+  --ink: #131B27;
+  --ink-muted: #556070;
   --on-brand: #FFFFFF;
-  --on-brand-muted: #B9CCC3;
-  --line: #D5DCD3;
+  --on-brand-muted: #B8C6D9;
+  --line: #D3DAE4;
   --code-red: #C6463B;
   --code-blue: #3C6FB6;
   --code-green: #3E8A55;
   --code-yellow: #E0B323;
-  --icon: var(--highland);
+  --icon: var(--navy);
   --error: #B3261E;
 
   --space-1: 4px;
@@ -40,15 +40,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --highland: #1E4840;
+    --navy: #25436A;
     --saffron-ink: #E9B460;
-    --page: #0F1A18;
-    --card: #15231F;
-    --sage: #1A2B26;
-    --ink: #EEF2EE;
-    --ink-muted: #A6B5AE;
-    --on-brand: #F5F6F2;
-    --line: #2A3B36;
+    --page: #0E1520;
+    --card: #151E2B;
+    --frost: #1A2535;
+    --ink: #EEF1F6;
+    --ink-muted: #A5B1C2;
+    --on-brand: #F5F7FA;
+    --line: #2A3647;
     --icon: var(--on-brand-muted);
     --error: #F2B8B5;
   }
