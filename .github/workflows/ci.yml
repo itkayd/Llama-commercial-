@@ -22,6 +22,8 @@ jobs:
         run: npx astro check
       - name: Build
         run: npm run build
+      - name: Page tests (each page renders its h1)
+        run: npm test
       # Link check, copy scan, contact-details check, and a hard failure if anything
       # from internal/ or the string "Negotiation Desk" reaches dist/.
       - name: Check dist

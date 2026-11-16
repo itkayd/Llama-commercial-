@@ -1,0 +1,7 @@
+# Removed pages go to the home page (Netlify). Existing files are never shadowed.
+/quote          /  301
+/quote/*        /  301
+/privacy        /  301
+/privacy/*      /  301
+/services/*     /  301
+/404.html       /  301

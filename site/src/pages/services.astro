@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Listed row by row so the two columns read as in the brief:
+// left column top to bottom, right column top to bottom.
+const left = [
+  'Regular office cleaning',
+  'Carpet and upholstery cleaning',
+  'Rug cleaning',
+  'Sports facility cleaning',
+  'Deep cleaning',
+  'Communal area cleaning',
+];
+const right = [
+  'Floor polishing',
+  'Floor scrubbing',
+  'Floor stripping',
+  'Floor sealing',
+  'Car park cleaning',
+  'Schools, business units, factories and shops',
+];
+---
+<Base
+  title="Services · Llama Commercial"
+  heading="Services"
+  description="Day-to-day cleaning, deep cleans, carpets and floor care for commercial buildings across London."
+>
+  <section class="block">
+    <p>Day-to-day cleaning, deep cleans and floor care, all under one roof:</p>
+    <ul class="ticks services-list">
+      {left.map((s) => <li>{s}</li>)}
+      {right.map((s) => <li>{s}</li>)}
+    </ul>
+  </section>
+  <section class="block">
+    <h2>Carpets that look new again</h2>
+    <p>Hot-water extraction for carpets, rugs and upholstery. It lifts what hoovering leaves behind.</p>
+  </section>
+  <section class="block">
+    <h2>Floors brought back</h2>
+    <p>Vinyl, lino, stone, wood or concrete: we scrub, strip, reseal and polish until it shines.</p>
+  </section>
+  <section class="block">
+    <h2>Big job or small</h2>
+    <p>One meeting room overnight, or a whole building over a weekend. Same care either way.</p>
+  </section>
+  <section class="block">
+    <h2>Llama clean that for you</h2>
+    <p>Tell us what needs doing. We'll come and see it, then send you a price in writing.</p>
+  </section>
+</Base>
+
+<style>
+  /* Fill the left column first, then the right, so the reading order matches the list. */
+  @media (min-width: 640px) {
+    .services-list {
+      grid-auto-flow: column;
+      grid-template-rows: repeat(6, auto);
+    }
+  }
+</style>

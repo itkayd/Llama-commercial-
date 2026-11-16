@@ -7,7 +7,7 @@ Website, brand kit and business tools for **Llama Commercial**, a commercial cle
 
 | Folder | What it is | Deployed? |
 | --- | --- | --- |
-| `site/` | The public website, built with Astro: Home, About us, Services (13 service pages), Areas covered, Contact us, Privacy notice | Yes, `site/dist` |
+| `site/` | The public website, built with Astro: five plain pages (Home, About Us, Services, Areas Covered, Contact Us) | Yes, `site/dist` |
 | `site/reference/` | The old one-file prototype, kept for reference only (not built) | No |
 | `internal/` | Negotiation desk with your costs, margins and lowest prices | **Never.** Open it on your own device only. CI fails if anything from it reaches the build |
 | `brand/logos/` | Every logo as SVG (print, web) and PNG (Word, Canva, social) | – |
@@ -26,13 +26,13 @@ npm install
 npm run dev          # http://localhost:4321
 npm run check        # astro check
 npm run build        # static site -> site/dist
+npm test             # each of the five pages renders its h1 and title (after build)
 npm run check:dist   # link check, copy scan, internal/ leak check
 npm run test:e2e     # browser checks at desktop and mobile widths (needs Playwright installed)
-npm run tokens       # regenerate src/styles/tokens.css after changing brand/tokens.json
 npm run images       # regenerate favicons and og.png (needs Playwright installed)
 ```
 
-Every phone number, email address and company detail lives in **`site/src/config.ts`**. Change it there and every page updates.
+Every phone number and email address lives in **`site/src/config.ts`** (`PHONE` and `EMAIL`). Change it there and every page updates.
 
 ## Going live
 
@@ -44,17 +44,7 @@ Open `site/src/config.ts` and replace each `TODO`:
 | `phoneDisplay` | placeholder number | Your business number, written like `07123 456789` |
 | `phoneE164` | placeholder number | The same number in international form, like `+447123456789` |
 | `email` | `hello@llamacommercial.co.uk` | Your real inbox |
-| `hours` | `Monday to Saturday, 8am to 7pm` | Your real hours. If they change, also update `openingHoursSchema` (`Mo-Sa 08:00-19:00`) beside it |
-| `companyNumber` | `[COMPANY NUMBER]` | From Companies House |
-| `registeredOffice` | `[REGISTERED ADDRESS]` | Your registered office. Once it is real, the address is added to the search-engine data automatically |
-
-**Call-back form (`PUBLIC_FORM_ENDPOINT`).** Make a free form at [formspree.io](https://formspree.io) (or similar) and copy its endpoint URL, then set it as an environment variable called `PUBLIC_FORM_ENDPOINT` on your host and redeploy:
-
-- **Netlify:** Site configuration → Environment variables → Add a variable.
-- **Vercel:** Project → Settings → Environment Variables.
-- **GitHub Pages:** Settings → Secrets and variables → Actions → Variables.
-
-Until it is set, the call-back button opens the visitor's email app with the request filled in, and the page tells them to press send.
+Pages that were removed (the price estimate, the privacy notice and the 13 service detail pages) redirect to the home page: `site/public/_redirects` on Netlify, `site/vercel.json` on Vercel.
 
 ## Deploy the website
 
@@ -70,7 +60,7 @@ Until it is set, the call-back button opens the visitor's email app with the req
 **GitHub Pages**
 Needs a public repo, or a paid GitHub plan for a private one. Go to *Settings → Pages → Source: GitHub Actions* and run *Deploy website to GitHub Pages* from the Actions tab.
 
-Every push to `main` redeploys automatically on Netlify and Vercel. Pull requests run CI (`.github/workflows/ci.yml`): type check, build, link check, copy scan and the `internal/` leak check.
+Every push to `main` redeploys automatically on Netlify and Vercel. Pull requests run CI (`.github/workflows/ci.yml`): type check, build, page tests, link check, copy scan and the `internal/` leak check.
 
 ## Rebuild the brand files
 

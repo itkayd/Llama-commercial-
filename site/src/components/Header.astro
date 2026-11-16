@@ -4,283 +4,167 @@ import Logo from './Logo.astro';
 
 const nav = [
   { href: '/', label: 'Home' },
-  { href: '/about/', label: 'About us' },
+  { href: '/about/', label: 'About Us' },
   { href: '/services/', label: 'Services' },
-  { href: '/areas/', label: 'Areas covered' },
-  { href: '/contact/', label: 'Contact us' },
+  { href: '/areas/', label: 'Areas Covered' },
+  { href: '/contact/', label: 'Contact Us' },
 ];
-
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href));
-const currentExact = (href: string) => path === href;
 ---
 <header class="site-header">
-  <div class="wrap bar">
+  <div class="bar">
     <Logo id="header" />
-
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
     <nav id="site-nav" class="nav" aria-label="Main">
-      <ul role="list" class="nav-list">
+      <ul role="list">
         {
           nav.map((item) => (
             <li>
-              <a
-                href={item.href}
-                class:list={['nav-link', { 'is-current': isCurrent(item.href) }]}
-                aria-current={currentExact(item.href) ? 'page' : isCurrent(item.href) ? 'true' : undefined}
-              >
+              <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>
           ))
         }
       </ul>
-      <div class="nav-extra">
-        <a class="nav-phone num" href={telHref}>Call {site.phoneDisplay}</a>
-        <a class="btn btn--primary" href="/contact/">Request a quote</a>
-      </div>
     </nav>
-
-    <div class="actions">
-      <a class="header-phone num" href={telHref}><span class="visually-hidden">Call </span>{site.phoneDisplay}</a>
-      <a class="btn btn--primary header-cta" href="/contact/">Request a quote</a>
-      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav" hidden>
-        <span class="menu-icon" aria-hidden="true"></span>
-        <span class="menu-label">Menu</span>
-      </button>
-    </div>
+    <a class="phone" href={telHref}><span class="visually-hidden">Call </span>{site.phoneDisplay}</a>
   </div>
 </header>
 
 <script>
   const button = document.querySelector<HTMLButtonElement>('.menu-btn');
-  const nav = document.getElementById('site-nav');
   const header = document.querySelector<HTMLElement>('.site-header');
-  if (button && nav && header) {
-    const label = button.querySelector('.menu-label')!;
-    const mq = window.matchMedia('(min-width: 960px)');
+  if (button && header) {
     button.hidden = false;
-
-    const setOpen = (open: boolean, returnFocus = false) => {
+    const setOpen = (open: boolean, focusButton = false) => {
       button.setAttribute('aria-expanded', String(open));
-      label.textContent = open ? 'Close' : 'Menu';
+      button.textContent = open ? 'Close' : 'Menu';
       header.classList.toggle('is-open', open);
-      if (!open && returnFocus) button.focus();
+      if (focusButton) button.focus();
     };
-
     button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
-        setOpen(false, true);
-      }
+      if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') setOpen(false, true);
     });
-    mq.addEventListener('change', (e) => {
-      if (e.matches) setOpen(false);
-    });
+    window.matchMedia('(min-width: 820px)').addEventListener('change', (e) => e.matches && setOpen(false));
   }
 </script>
 
 <style>
   .site-header {
     position: sticky;
-    top: env(safe-area-inset-top);
+    top: 0;
     z-index: 50;
-    background: var(--card);
+    background: var(--page);
     border-bottom: 1px solid var(--line);
   }
   .bar {
-    display: flex;
+    max-width: 1000px;
+    margin-inline: auto;
+    padding: 12px max(20px, env(safe-area-inset-right)) 12px max(20px, env(safe-area-inset-left));
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: var(--space-4);
-    padding-block: 14px;
-    min-height: 72px;
+    gap: 16px 24px;
   }
-  .nav {
-    margin-left: auto;
-  }
-  .nav-list {
+  .nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 2px;
+    justify-content: center;
+    gap: 4px 22px;
   }
-  .nav-link {
+  .nav a {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    padding: 8px 14px;
-    border-radius: var(--radius-pill);
     font-weight: 500;
     font-size: 15.5px;
-    line-height: 1.2;
     text-decoration: none;
     color: var(--ink);
     white-space: nowrap;
   }
-  .nav-link:hover {
-    background: var(--frost);
+  .nav a:hover {
+    text-decoration: underline;
   }
-  .nav-link.is-current {
-    background: var(--frost);
+  .nav a[aria-current='page'] {
+    color: var(--active);
     font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--saffron);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.45em;
   }
-  .nav-extra {
-    display: none;
-  }
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
-  .header-phone {
+  .phone {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
     font-weight: 700;
-    font-size: 15.5px;
+    font-size: 17px;
     text-decoration: none;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
-  .header-phone:hover {
+  .phone:hover {
     text-decoration: underline;
   }
   .menu-btn {
     display: none;
-    align-items: center;
-    gap: 10px;
-    min-height: 44px;
-    min-width: 44px;
-    padding: 10px 16px;
-    border: 0;
-    border-radius: var(--radius-pill);
-    background: transparent;
-    box-shadow: inset 0 0 0 1.5px var(--line);
-    font-weight: 700;
-    font-size: 15.5px;
-    cursor: pointer;
-  }
-  .menu-btn:hover {
-    box-shadow: inset 0 0 0 1.5px var(--ink);
-  }
-  .menu-icon,
-  .menu-icon::before,
-  .menu-icon::after {
-    display: block;
-    width: 16px;
-    height: 1.6px;
-    background: currentColor;
-    border-radius: 1px;
-  }
-  .menu-icon {
-    position: relative;
-  }
-  .menu-icon::before,
-  .menu-icon::after {
-    content: '';
-    position: absolute;
-    left: 0;
-  }
-  .menu-icon::before {
-    top: -5px;
-  }
-  .menu-icon::after {
-    top: 5px;
-  }
-  .is-open .menu-icon {
-    background: transparent;
-  }
-  .is-open .menu-icon::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-  .is-open .menu-icon::after {
-    top: 0;
-    transform: rotate(-45deg);
   }
 
-  @media (max-width: 959.98px) {
-    .header-cta {
-      display: none;
+  @media (max-width: 819.98px) {
+    .bar {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'logo button'
+        'phone phone'
+        'nav nav';
+      gap: 4px 16px;
     }
-    .actions {
-      margin-left: auto;
+    .bar > :global(.logo) {
+      grid-area: logo;
     }
     .menu-btn:not([hidden]) {
-      display: inline-flex;
-    }
-    /* Without JavaScript the menu stays open as a plain list under the logo. */
-    .bar {
-      flex-wrap: wrap;
-    }
-    .nav {
-      order: 3;
-      flex-basis: 100%;
-      margin-left: 0;
-    }
-    .nav-list {
-      flex-wrap: wrap;
-    }
-    :global(html.js) .bar {
-      flex-wrap: nowrap;
-    }
-    :global(html.js) .nav {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--card);
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 18px 30px -24px rgba(20, 28, 40, 0.45);
-      padding: 8px max(20px, env(safe-area-inset-right)) 24px max(20px, env(safe-area-inset-left));
-      max-height: calc(100dvh - 72px);
-      overflow-y: auto;
-    }
-    :global(html.js) .is-open .nav {
-      display: block;
-    }
-    :global(html.js) .nav-list {
-      flex-direction: column;
-      gap: 0;
-    }
-    :global(html.js) .nav-list li {
-      border-bottom: 1px solid var(--line);
-    }
-    :global(html.js) .nav-link {
-      display: flex;
-      min-height: 52px;
-      padding: 12px 4px;
-      border-radius: 0;
-      font-size: 17px;
-    }
-    :global(html.js) .nav-link:hover {
-      background: transparent;
-      text-decoration: underline;
-    }
-    :global(html.js) .nav-link.is-current {
-      background: var(--frost);
-      padding-inline: 12px;
-      border-radius: var(--radius-sm);
-    }
-    :global(html.js) .nav-extra {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-3);
-      align-items: center;
-      padding-top: var(--space-4);
-    }
-    .nav-phone {
+      grid-area: button;
       display: inline-flex;
       align-items: center;
       min-height: 44px;
+      padding: 8px 18px;
+      border: 1.5px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
       font-weight: 700;
+      font-size: 15.5px;
+      cursor: pointer;
+    }
+    .phone {
+      grid-area: phone;
+      justify-self: start;
+    }
+    .nav {
+      grid-area: nav;
+    }
+    .nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav li {
+      border-top: 1px solid var(--line);
+    }
+    .nav a {
+      display: flex;
       font-size: 17px;
     }
-  }
-
-  @media (max-width: 519.98px) {
-    .header-phone {
+    /* With JavaScript the list is hidden until the Menu button opens it. */
+    :global(html.js) .nav {
       display: none;
     }
-    .bar {
-      gap: var(--space-3);
+    :global(html.js) .is-open .nav {
+      display: block;
     }
   }
 </style>

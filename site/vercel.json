@@ -33,5 +33,37 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/quote",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/quote/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/:slug/:rest*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/404.html",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
