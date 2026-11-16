@@ -1,11 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { PHONE, telHref } from '../config';
+import { SITE, telHref } from '../config';
 ---
 <Base
   title="Llama Commercial"
   heading="No drama. Just Llama."
-  description="Commercial cleaning across Greater London for offices, schools, churches, shops, gyms, factories, stairwells and car parks."
+  description="Commercial cleaning across Greater London for offices, schools, churches, shops, gyms, factories, communal areas and car parks."
 >
   <section class="block">
     <h2>Clean buildings, quietly done</h2>
@@ -25,7 +25,7 @@ import { PHONE, telHref } from '../config';
     <h2>Start with a walk-round</h2>
     <p>
       We come and look at the building, ask what matters to you, then put the price and the plan in writing. Then it's up to you.
-      Call <a class="contact-link" href={telHref}>{PHONE}</a>.
+      Call <a class="strong-link" href={telHref}>{SITE.phone}</a>.
     </p>
   </section>
 </Base>

@@ -1,17 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// Listed row by row so the two columns read as in the brief:
-// left column top to bottom, right column top to bottom.
-const left = [
+// Items 1–6 fill the left column, items 7–12 the right.
+const services = [
   'Regular office cleaning',
   'Carpet and upholstery cleaning',
   'Rug cleaning',
   'Sports facility cleaning',
   'Deep cleaning',
   'Communal area cleaning',
-];
-const right = [
   'Floor polishing',
   'Floor scrubbing',
   'Floor stripping',
@@ -23,13 +20,12 @@ const right = [
 <Base
   title="Services · Llama Commercial"
   heading="Services"
-  description="Day-to-day cleaning, deep cleans, carpets and floor care for commercial buildings across London."
+  description="Regular office cleaning, deep cleans, carpets, rugs and full floor care across London."
 >
   <section class="block">
     <p>Day-to-day cleaning, deep cleans and floor care, all under one roof:</p>
     <ul class="ticks services-list">
-      {left.map((s) => <li>{s}</li>)}
-      {right.map((s) => <li>{s}</li>)}
+      {services.map((s) => <li>{s}</li>)}
     </ul>
   </section>
   <section class="block">
@@ -51,7 +47,6 @@ const right = [
 </Base>
 
 <style>
-  /* Fill the left column first, then the right, so the reading order matches the list. */
   @media (min-width: 640px) {
     .services-list {
       grid-auto-flow: column;

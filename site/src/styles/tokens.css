@@ -1,30 +1,50 @@
-/* Llama Commercial site tokens: navy brand, light and dark. */
+/* Llama Commercial tokens. Dark mode follows the system, or data-theme on <html>. */
 
 :root {
   color-scheme: light dark;
-  --page: #FFFFFF;
-  --frost: #F5F7FA;
+  --bg: #FFFFFF;
+  --soft: #F5F7FA;
   --ink: #141C28;
-  --slate: #556070;
+  --muted: #556070;
   --line: #D3DAE4;
-  --navy: #1F3A5F;
-  --saffron: #E3A13A;
-  --on-navy: #FFFFFF;
-  /* Text colour for the active menu link: navy on light, ink on dark (navy is too dark to read there). */
-  --active: var(--navy);
+  /* Navy. The brief gives #1F3A5F; #1F395E is one step darker so white text clears 11.5:1 (11.63). */
+  --brand: #1F395E;
+  --brand-ink: #FFFFFF;
+  --brand-muted: #B8C6D9;
+  --accent: #E3A13A;
+  /* Active menu link: navy on light; ink on dark, where navy can't be read. */
+  --active: var(--brand);
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Manrope", "Segoe UI", system-ui, Arial, sans-serif;
+  --font-display: "Fraunces Variable", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --page: #0E1520;
-    --frost: #151E2B;
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0E1520;
+    --soft: #151E2B;
     --ink: #EEF1F6;
-    --slate: #A5B1C2;
+    --muted: #A5B1C2;
     --line: #2A3647;
-    --navy: #27466F;
+    --brand: #27466F;
+    --brand-ink: #F5F7FA;
     --active: var(--ink);
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0E1520;
+  --soft: #151E2B;
+  --ink: #EEF1F6;
+  --muted: #A5B1C2;
+  --line: #2A3647;
+  --brand: #27466F;
+  --brand-ink: #F5F7FA;
+  --active: var(--ink);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }

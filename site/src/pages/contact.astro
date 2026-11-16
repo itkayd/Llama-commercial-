@@ -1,30 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
-import { PHONE, EMAIL, telHref, mailHref } from '../config';
+import { SITE, telHref, mailHref } from '../config';
 ---
 <Base
   title="Contact Us · Llama Commercial"
   heading="Contact Us"
-  description="Call Llama Commercial or email us and tell us about your building."
+  description="Call or email Llama Commercial about cleaning your building."
 >
   <section class="block">
-    <p class="phone-line">Telephone: <a class="contact-link" href={telHref}>{PHONE}</a></p>
+    <p class="phone-line">Telephone: <a class="strong-link underline-accent" href={telHref}>{SITE.phone}</a></p>
     <p>
-      The quickest way is a call. Prefer to write? Email <a class="contact-link email" href={mailHref}>{EMAIL}</a> and tell us about
-      your building.
+      The quickest way is a call. Prefer to write? Email <a class="strong-link email" href={mailHref}>{SITE.email}</a> and tell us
+      about your building.
     </p>
   </section>
 </Base>
 
 <style>
   .phone-line {
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 600;
+    font-size: 20px;
     color: var(--ink);
-    line-height: 1.3;
   }
   .email {
-    color: var(--ink);
     overflow-wrap: anywhere;
   }
 </style>

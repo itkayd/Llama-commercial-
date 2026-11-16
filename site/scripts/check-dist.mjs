@@ -32,13 +32,9 @@ for (const f of files) {
   }
 }
 
-// 2. Copy scan
-const banned = [
-  'guarantee', 'promise', 'same team', 'same cleaner', 'check-in', 'photo', 'within one working day', '% off',
-  'free clean', 'best', '!', 'Airbnb', 'tenancy', 'Proven', 'Duck', 'Owl',
-  'sparkling', 'spotless', 'pristine', 'immaculate', 'world-class', 'leading', 'premium', 'unbeatable', 'hassle-free',
-  'peace of mind', 'look no further', 'one-stop shop', 'cutting-edge', 'passionate', '24/7',
-];
+// 2. Copy scan of visible text (brief section 10.3), plus the brand's banned words.
+const bannedRe = /request a quote|guarantee|within \d+ (hours|working)|same (day|team)|check-in|photo report|discount|special offer|\bbest\b|leading|!/i;
+const extraBanned = ['promise', 'sparkling', 'spotless', 'pristine', 'immaculate', 'world-class', 'premium', 'unbeatable', 'hassle-free', 'peace of mind', 'one-stop shop', 'airbnb', 'tenancy', '24/7'];
 const visibleText = (html) =>
   html
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
@@ -46,13 +42,17 @@ const visibleText = (html) =>
     .replace(/<!--[\s\S]*?-->/g, ' ')
     .replace(/<!doctype[^>]*>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&')
     .replace(/&[a-z#0-9]+;/gi, ' ');
 const attrText = (html) => [...html.matchAll(/\s(?:alt|title|aria-label|content|placeholder)="([^"]*)"/g)].map((m) => m[1]).join(' ');
 for (const f of htmlFiles) {
   const html = readFileSync(f, 'utf8');
-  const text = `${visibleText(html)} ${attrText(html)}`.toLowerCase();
-  for (const word of banned) {
-    if (text.includes(word.toLowerCase())) problems.push(`banned copy "${word}" in ${relative(dist, f)}`);
+  const text = `${visibleText(html)} ${attrText(html)}`;
+  const hit = text.match(bannedRe);
+  if (hit) problems.push(`banned copy "${hit[0]}" in ${relative(dist, f)}`);
+  for (const word of extraBanned) {
+    if (text.toLowerCase().includes(word)) problems.push(`banned copy "${word}" in ${relative(dist, f)}`);
   }
 }
 

@@ -1,14 +1,107 @@
+---
+import { SITE, telHref, mailHref } from '../config';
+import Logo from './Logo.astro';
+import { nav } from '../nav';
+---
 <footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <Logo variant="white" size={44} />
+      <p class="footer-tagline">{SITE.tagline}</p>
+    </div>
+    <div class="footer-col">
+      <h2 class="footer-label">Talk to us</h2>
+      <a class="footer-phone" href={telHref}>{SITE.phone}</a>
+      <a class="footer-email" href={mailHref}>{SITE.email}</a>
+      <p class="footer-muted">{SITE.area}</p>
+    </div>
+    <nav class="footer-col" aria-labelledby="footer-pages">
+      <h2 class="footer-label" id="footer-pages">Pages</h2>
+      <ul role="list">
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
   <div class="wrap">
-    <p>Copyright © 2026 Llama Commercial Ltd. All rights reserved.</p>
+    <p class="legal">Copyright © {SITE.year} {SITE.legalName}. All rights reserved.</p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--line);
-    padding-block: 24px max(24px, env(safe-area-inset-bottom));
-    color: var(--slate);
-    font-size: 14.5px;
+    margin-top: 40px;
+    background: var(--brand);
+    color: var(--brand-ink);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 32px;
+    padding-top: 44px;
+    padding-bottom: 32px;
+  }
+  @media (max-width: 759.98px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+  }
+  .footer-brand,
+  .footer-col {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    justify-items: start;
+  }
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.25;
+    margin-top: 8px;
+  }
+  .footer-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand-muted);
+    margin: 0;
+  }
+  .footer-col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    text-decoration: none;
+  }
+  .footer-col a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+  .footer-phone {
+    font-size: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .footer-email {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .footer-muted {
+    color: var(--brand-muted);
+  }
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .legal {
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding-block: 18px;
+    font-size: 14px;
+    color: var(--brand-muted);
   }
 </style>
