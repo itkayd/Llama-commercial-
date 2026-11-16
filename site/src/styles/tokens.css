@@ -1,55 +1,30 @@
-/* Generated from brand/tokens.json by scripts/build-tokens.mjs. Do not edit by hand. */
+/* Llama Commercial site tokens: navy brand, light and dark. */
 
 :root {
   color-scheme: light dark;
-  --navy: #1F395E;
-  --saffron: #E3A13A;
-  --saffron-ink: #8A5A12;
-  --page: #F5F7FA;
-  --card: #FFFFFF;
-  --frost: #E8EDF4;
-  --ink: #131B27;
-  --ink-muted: #556070;
-  --on-brand: #FFFFFF;
-  --on-brand-muted: #B8C6D9;
+  --page: #FFFFFF;
+  --frost: #F5F7FA;
+  --ink: #141C28;
+  --slate: #556070;
   --line: #D3DAE4;
-  --code-red: #C6463B;
-  --code-blue: #3C6FB6;
-  --code-green: #3E8A55;
-  --code-yellow: #E0B323;
-  --icon: var(--navy);
-  --error: #B3261E;
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 40px;
-  --space-6: 64px;
-
-  --radius-sm: 6px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-pill: 999px;
-  --radius-input: 10px;
+  --navy: #1F3A5F;
+  --saffron: #E3A13A;
+  --on-navy: #FFFFFF;
+  /* Text colour for the active menu link: navy on light, ink on dark (navy is too dark to read there). */
+  --active: var(--navy);
 
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Manrope", "Segoe UI", system-ui, Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --navy: #25436A;
-    --saffron-ink: #E9B460;
     --page: #0E1520;
-    --card: #151E2B;
-    --frost: #1A2535;
+    --frost: #151E2B;
     --ink: #EEF1F6;
-    --ink-muted: #A5B1C2;
-    --on-brand: #F5F7FA;
+    --slate: #A5B1C2;
     --line: #2A3647;
-    --icon: var(--on-brand-muted);
-    --error: #F2B8B5;
+    --navy: #27466F;
+    --active: var(--ink);
   }
 }
