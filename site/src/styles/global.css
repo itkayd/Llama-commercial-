@@ -1,9 +1,15 @@
-@import '@fontsource/fraunces/latin-600.css';
+@import '@fontsource-variable/fraunces/opsz.css';
 @import '@fontsource/manrope/latin-400.css';
 @import '@fontsource/manrope/latin-500.css';
 @import '@fontsource/manrope/latin-600.css';
 @import '@fontsource/manrope/latin-700.css';
 @import './tokens.css';
+
+/* The woven band: the llama's saffron collar. Used in exactly three places (collar, divider, active link). */
+:root {
+  --zigzag-collar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='26' viewBox='0 0 28 26'%3E%3Cpath d='M-1 7.5L0 7 14 19 28 7 29 7.5' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --zigzag-small: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M-1 2.5L0 2 6 6 12 2 13 2.5' fill='none' stroke='%23E3A13A' stroke-width='1.6'/%3E%3C/svg%3E");
+}
 
 *,
 *::before,
@@ -18,7 +24,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--page);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 17px;
@@ -38,6 +44,7 @@ h1,
 h2 {
   font-family: var(--font-display);
   font-weight: 600;
+  font-optical-sizing: auto;
   text-wrap: balance;
 }
 
@@ -47,7 +54,7 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--saffron);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -55,6 +62,7 @@ a {
   *,
   *::before,
   *::after {
+    scroll-behavior: auto !important;
     transition: none !important;
     animation: none !important;
   }
@@ -78,9 +86,10 @@ a {
   top: 12px;
   z-index: 100;
   padding: 10px 16px;
-  background: var(--navy);
-  color: var(--on-navy);
+  background: var(--brand);
+  color: var(--brand-ink);
   font-weight: 700;
+  border-radius: 8px;
   transform: translateY(-200%);
 }
 
@@ -92,19 +101,24 @@ main:focus {
   outline: none;
 }
 
-/* Shared width: single column, 960px max, 20px sides. */
+/* One column, 960px content, 20px sides (respecting safe areas). */
 .wrap {
   width: 100%;
   max-width: 1000px;
   margin-inline: auto;
-  padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right));
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
 }
 
-/* Title band */
+/* Title band and its woven collar */
 .title-band {
-  background: var(--navy);
-  color: var(--on-navy);
-  padding-block: 44px;
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+.title-band .wrap {
+  padding-top: 44px;
+  padding-bottom: 44px;
 }
 
 .title-band h1 {
@@ -112,20 +126,45 @@ main:focus {
   line-height: 1.15;
 }
 
+.collar {
+  height: 22px;
+  background: var(--accent) var(--zigzag-collar) left center / 24px 22px repeat-x;
+}
+
 /* Content */
 .content {
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
 .block {
-  padding-block: 40px;
-  border-bottom: 1px solid var(--line);
+  position: relative;
   display: grid;
-  gap: 12px;
+  gap: 10px;
+  padding-block: 30px;
+}
+
+.block:first-child {
+  padding-top: 0;
 }
 
 .block:last-child {
-  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Divider: a small saffron zigzag at the top left of each block that follows another. */
+.block + .block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 8px;
+  background: var(--zigzag-small) left top / 12px 8px repeat-x;
+}
+
+.block + .block {
+  padding-top: 38px;
 }
 
 .block h2 {
@@ -133,9 +172,8 @@ main:focus {
   line-height: 1.25;
 }
 
-.block p,
-.text {
-  color: var(--slate);
+.block p {
+  color: var(--muted);
   max-width: 68ch;
 }
 
@@ -144,7 +182,16 @@ main:focus {
   font-weight: 700;
 }
 
-/* Tick lists */
+.prose {
+  display: grid;
+  gap: 16px;
+}
+
+.prose p {
+  color: var(--ink);
+}
+
+/* Tick list */
 .ticks {
   list-style: none;
   padding: 0;
@@ -169,27 +216,22 @@ main:focus {
   content: '';
   position: absolute;
   left: 4px;
-  top: 0.32em;
-  width: 7px;
-  height: 13px;
-  border: solid var(--saffron);
+  top: 0.15em;
+  width: 9px;
+  height: 15px;
+  border: solid var(--accent);
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
 
 /* Note box */
 .note {
-  background: var(--frost);
-  border-left: 4px solid var(--navy);
-  padding: 18px 22px;
+  background: var(--soft);
+  border-left: 4px solid var(--brand);
+  border-radius: 6px;
+  padding: 18px 20px;
   font-weight: 600;
   max-width: 68ch;
-}
-
-@media (prefers-color-scheme: dark) {
-  .note {
-    border-left-color: var(--slate);
-  }
 }
 
 /* Postcode chips */
@@ -198,27 +240,29 @@ main:focus {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .chips li {
   min-width: 64px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   border: 1px solid var(--line);
+  border-radius: 8px;
   font-size: 20px;
   font-weight: 700;
+  line-height: 1.3;
   text-align: center;
 }
 
-/* Bold contact links with a saffron underline */
-.contact-link {
+/* Bold tel:/mailto: links in body copy */
+.strong-link {
+  color: var(--ink);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--saffron);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.22em;
 }
 
-.contact-link:hover {
-  text-decoration-thickness: 3px;
+.underline-accent {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
 }

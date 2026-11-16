@@ -7,7 +7,7 @@ Website, brand kit and business tools for **Llama Commercial**, a commercial cle
 
 | Folder | What it is | Deployed? |
 | --- | --- | --- |
-| `site/` | The public website, built with Astro: five plain pages (Home, About Us, Services, Areas Covered, Contact Us) | Yes, `site/dist` |
+| `site/` | The public website, built with Astro: five plain pages (Home, About Us, Services, Areas Covered, Contact Us) and a 404 | Yes, `site/dist` |
 | `site/reference/` | The old one-file prototype, kept for reference only (not built) | No |
 | `internal/` | Negotiation desk with your costs, margins and lowest prices | **Never.** Open it on your own device only. CI fails if anything from it reaches the build |
 | `brand/logos/` | Every logo as SVG (print, web) and PNG (Word, Canva, social) | – |
@@ -26,25 +26,27 @@ npm install
 npm run dev          # http://localhost:4321
 npm run check        # astro check
 npm run build        # static site -> site/dist
-npm test             # each of the five pages renders its h1 and title (after build)
-npm run check:dist   # link check, copy scan, internal/ leak check
-npm run test:e2e     # browser checks at desktop and mobile widths (needs Playwright installed)
-npm run images       # regenerate favicons and og.png (needs Playwright installed)
+npm test             # each page renders its h1, header, collar and footer; tel:/mailto: match config (after build)
+npm run check:dist   # link check, banned-copy scan, internal/ leak check
+npm run test:e2e     # browser checks: 6 pages x 4 sizes x light/dark (needs Playwright installed)
+npm run images       # regenerate favicons, app icons and og.png (needs Playwright installed)
 ```
 
-Every phone number and email address lives in **`site/src/config.ts`** (`PHONE` and `EMAIL`). Change it there and every page updates.
+The build itself fails if anything from `internal/` ends up in `site/dist/`.
+
+Every phone number and email address comes from **`site/src/config.ts`** (`SITE.phone`, `SITE.email`). `tel:` links are built from `SITE.phone` (spaces removed, leading 0 swapped for +44). Change it there and every page updates.
 
 ## Going live
 
-Open `site/src/config.ts` and replace each `TODO`:
+Open `site/src/config.ts` and check each value in `SITE`:
 
 | Setting | Now | Change to |
 | --- | --- | --- |
-| `domain` | `https://llamacommercial.co.uk` | Confirm the domain is registered. If it changes, also update `site` in `site/astro.config.mjs` and the sitemap line in `site/public/robots.txt` |
-| `phoneDisplay` | placeholder number | Your business number, written like `07123 456789` |
-| `phoneE164` | placeholder number | The same number in international form, like `+447123456789` |
+| `phone` | `07000 000000` (placeholder) | Your business number, written like `07123 456789` |
 | `email` | `hello@llamacommercial.co.uk` | Your real inbox |
-Pages that were removed (the price estimate, the privacy notice and the 13 service detail pages) redirect to the home page: `site/public/_redirects` on Netlify, `site/vercel.json` on Vercel.
+| `url` | `https://llamacommercial.co.uk` | Confirm the domain is registered. If it changes, also update `site` in `site/astro.config.mjs` and the sitemap line in `site/public/robots.txt` |
+
+Old addresses (`/quote`, `/privacy`, `/services/…` detail pages) redirect to the home page: `site/public/_redirects` on Netlify, `site/vercel.json` on Vercel. Unknown addresses show the "Lost llama" 404 page.
 
 ## Deploy the website
 

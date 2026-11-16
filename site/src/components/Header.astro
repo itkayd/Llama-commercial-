@@ -1,34 +1,33 @@
 ---
-import { site, telHref } from '../config';
+import { SITE, telHref } from '../config';
 import Logo from './Logo.astro';
+import { nav } from '../nav';
 
-const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/about/', label: 'About Us' },
-  { href: '/services/', label: 'Services' },
-  { href: '/areas/', label: 'Areas Covered' },
-  { href: '/contact/', label: 'Contact Us' },
-];
 const path = Astro.url.pathname;
 ---
 <header class="site-header">
-  <div class="bar">
-    <Logo id="header" />
-    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+  <div class="wrap bar">
+    <Logo />
     <nav id="site-nav" class="nav" aria-label="Main">
       <ul role="list">
         {
           nav.map((item) => (
             <li>
               <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
-                {item.label}
+                <span>{item.label}</span>
               </a>
             </li>
           ))
         }
       </ul>
     </nav>
-    <a class="phone" href={telHref}><span class="visually-hidden">Call </span>{site.phoneDisplay}</a>
+    <a class="phone" href={telHref}><span class="visually-hidden">Call </span>{SITE.phone}</a>
+    <a class="call-btn" href={telHref} aria-label="Call us">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 006.2 6.2l1.4-2.1 4.2 1.6V18a2.5 2.5 0 01-2.5 2.5A15.5 15.5 0 012.5 6 2.5 2.5 0 015 3.5z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" />
+      </svg>
+    </a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
   </div>
 </header>
 
@@ -39,7 +38,6 @@ const path = Astro.url.pathname;
     button.hidden = false;
     const setOpen = (open: boolean, focusButton = false) => {
       button.setAttribute('aria-expanded', String(open));
-      button.textContent = open ? 'Close' : 'Menu';
       header.classList.toggle('is-open', open);
       if (focusButton) button.focus();
     };
@@ -47,6 +45,7 @@ const path = Astro.url.pathname;
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') setOpen(false, true);
     });
+    header.querySelectorAll('#site-nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
     window.matchMedia('(min-width: 820px)').addEventListener('change', (e) => e.matches && setOpen(false));
   }
 </script>
@@ -54,32 +53,33 @@ const path = Astro.url.pathname;
 <style>
   .site-header {
     position: sticky;
-    top: 0;
+    top: env(safe-area-inset-top);
     z-index: 50;
-    background: var(--page);
+    background: var(--bg);
     border-bottom: 1px solid var(--line);
   }
   .bar {
-    max-width: 1000px;
-    margin-inline: auto;
-    padding: 12px max(20px, env(safe-area-inset-right)) 12px max(20px, env(safe-area-inset-left));
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
     align-items: center;
-    gap: 16px 24px;
+    gap: 12px 20px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .nav {
+    margin-left: auto;
   }
   .nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    gap: 4px 22px;
+    gap: 2px;
   }
   .nav a {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    padding: 8px 11px;
+    border-radius: 8px;
     font-weight: 500;
     font-size: 15.5px;
     text-decoration: none;
@@ -87,22 +87,32 @@ const path = Astro.url.pathname;
     white-space: nowrap;
   }
   .nav a:hover {
-    text-decoration: underline;
+    background: var(--soft);
+  }
+  /* The span is exactly as wide as the text, so the zigzag under it is too. */
+  .nav a span {
+    position: relative;
+    display: inline-block;
   }
   .nav a[aria-current='page'] {
     color: var(--active);
     font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--saffron);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.45em;
+  }
+  .nav a[aria-current='page'] span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -7px;
+    height: 8px;
+    background: var(--zigzag-small) left top / 12px 8px repeat-x;
   }
   .phone {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    min-height: 40px;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 18px;
     text-decoration: none;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
@@ -110,61 +120,76 @@ const path = Astro.url.pathname;
   .phone:hover {
     text-decoration: underline;
   }
+  .call-btn,
   .menu-btn {
     display: none;
   }
 
   @media (max-width: 819.98px) {
     .bar {
-      grid-template-columns: 1fr auto;
-      grid-template-areas:
-        'logo button'
-        'phone phone'
-        'nav nav';
-      gap: 4px 16px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .bar > :global(.logo) {
-      grid-area: logo;
+    .phone {
+      display: none;
     }
-    .menu-btn:not([hidden]) {
-      grid-area: button;
+    .call-btn {
       display: inline-flex;
       align-items: center;
-      min-height: 44px;
-      padding: 8px 18px;
+      justify-content: center;
+      width: 42px;
+      height: 40px;
+      margin-left: auto;
+      border-radius: 8px;
+      background: var(--brand);
+    }
+    .menu-btn:not([hidden]) {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 14px;
       border: 1.5px solid var(--line);
-      border-radius: 0;
+      border-radius: 8px;
       background: transparent;
       color: var(--ink);
       font: inherit;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 15.5px;
       cursor: pointer;
     }
-    .phone {
-      grid-area: phone;
-      justify-self: start;
-    }
     .nav {
-      grid-area: nav;
+      order: 10;
+      flex-basis: 100%;
+      margin-left: 0;
     }
     .nav ul {
       flex-direction: column;
       gap: 0;
     }
-    .nav li {
+    .nav li + li {
       border-top: 1px solid var(--line);
     }
     .nav a {
       display: flex;
+      padding: 12px 4px;
+      border-radius: 0;
       font-size: 17px;
     }
-    /* With JavaScript the list is hidden until the Menu button opens it. */
+    /* Without JavaScript the list stays visible; with it, the Menu button opens it. */
     :global(html.js) .nav {
       display: none;
     }
     :global(html.js) .is-open .nav {
       display: block;
+    }
+  }
+  /* Keep logo, call and Menu on one row on the narrowest phones. */
+  @media (max-width: 359.98px) {
+    .bar {
+      gap: 8px;
+    }
+    .menu-btn:not([hidden]) {
+      padding: 8px 10px;
     }
   }
 </style>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, telHref } from '../config';
+---
+<Base title="Lost llama · Llama Commercial" heading="Lost llama" description="That page doesn't exist." noindex>
+  <section class="block">
+    <p>
+      That page doesn't exist. Head back to the <a class="strong-link" href="/">home page</a> or call us on <a
+        class="strong-link"
+        href={telHref}>{SITE.phone}</a
+      >.
+    </p>
+  </section>
+</Base>
